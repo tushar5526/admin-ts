@@ -3,6 +3,7 @@ import {Admin, Resource, combineDataProviders, ListGuesser} from 'react-admin';
 import {useEffect, useState} from "react";
 import getDataProvider from "./customDataProviders";
 import student from "./resources/student";
+import location from "./resources/location";
 
 import jsonServerProvider from 'ra-data-json-server';
 import school from "./resources/student";
@@ -62,13 +63,16 @@ const App = () => {
     }, []);
 
     if (!dataProvider) return <p>Loading...</p>;
-    return <Admin
+    return (<Admin
         dataProvider={dataProvider}
         authProvider={authProvider}
         loginPage={Login}
     >
         <Resource name="student" {...student}/>
         <Resource name="e_samwaad_user"   {...Esamwaad}/>
+        <Resource name="location" {...location} />
+        <Resource name="school" {...school} />
     </Admin>
+  );
 };
 export default App;
