@@ -33,7 +33,7 @@ const getDataProvider = async (session: any = {}) => {
     if (session.role) hasuraHeaders["x-hasura-role"] = session.role;
 
     const apolloClient = new ApolloClient({
-        uri: "https://hpsamarth-hasura.in/v1/graphql",
+        uri: process.env.NEXT_PUBLIC_HASURA_URL,
         cache: new InMemoryCache(),
         headers: hasuraHeaders,
     });

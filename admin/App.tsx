@@ -6,7 +6,10 @@ import student from "./resources/student";
 
 import jsonServerProvider from 'ra-data-json-server';
 import school from "./resources/student";
-import user from "./resources/user";
+import {Esamwaad} from "./resources/user";
+import authProvider from "./authProvider";
+import Login from "./Login";
+import {EsamwaadUserDataProvider} from "./customDataProviders/userDataProviders";
 //
 const JSONDp = jsonServerProvider('https://jsonplaceholder.typicode.com');
 
@@ -31,7 +34,6 @@ const App = () => {
             console.log(r)
         }
     }
-    console.log(JSONDataProvider)
     const prepareDataProviders = async () => {
         try {
             const hasuraDp = await getDataProvider(session);
@@ -44,6 +46,8 @@ const App = () => {
                         return hasuraDp;
                     case 'users':
                         return JSONDataProvider;
+                    case 'e_samwaad_user':
+                        return EsamwaadUserDataProvider;
                     default:
                         throw new Error(`Unknown resource: ${resource}`);
                 }
@@ -60,9 +64,11 @@ const App = () => {
     if (!dataProvider) return <p>Loading...</p>;
     return <Admin
         dataProvider={dataProvider}
+        authProvider={authProvider}
+        loginPage={Login}
     >
         <Resource name="student" {...student}/>
-        <Resource name="users" {...user}/>
+        <Resource name="e_samwaad_user"   {...Esamwaad}/>
     </Admin>
 };
 export default App;
