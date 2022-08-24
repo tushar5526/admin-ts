@@ -31,9 +31,16 @@ const dataProvider: DataProvider = {
         }
         return response;
     },
-    getOne: async (...params: any): Promise<any> => {
-        console.log(params)
-        const response = await client.get('admin/searchUser')
+    getOne: async (resource, { id}: any): Promise<any> => {
+        const params = {
+            "queryString": id,
+        }
+        const response = await client.get('/admin/searchUser', {params})
+
+        if (response?.data?.result) {
+            return response?.data?.result?.users[0]
+        }
+        return response;
     },
     getMany: async (...params: any): Promise<any> => {
         console.log(params)
