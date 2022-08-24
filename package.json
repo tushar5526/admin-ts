@@ -1,0 +1,32 @@
+{
+  "name": "x-admin-new",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "graphql": "^16.6.0",
+    "graphql-ast-types-browser": "^1.0.2",
+    "lodash": "^4.17.21",
+    "next": "12.2.5",
+    "ra-data-graphql": "^4.3.0",
+    "ra-data-json-server": "^4.3.0",
+    "ra-data-simple-rest": "^4.3.0",
+    "react": "18.2.0",
+    "react-admin": "^4.3.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.184",
+    "@types/node": "18.7.12",
+    "@types/react": "18.0.17",
+    "@types/react-dom": "18.0.6",
+    "eslint": "8.22.0",
+    "eslint-config-next": "12.2.5",
+    "typescript": "4.7.4"
+  }
+}
