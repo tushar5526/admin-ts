@@ -11,6 +11,7 @@ import {Esamwaad} from "./resources/user";
 import authProvider from "./authProvider";
 import Login from "./Login";
 import {EsamwaadUserDataProvider} from "./customDataProviders/userDataProviders";
+import ShikshaSaathi from "./resources/user/shikshaSaathi";
 //
 const JSONDp = jsonServerProvider('https://jsonplaceholder.typicode.com');
 
@@ -49,6 +50,8 @@ const App = () => {
                         return JSONDataProvider;
                     case 'e_samwaad_user':
                         return EsamwaadUserDataProvider;
+                    case 'shiksha_saathi_user':
+                        return EsamwaadUserDataProvider;
                     default:
                         throw new Error(`Unknown resource: ${resource}`);
                 }
@@ -64,15 +67,16 @@ const App = () => {
 
     if (!dataProvider) return <p>Loading...</p>;
     return (<Admin
-        dataProvider={dataProvider}
-        authProvider={authProvider}
-        loginPage={Login}
-    >
-        <Resource name="student" {...student}/>
-        <Resource name="e_samwaad_user"   {...Esamwaad}/>
-        <Resource name="location" {...location} />
-        <Resource name="school" {...school} />
-    </Admin>
-  );
+            dataProvider={dataProvider}
+            authProvider={authProvider}
+            loginPage={Login}
+        >
+            <Resource name="student" {...student}/>
+            <Resource name="e_samwaad_user"   {...Esamwaad}/>
+            <Resource name="shiksha_saathi_user"   {...ShikshaSaathi}/>
+            <Resource name="location" {...location} />
+            <Resource name="school" {...school} />
+        </Admin>
+    );
 };
 export default App;
