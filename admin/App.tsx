@@ -69,6 +69,7 @@ const App = () => {
       <Resource name="student" {...student} />
       <Resource name="users" {...user} />
       <Resource name="location" {...location} />
+      <Resource name="school" {...school} />
     </Admin>
   );
 };
