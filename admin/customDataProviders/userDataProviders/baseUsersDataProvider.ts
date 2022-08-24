@@ -37,7 +37,9 @@ const dataProvider = {
         const response = await client.get('/admin/searchUser', {params})
 
         if (response?.data?.result) {
-            return response?.data?.result?.users[0]
+            return {
+                data: response?.data?.result?.users[0]
+            }
         }
         return response;
     },

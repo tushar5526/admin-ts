@@ -1,4 +1,4 @@
-import {Edit, SimpleForm, NullableBooleanInput, TextInput, useRecordContext, useDataProvider} from 'react-admin';
+import {Edit, SimpleForm,  TextInput, useRecordContext, useDataProvider} from 'react-admin';
 
 const UserForm = () => {
     const record = useRecordContext();
