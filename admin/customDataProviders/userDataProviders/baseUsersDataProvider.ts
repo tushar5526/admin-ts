@@ -1,10 +1,18 @@
-import {client} from "../../api-clients/users-client";
-import {useNotify} from "react-admin";
+import {client, clientGQL} from "../../api-clients/users-client";
 
 const Applications: any = {
     "e_samwaad_user": "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da",
     "shiksha_saathi_user": "1ae074db-32f3-4714-a150-cc8a370eafd1",
 }
+
+export const UPDATE_USER_BY_ID_QUERY = `
+mutation($object:teacher_set_input!, $id:uuid!){
+  update_teacher(where:{user_id:{_eq:$id}}, _set:$object){
+    returning{
+      id
+    }
+  }
+}`
 const dataProvider = {
     getList: async (resource: any, {pagination: {page, perPage}, filter}: any): Promise<any> => {
         const queryString = [
@@ -61,12 +69,18 @@ const dataProvider = {
         delete data['account_status'];
         delete data['gql'];
         delete data['id'];
-        const response = await client.patch('/admin/updateUser/' + id, data);
-        console.log(data);
-        if (response?.data?.result) {
-            return {
-                data: response?.data?.result
+        try {
+            const response = await client.patch('/admin/updateUser/' + id, data);
+            if (d) {
+                await clientGQL(UPDATE_USER_BY_ID_QUERY, {object: d, id: id})
             }
+            if (response?.data?.result) {
+                return {
+                    data: response?.data?.result
+                }
+            }
+        } catch (e) {
+            console.log(e);
         }
         throw new Error('Unable to update');
     },

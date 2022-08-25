@@ -11,7 +11,6 @@ import {
 const LocationForm = () => {
     const record = useRecordContext();
     const dataProvider = useDataProvider();
-    console.log(dataProvider);
     return (
         <>
             <span>Location Details</span>

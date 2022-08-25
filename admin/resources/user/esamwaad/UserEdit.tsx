@@ -7,11 +7,11 @@ import {
     TextInput,
     useRecordContext,
     useDataProvider,
-    SelectInput, useResourceContext, useRedirect, useRefresh,
+    SelectInput, useResourceContext, useRedirect, useRefresh, useGetOne, useGetList,
 } from 'react-admin';
-import {designationLevels} from "./designation";
+import {designationESamwaad, designationLevels} from "./designation";
 import {useEffect, useMemo, useState} from "react";
-import {Button, Typography} from "@mui/material";
+import {Button, MenuItem, Select, Typography} from "@mui/material";
 import {useMutation, useQuery} from "react-query";
 import {useController} from "react-hook-form";
 import {useParams} from "react-router-dom";
@@ -99,7 +99,92 @@ const SchoolModeUserForm = ({record}: any) => {
         <ChangePasswordButton record={record}/>
     </>
 }
+
+export const GQLForm = () => {
+    const record = useRecordContext();
+    const dataProvider = useDataProvider();
+    const {data, isLoading, error, refetch} = useGetList(
+        'teacher',
+        {filter: {user_id: record.id}},
+    );
+    const [designation, setDesignation] = useState('');
+    const [accountStatus, setAccountStatus] = useState('');
+    const [employment, setEmployment] = useState('');
+    useEffect(() => {
+        if (data?.length) {
+            setDesignation(data?.[0]?.designation);
+            setAccountStatus(data?.[0]?.account_status);
+            setEmployment(data?.[0]?.employment);
+            designationInput.field.onChange(data?.[0]?.designation);
+            accountStatusInput.field.onChange(data?.[0]?.account_status);
+            employmentStatusInput.field.onChange(data?.[0]?.employment);
+        }
+    }, [data])
+    const designationInput = useController({name: 'designation'});
+    const accountStatusInput = useController({name: 'account_status'});
+    const employmentStatusInput = useController({name: 'employment'});
+    return <div>
+        <div style={{marginTop: '20px', minWidth: '300px'}}>
+            <Labeled label={'Designation'}>
+                <Select
+                    value={designation}
+                    style={{minWidth: '300px'}}
+                    onChange={(e) => {
+                        setDesignation(e.target.value)
+                        designationInput.field.onChange(e.target.value);
+                    }}
+                >
+                    {
+                        designationESamwaad.map((d, index) => {
+                            return <MenuItem value={d.designation} key={index}>{d.designation}</MenuItem>
+                        })
+                    }
+                </Select>
+            </Labeled>
+        </div>
+        <div style={{marginTop: '20px', minWidth: '300px'}}>
+            <Labeled label={'Mode of Employment'}>
+                <Select
+                    value={employment}
+                    style={{minWidth: '300px'}}
+                    onChange={(e) => {
+                        setEmployment(e.target.value)
+                        employmentStatusInput.field.onChange(e.target.value);
+                    }}
+                >
+                    {
+                        ['Permanent', 'Contractual'].map((d, index) => {
+                            return <MenuItem value={d} key={index}>{d}</MenuItem>
+                        })
+                    }
+                </Select>
+            </Labeled>
+        </div>
+        <div style={{marginTop: '20px', minWidth: '300px'}}>
+            <Labeled label={'Account Status'}>
+                <Select
+                    value={accountStatus}
+                    style={{minWidth: '300px'}}
+                    onChange={
+                        (e) => {
+                            setAccountStatus(e.target.value)
+                            accountStatusInput.field.onChange(e.target.value);
+                        }
+                    }
+                >
+                    {
+                        ['ACTIVE', 'DEACTIVATED', 'PENDING', 'REJECTED'].map((d, index) => {
+                            return <MenuItem value={d} key={index}>{d}</MenuItem>
+                        })
+                    }
+                </Select>
+            </Labeled>
+        </div>
+
+    </div>
+}
 const NonSchoolModeUserForm = (record: any) => {
+
     return <>
         <TextInput source="username" disabled={true}/>
         <TextInput source="firstName" label="Full Name"/>
@@ -110,7 +195,9 @@ const NonSchoolModeUserForm = (record: any) => {
                 render={(record: any) => DisplayRoles(record)}
             />
         </Labeled>
-        <SelectInput source="designation" choices={designationLevels}/>
+        <GQLForm/>
+        <SchoolUDISEInput/>
+        <ChangePasswordButton record={record}/>
     </>
 }
 const UserForm = () => {
@@ -176,7 +263,7 @@ const UserEdit = () => {
                 _v['gql'] = {
                     designation: _v.designation,
                     cadre: _v.designation,
-                    school_id: values?.data.id,
+                    school_id: values?.data.school,
                     account_status: _v.account_status,
                     employment: _v.employment,
                 };

@@ -13,6 +13,7 @@ import authProvider from "./authProvider";
 import Login from "./Login";
 import {EsamwaadUserDataProvider} from "./customDataProviders/userDataProviders";
 import ShikshaSaathi from "./resources/user/shikshaSaathi";
+import {lightTheme} from "./components/layout/themes";
 //
 const JSONDp = jsonServerProvider('https://jsonplaceholder.typicode.com');
 
@@ -42,12 +43,13 @@ const App = () => {
             const hasuraDp = await getDataProvider(session);
             const _dataProvider = combineDataProviders((resource) => {
                 switch (resource) {
+                    case 'teacher':
                     case 'school':
                     case 'student':
                         return hasuraDp;
                     case 'location':
                         return hasuraDp;
-                        case 'grade_assessment':
+                    case 'grade_assessment':
                         return hasuraDp;
                     case 'users':
                         return JSONDataProvider;
@@ -71,6 +73,7 @@ const App = () => {
     if (!dataProvider) return <p>Loading...</p>;
     return (<Admin
             dataProvider={dataProvider}
+            theme={lightTheme}
             authProvider={authProvider}
             loginPage={Login}
         >
