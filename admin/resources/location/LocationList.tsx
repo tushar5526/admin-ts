@@ -80,7 +80,11 @@ const LocationList = () => {
         <SelectInput
             label="District"
             key={'district'}
-            onChange={(e: any) => setSelectedDistrict(e.target.value)}
+            onChange={(e: any) => {
+                setSelectedDistrict(e.target.value)
+                setSelectedBlock(null)
+                setSelectedCluster(null)
+            }}
             value={selectedDistrict}
             source="district"
             choices={districts}
@@ -88,7 +92,10 @@ const LocationList = () => {
         selectedDistrict ? (
             <SelectInput
                 label="Block"
-                onChange={(e) => setSelectedBlock(e.target.value)}
+                onChange={(e) => {
+                    setSelectedBlock(e.target.value)
+                    setSelectedCluster(null)
+                }}
                 value={selectedBlock}
                 source="block"
                 choices={blocks}
@@ -110,7 +117,6 @@ const LocationList = () => {
     ];
     return (
         <List
-            sx={{paddingTop: '20px'}}
             filters={Filters}>
             <Datagrid rowClick={"edit"}>
                 <TextField source="id"/>
