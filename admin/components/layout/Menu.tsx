@@ -41,20 +41,13 @@ const Menu = ({ dense = false }: MenuProps) => {
         return (
           <MenuItemLink
             key={option.name}
-            to={option.to}
+            to={`/${option.resource}`}
             state={{ _scrollToTop: true }}
             primaryText={translate(option.name, {
               smart_count: 2,
             })}
             dense={dense}
             style={{
-              color: "#444444",
-              backgroundColor: "#ffffff",
-              padding: "10px 15px",
-              borderRadius: "25px",
-              marginBottom: "10px",
-              marginLeft: "10px",
-              textAlign: "center",
             }}
           />
         );

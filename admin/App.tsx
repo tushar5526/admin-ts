@@ -14,6 +14,8 @@ import Login from "./Login";
 import {EsamwaadUserDataProvider} from "./customDataProviders/userDataProviders";
 import ShikshaSaathi from "./resources/user/shikshaSaathi";
 import {lightTheme} from "./components/layout/themes";
+import {Layout} from "./components/layout";
+import MenuOptions from "./components/layout/MenuOptions";
 //
 const JSONDp = jsonServerProvider('https://jsonplaceholder.typicode.com');
 
@@ -74,15 +76,15 @@ const App = () => {
     return (<Admin
             dataProvider={dataProvider}
             theme={lightTheme}
+            layout={Layout}
             authProvider={authProvider}
             loginPage={Login}
         >
-            <Resource name="student" {...student}/>
-            <Resource name="e_samwaad_user"   {...Esamwaad}/>
-            <Resource name="shiksha_saathi_user"   {...ShikshaSaathi}/>
-            <Resource name="location" {...location} />
-            <Resource name="school" {...school} />
-            <Resource name="grade_assessment" {...gradeAssessment} />
+            {
+                MenuOptions.map((option, index)=>{
+                    return <Resource key={index} name={option.resource} {...option.props}/>
+                })
+            }
         </Admin>
     );
 };
