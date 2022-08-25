@@ -5,7 +5,7 @@ import SchoolEdit from "./SchoolEdit";
 
 export default {
   list: SchoolList,
-  // edit: null,
+  edit: SchoolEdit,
   icon: SchoolIcon,
   permissions: {
     canEdit: ['Admin'],

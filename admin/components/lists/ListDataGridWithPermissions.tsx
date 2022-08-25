@@ -14,7 +14,7 @@ const ListDataGridWithPermissions = ({
     if (!ResourceWithPermission?.resourcePermissions?.canDelete) {
         _dataGridProps.bulkActionButtons = null;
     }
-    return <List {...(listProps || {})}>
+    return <List {...(listProps || {})} >
         <Datagrid {...(_dataGridProps || {})}>
             {
                 children

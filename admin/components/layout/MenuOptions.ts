@@ -2,9 +2,8 @@ import student from "../../resources/student";
 import {Esamwaad} from "../../resources/user";
 import ShikshaSaathi from "../../resources/user/shikshaSaathi";
 import location from "../../resources/location";
-import school from "../../resources/student";
+import school from "../../resources/school";
 import gradeAssessment from "../../resources/gradeAssessment";
-import {forEach} from "lodash";
 
 const MenuOptions: any[] = [
     {
