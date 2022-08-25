@@ -15,7 +15,7 @@ const StudentForm = () => {
   console.log(dataProvider);
   return (
     <>
-      <span>Location Details</span>
+      <span>Student Details</span>
 
       <TextInput source="id" />
       <TextInput source="name" />
