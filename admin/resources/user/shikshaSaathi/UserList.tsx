@@ -1,6 +1,6 @@
 import {FunctionField, Datagrid, List, NumberField, ReferenceField, TextField} from 'react-admin';
 const ApplicationId = '1ae074db-32f3-4714-a150-cc8a370eafd1';
-const displayRoles = (a: any) => {
+const DisplayRoles = (a: any) => {
     const registration = a.registrations?.find((r: any) => r.applicationId === ApplicationId);
     if (!registration) {
         return <span>-</span>
@@ -23,7 +23,7 @@ const UserList = () => (
             <NumberField source="mobilePhone" label="Mobile Phone"/>
             <FunctionField
                 label="Role"
-                render={record => displayRoles(record)}
+                render={record => DisplayRoles(record)}
             />;
         </Datagrid>
     </List>
