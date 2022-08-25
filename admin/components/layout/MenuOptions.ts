@@ -29,8 +29,18 @@ const MenuOptions = [
         props: school
     },
     {
+        name: "Location",
+        resource: 'location',
+        props: location
+    },
+    {
         name: "Grade Assessment",
         resource: 'gradeAssessment',
+        props: gradeAssessment
+    },
+    {
+        name: "Assessment",
+        resource: 'assessment',
         props: gradeAssessment
     },
 

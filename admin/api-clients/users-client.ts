@@ -1,13 +1,14 @@
 export const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 export const clientGQL = (query: string, variables: any = {}) => {
-    const token = localStorage.getItem('token');
-
+    const userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData') as string) : null;
+    const headers: any = {'Content-Type': 'application/json'}
+    if (userData) {
+        const token = userData?.user?.token;
+        headers['Authorization'] = `Bearer ${token}`;
+    }
     return fetch(process.env.NEXT_PUBLIC_HASURA_URL as string, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-hasura-admin-secret': `samarthDBHasuraPW5678`
-        },
+        headers: headers,
         body: JSON.stringify({query, variables}),
     })
 }
