@@ -110,6 +110,7 @@ const LocationList = () => {
     ];
     return (
         <List
+            sx={{paddingTop: '20px'}}
             filters={Filters}>
             <Datagrid rowClick={"edit"}>
                 <TextField source="id"/>
