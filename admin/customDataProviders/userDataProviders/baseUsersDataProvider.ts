@@ -1,4 +1,5 @@
 import {client} from "../../api-clients/users-client";
+import {useNotify} from "react-admin";
 
 const Applications: any = {
     "e_samwaad_user": "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da",
@@ -42,6 +43,15 @@ const dataProvider = {
             }
         }
         return response;
+    },
+    changePassword: async (resource: any, payload: any): Promise<any> => {
+        const response = await client.post('/admin/changePassword', payload);
+        if (response?.data?.msg) {
+            return {
+                data: response?.data?.msg
+            }
+        }
+        throw new Error('Unable to update');
     },
 }
 export default dataProvider;
