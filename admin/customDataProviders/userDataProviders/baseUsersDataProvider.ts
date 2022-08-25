@@ -1,4 +1,5 @@
 import {client} from "../../api-clients/users-client";
+import {useNotify} from "react-admin";
 
 const Applications: any = {
     "e_samwaad_user": "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da",
@@ -42,6 +43,32 @@ const dataProvider = {
             }
         }
         return response;
+    },
+    changePassword: async (resource: any, payload: any): Promise<any> => {
+        const response = await client.post('/admin/changePassword', payload);
+        if (response?.data?.msg) {
+            return {
+                data: response?.data?.msg
+            }
+        }
+        throw new Error('Unable to update');
+    },
+    updateUser: async (resource: any, data: any): Promise<any> => {
+        const d = data.gql ? JSON.parse(JSON.stringify(data.gql)) : null;
+        const id = data.id;
+        delete data['designation'];
+        delete data['employment'];
+        delete data['account_status'];
+        delete data['gql'];
+        delete data['id'];
+        const response = await client.patch('/admin/updateUser/' + id, data);
+        console.log(data);
+        if (response?.data?.result) {
+            return {
+                data: response?.data?.result
+            }
+        }
+        throw new Error('Unable to update');
     },
 }
 export default dataProvider;

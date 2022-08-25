@@ -22,16 +22,16 @@ const UserList = () => (
             <TextField source="username"/>
             <FunctionField
                 label="Full Name"
-                render={record => `${record.firstName} ${record.lastName}`}
+                render={(record: any) => `${record.firstName} ${record.lastName}`}
             />;
             <NumberField source="mobilePhone" label="Mobile Phone"/>
             <FunctionField
                 label="Full Name"
-                render={record => `${record.firstName} ${record.lastName}`}
+                render={(record: any) => `${record.firstName} ${record.lastName}`}
             />;
             <FunctionField
                 label="Role"
-                render={record => DisplayRoles(record)}
+                render={(record: any) => DisplayRoles(record)}
             />;
 
         </Datagrid>
