@@ -52,6 +52,8 @@ const App = () => {
                     case 'location':
                         return hasuraDp;
                     case 'grade_assessment':
+                    case 'assessment':
+                    case 'stream':
                         return hasuraDp;
                     case 'users':
                         return JSONDataProvider;
