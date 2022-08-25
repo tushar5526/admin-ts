@@ -7,4 +7,10 @@ export default {
   list: SchoolList,
   // edit: null,
   icon: SchoolIcon,
+  permissions: {
+    canEdit: ['Admin'],
+    canDelete: ['Admin'],
+    canCreate: ['Admin'],
+    canList: ['Admin'],
+  }
 };

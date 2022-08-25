@@ -7,4 +7,10 @@ export default {
   list: LocationList,
   edit: LocationEdit,
   icon: SchoolIcon,
+  permissions: {
+    canEdit: ['Admin'],
+    canDelete: ['Admin'],
+    canCreate: ['Admin'],
+    canList: ['Admin'],
+  }
 };

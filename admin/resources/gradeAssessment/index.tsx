@@ -6,4 +6,10 @@ export default {
   list: GradeAssessmentList,
   // edit: null,
   icon: SchoolIcon,
+  permissions: {
+    canEdit: ['Admin'],
+    canDelete: ['Admin'],
+    canCreate: ['Admin'],
+    canList: ['Admin'],
+  }
 };

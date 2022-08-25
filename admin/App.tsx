@@ -1,21 +1,18 @@
 import * as React from "react";
-import {Admin, Resource, combineDataProviders, ListGuesser} from 'react-admin';
-import {useEffect, useState} from "react";
+import {Admin, Resource, combineDataProviders} from 'react-admin';
+import {useEffect,  useState} from "react";
 import getDataProvider from "./customDataProviders";
 import student from "./resources/student";
 import location from "./resources/location";
-import gradeAssessment from "./resources/gradeAssessment";
 
 import jsonServerProvider from 'ra-data-json-server';
 import school from "./resources/student";
-import {Esamwaad} from "./resources/user";
 import authProvider from "./authProvider";
 import Login from "./Login";
 import {EsamwaadUserDataProvider} from "./customDataProviders/userDataProviders";
-import ShikshaSaathi from "./resources/user/shikshaSaathi";
 import {lightTheme} from "./components/layout/themes";
 import {Layout} from "./components/layout";
-import MenuOptions from "./components/layout/MenuOptions";
+import  {MenuItemsWithPermissionResolver} from "./components/layout/MenuOptions";
 //
 const JSONDp = jsonServerProvider('https://jsonplaceholder.typicode.com');
 
@@ -83,9 +80,11 @@ const App = () => {
             loginPage={Login}
         >
             {
-                MenuOptions.map((option, index)=>{
-                    return <Resource key={index} name={option.resource} {...option.props}/>
-                })
+                permissions =>
+                    MenuItemsWithPermissionResolver(permissions).map((option, index) => {
+                        return <Resource key={index} name={option.resource}  {...option.props}/>
+                    })
+
             }
         </Admin>
     );

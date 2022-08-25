@@ -3,6 +3,7 @@ import {useLocation} from "react-router-dom";
 import {useMemo, useState} from "react";
 import {useQuery} from "react-query";
 import * as _ from "lodash";
+import {ListDataGridWithPermissions} from "../../components/lists";
 
 const LocationList = () => {
     const location = useLocation();
@@ -116,15 +117,12 @@ const LocationList = () => {
         ),
     ];
     return (
-        <List
-            filters={Filters}>
-            <Datagrid rowClick={"edit"}>
-                <TextField source="id"/>
-                <TextField source="district"/>
-                <TextField source="block"/>
-                <TextField source="cluster"/>
-            </Datagrid>
-        </List>
+        <ListDataGridWithPermissions listProps={{filters: Filters}} dataGridProps={{rowClick: "edit"}}>
+            <TextField source="id"/>
+            <TextField source="district"/>
+            <TextField source="block"/>
+            <TextField source="cluster"/>
+        </ListDataGridWithPermissions>
     );
 };
 export default LocationList;
