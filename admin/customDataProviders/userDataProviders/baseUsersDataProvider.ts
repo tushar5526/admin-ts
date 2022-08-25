@@ -53,5 +53,22 @@ const dataProvider = {
         }
         throw new Error('Unable to update');
     },
+    updateUser: async (resource: any, data: any): Promise<any> => {
+        const d = data.gql ? JSON.parse(JSON.stringify(data.gql)) : null;
+        const id = data.id;
+        delete data['designation'];
+        delete data['employment'];
+        delete data['account_status'];
+        delete data['gql'];
+        delete data['id'];
+        const response = await client.patch('/admin/updateUser/' + id, data);
+        console.log(data);
+        if (response?.data?.result) {
+            return {
+                data: response?.data?.result
+            }
+        }
+        throw new Error('Unable to update');
+    },
 }
 export default dataProvider;

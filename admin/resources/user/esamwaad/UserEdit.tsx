@@ -7,13 +7,14 @@ import {
     TextInput,
     useRecordContext,
     useDataProvider,
-    SelectInput, useResourceContext, ReferenceInput, AutocompleteInput, useGetList
+    SelectInput, useResourceContext, useRedirect, useRefresh,
 } from 'react-admin';
-import {designationLevels, getLevelFromDesignation} from "./designation";
+import {designationLevels} from "./designation";
 import {useEffect, useMemo, useState} from "react";
-import {Button, Input, Typography} from "@mui/material";
+import {Button, Typography} from "@mui/material";
 import {useMutation, useQuery} from "react-query";
-import {useForm} from "react-hook-form";
+import {useController} from "react-hook-form";
+import {useParams} from "react-router-dom";
 
 const ApplicationId = 'f0ddb3f6-091b-45e4-8c0f-889f89d4f5da';
 
@@ -35,8 +36,8 @@ export const DisplayRoles = (a: any) => {
 }
 export const ChangePasswordButton = ({record}: any) => {
     const dataProvider = useDataProvider();
-    const resource = useResourceContext();
     const notify = useNotify();
+    const resource = useResourceContext();
     const {mutate, isLoading} = useMutation(
         ['changePassword', record.id],
         () => dataProvider.changePassword(resource, {
@@ -65,15 +66,13 @@ export const SchoolUDISEInput = () => {
         ['getSchoolByUDISE', record.id],
         () => dataProvider.getSchoolByUDISE(resource, value)
     );
-    const form = useForm();
+    const i = useController({name: 'data.school'});
     useEffect(() => {
         refetch(value);
     }, [value])
     useEffect(() => {
-        form.setValue('data.udise', data?.data?.udise);
-        form.setValue('school', data?.data?.id);
-        console.log(data?.data);
-    }, [form, data])
+        i.field.onChange(data?.data?.id);
+    }, [data])
     return <div style={{marginTop: '20px', minWidth: '300px'}}>
         <Typography>
             {
@@ -83,9 +82,6 @@ export const SchoolUDISEInput = () => {
         <TextInput source={'data.udise'} label="UDISE" onChange={(e) => {
             setValue(e.target.value)
         }}/>
-        <TextInput source={'school'} label="School" onChange={(e) => {
-        }}/>
-
     </div>
 }
 const SchoolModeUserForm = ({record}: any) => {
@@ -119,7 +115,6 @@ const NonSchoolModeUserForm = (record: any) => {
 }
 const UserForm = () => {
     const record = useRecordContext();
-    const dataProvider = useDataProvider();
     const roles = useMemo(() => {
         if (record?.registrations) {
             const registration = record.registrations?.find((r: any) => r.applicationId === ApplicationId);
@@ -140,16 +135,53 @@ const UserForm = () => {
 
 const UserEdit = () => {
     const notify = useNotify();
-    return (
+    const resource = useResourceContext();
+    const dataProvider = useDataProvider();
+    const redirect = useRedirect();
 
+    const params = useParams();
+    const refresh = useRefresh();
+
+    const {mutate, isLoading} = useMutation(
+        ['updateUser', params.id],
+        (value) => dataProvider.updateUser(resource, value),
+        {
+            onSuccess: (data: any) => {
+                refresh();
+                redirect('/' + resource);
+            },
+            onError: (error: any) => {
+                notify(error.toString(), {type: 'error'});
+            }
+        }
+    );
+    return (
         <Edit>
             <SimpleForm onSubmit={(values) => {
-
-                // We will get Form Values on submission
-                notify(`Post updated successfully`);
-                console.log(values);
-
-
+                const _v: any = {
+                    mobilePhone: values['mobilePhone'],
+                    firstName: values['firstName'],
+                    fullName: values['firstName'],
+                    data: {
+                        phone: values['mobilePhone'],
+                        accountName: values['firstName'],
+                        school: values?.data.school,
+                        udise: values?.data.udise,
+                    },
+                    designation: values.designation,
+                    id: values.id,
+                    account_status: values.account_status,
+                    employment: values.employment,
+                }
+                _v['gql'] = {
+                    designation: _v.designation,
+                    cadre: _v.designation,
+                    school_id: values?.data.id,
+                    account_status: _v.account_status,
+                    employment: _v.employment,
+                };
+                mutate(_v);
+                notify(`Post updated successfully`, {type: "success"});
             }}>
                 <UserForm/>
             </SimpleForm>
