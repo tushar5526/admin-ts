@@ -1,11 +1,6 @@
 import {
   Datagrid,
   List,
-  SimpleList,
-  TextField,
-  List,
-  SimpleList,
-  Datagrid,
   TextField,
   FunctionField,
   ReferenceField,
@@ -25,7 +20,7 @@ const SchoolList = () => {
         <ReferenceField source="location_id" reference="location">
           <TextField label="Cluster" source="cluster" />
         </ReferenceField>
-        <FunctionField
+        {/* <FunctionField
           label="Session"
           render={(record) => {
             const obj = config.schoolSession.find(
@@ -33,7 +28,7 @@ const SchoolList = () => {
             );
             return obj?.name;
           }}
-        />
+        /> */}
       </Datagrid>
     </List>
   );
