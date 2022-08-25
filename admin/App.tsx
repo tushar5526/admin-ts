@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import getDataProvider from "./customDataProviders";
 import student from "./resources/student";
 import location from "./resources/location";
+import gradeAssessment from "./resources/gradeAssessment";
 
 import jsonServerProvider from 'ra-data-json-server';
 import school from "./resources/student";
@@ -46,6 +47,8 @@ const App = () => {
                         return hasuraDp;
                     case 'location':
                         return hasuraDp;
+                        case 'grade_assessment':
+                        return hasuraDp;
                     case 'users':
                         return JSONDataProvider;
                     case 'e_samwaad_user':
@@ -76,6 +79,7 @@ const App = () => {
             <Resource name="shiksha_saathi_user"   {...ShikshaSaathi}/>
             <Resource name="location" {...location} />
             <Resource name="school" {...school} />
+            <Resource name="grade_assessment" {...gradeAssessment} />
         </Admin>
     );
 };
