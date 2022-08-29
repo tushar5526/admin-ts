@@ -5,7 +5,6 @@ import {
   TextInput,
   Datagrid,
   List,
-  NumberField,
   ReferenceField,
   TextField,
   useRecordContext,
@@ -56,7 +55,7 @@ const QuarterField = ({ label }: { label: string }) => {
     </div>
   );
 };
-const MappingList = () => {
+const SchoolMappingList = () => {
   const Filters = [
     <TextInput label="Username" source={"username"} alwaysOn key={"search"} />,
     <TextInput label="Quarter" source={"quarter"} key={"search"} />,
@@ -122,4 +121,4 @@ const MappingList = () => {
     </List>
   );
 };
-export default MappingList;
+export default SchoolMappingList;

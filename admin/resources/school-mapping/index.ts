@@ -1,8 +1,8 @@
 import SchoolIcon from "@mui/icons-material/School";
-import MappingList from "./MappingList";
+import SchoolMappingList from "./SchoolMappingList";
 
 export default {
-  list: MappingList,
+  list: SchoolMappingList,
   icon: SchoolIcon,
   permissions: {
     canEdit: ["Admin"],

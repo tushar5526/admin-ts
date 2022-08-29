@@ -4,7 +4,7 @@ import ShikshaSaathi from "../../resources/user/shikshaSaathi";
 import location from "../../resources/location";
 import school from "../../resources/school";
 import gradeAssessment from "../../resources/gradeAssessment";
-import mapping from "../../resources/mapping";
+import mapping from "../../resources/school-mapping";
 
 const MenuOptions: any[] = [
   {
