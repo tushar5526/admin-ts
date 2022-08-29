@@ -3,8 +3,6 @@ import {
   ReferenceInput,
   SelectInput,
   TextInput,
-} from "react-admin";
-import {
   Datagrid,
   List,
   NumberField,
