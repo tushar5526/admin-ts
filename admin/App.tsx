@@ -49,6 +49,7 @@ const App = () => {
           case "location":
             return hasuraDp;
           case "ss_school_allocation_data":
+          case "ss_school_allocation_quarter":
             return hasuraDp;
           case "grade_assessment":
           case "assessment":
