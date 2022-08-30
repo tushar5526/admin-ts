@@ -5,8 +5,8 @@ import location from "../../resources/location";
 import school from "../../resources/school";
 import gradeAssessment from "../../resources/gradeAssessment";
 import assessment from "../../resources/assessment";
-import mapping from "../../resources/mapping";
 import teacher from "../../resources/teacher";
+import mapping from "../../resources/school-mapping";
 
 const MenuOptions: any[] = [
     {
