@@ -14,6 +14,7 @@ import {
 } from "react-admin";
 import { useQuery } from "react-query";
 import { Box, Typography } from "@mui/material";
+import { ListDataGridWithPermissions } from "../../components/lists";
 
 const QuarterField = ({ label }: { label: string }) => {
   const record = useRecordContext();
@@ -76,49 +77,45 @@ const SchoolMappingList = () => {
       <SelectInput label="Udise" optionText="udise" />
     </ReferenceInput>,
   ];
-  const MappingPagination = () => (
-    <Pagination rowsPerPageOptions={[50, 75, 100]} />
-  );
 
   return (
-    <List filters={Filters} pagination={<MappingPagination />}>
-      <Datagrid rowClick="edit">
-        <TextField source="id" />
-        <TextField source="username" />
-        <QuarterField label={"Year  /  Month1  /  Month2  /  Month3"} />
+    <ListDataGridWithPermissions
+      listProps={{ filters: Filters }}
+      dataGridProps={{ rowClick: "edit" }}
+    >
+      <TextField source="id" />
+      <TextField source="username" />
+      <QuarterField label={"Year  /  Month1  /  Month2  /  Month3"} />
 
-        <ReferenceField label="District" source="school_id" reference="school">
-          <ReferenceField
-            label="District"
-            source="location_id"
-            reference="location"
-          >
-            <TextField source="district" />
-          </ReferenceField>
+      <ReferenceField label="District" source="school_id" reference="school">
+        <ReferenceField
+          label="District"
+          source="location_id"
+          reference="location"
+        >
+          <TextField source="district" />
         </ReferenceField>
-        <ReferenceField label="Block" source="school_id" reference="school">
-          <ReferenceField
-            label="Block"
-            source="location_id"
-            reference="location"
-          >
-            <TextField source="block" />
-          </ReferenceField>
+      </ReferenceField>
+
+      <ReferenceField label="Block" source="school_id" reference="school">
+        <ReferenceField label="Block" source="location_id" reference="location">
+          <TextField source="block" />
         </ReferenceField>
-        <ReferenceField label="Cluster" source="school_id" reference="school">
-          <ReferenceField
-            label="Cluster"
-            source="location_id"
-            reference="location"
-          >
-            <TextField source="cluster" />
-          </ReferenceField>
+      </ReferenceField>
+
+      <ReferenceField label="Cluster" source="school_id" reference="school">
+        <ReferenceField
+          label="Cluster"
+          source="location_id"
+          reference="location"
+        >
+          <TextField source="cluster" />
         </ReferenceField>
-        <ReferenceField label="Udise" source="school_id" reference="school">
-          <TextField source="udise" />
-        </ReferenceField>
-      </Datagrid>
-    </List>
+      </ReferenceField>
+      <ReferenceField label="Udise" source="school_id" reference="school">
+        <TextField source="udise" />
+      </ReferenceField>
+    </ListDataGridWithPermissions>
   );
 };
 export default SchoolMappingList;
