@@ -21,11 +21,16 @@ const UserCreate = (props: any) => {
     userName: "",
     fullName: "",
     mobile: "",
-    roles: "",
+    roles: "School",
     udise: "",
     designation: "",
   });
   const designationChoices = getLowerDesignationsChoices(_loggedInUser);
+  const roleChoices = [
+    { id: "Teacher", name: "Teacher" },
+    { id: "Principal", name: "Principal" },
+    { id: "school", name: "school" },
+  ];
   return (
     <Create {...props}>
       <SimpleForm onSubmit={handleSubmit}>
@@ -44,9 +49,12 @@ const UserCreate = (props: any) => {
           source="mobilePhone"
           label="Mobile Phone"
         />
-        <TextInput
+        <SelectInput
           onChange={(e) => setState({ ...state, roles: e.target.value })}
           source="roles"
+          value={state.roles}
+          disabled
+          choices={roleChoices}
           label="Roles"
         />
         <SelectInput

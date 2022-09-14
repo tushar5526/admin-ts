@@ -1,7 +1,15 @@
 body {
-    margin: 2px 0;
+  margin: 2px 0;
 }
 
 .appFrame {
-    margin-top: 120px;
+  margin-top: 120px;
+}
+
+/* vinay */
+.student_mapping_imp {
+  display: flex;
+  height: fit-content;
+  align-content: center;
+  justify-content: flex-end;
 }

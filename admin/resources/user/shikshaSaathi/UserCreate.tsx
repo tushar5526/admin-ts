@@ -71,29 +71,27 @@ const UserCreate = (props: any) => {
           label="Designation"
           choices={designationChoices}
         />
-        {getVisibility(state.designation, "District") && (
-          <SelectInput
-            value={state.district}
-            onChange={(e) =>
-              setState({ ...state, designation: e.target.value })
-            }
-            source="district"
-            label="District"
-            // @ts-ignore
-            choices={districtChoices}
-          />
-        )}
+        {/* {getVisibility(state.designation, "District") && ( */}
+        <SelectInput
+          value={state.district}
+          onChange={(e) => setState({ ...state, district: e.target.value })}
+          source="district"
+          label="District"
+          // @ts-ignore
+          choices={districtChoices}
+        />
+        {/* )} */}
 
-        {getVisibility(state.designation, "Block") && state.district.length && (
-          <SelectInput
-            value={state.block}
-            onChange={(e) => setState({ ...state, block: e.target.value })}
-            source="block"
-            label="Block"
-            // @ts-ignore
-            choices={blockChoices}
-          />
-        )}
+        {/* {getVisibility(state.designation, "Block") && state.district.length && ( */}
+        <SelectInput
+          value={state.block}
+          onChange={(e) => setState({ ...state, block: e.target.value })}
+          source="block"
+          label="Block"
+          // @ts-ignore
+          choices={blockChoices}
+        />
+        {/* )} */}
         {getVisibility(state.designation, "Cluster") &&
           state.district.length &&
           state.block.length && (
