@@ -22,8 +22,9 @@ export const useLogin = (): ReturnType => {
   const [userType, setUserType] = useState("ADMIN" as "ADMIN" | "SCHOOL");
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
-      setUser(JSON.parse(localStorage.getItem("user") as string));
+    if (localStorage.getItem("userData")) {
+      let userData = JSON.parse(localStorage.getItem("userData") as string);
+      setUser(userData["user"]);
       setUserType(localStorage.getItem("userType") as any);
     }
   }, []);

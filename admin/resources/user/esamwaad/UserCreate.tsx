@@ -16,6 +16,10 @@ const UserCreate = (props: any) => {
   const handleSubmit = () => {
     console.log(state, "I am geting submitted ");
   };
+  // to be called when submitted
+  const createUser = () => {
+    // to be completed
+  };
 
   const [state, setState] = useState({
     userName: "",
