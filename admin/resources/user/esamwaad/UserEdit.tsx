@@ -308,7 +308,7 @@ const UserEdit = () => {
             employment: _v.employment,
           };
           mutate(_v);
-          notify(`Post updated successfully`, { type: "success" });
+          notify(`User updated successfully`, { type: "success" });
         }}
       >
         <UserForm />

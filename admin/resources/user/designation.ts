@@ -187,7 +187,6 @@ export const getAllDistricts = (district?: string, user?: any) => {
   const _user = user?.user?.user || null;
 
   const level = _user?.data?.roleData;
-  console.log(level, "level");
 
   if (level?.district || level?.state || level?.cluster || level?.block) {
     const districts = () => {

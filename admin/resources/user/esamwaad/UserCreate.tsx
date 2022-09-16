@@ -16,6 +16,7 @@ import { useSearchSchoolByUDISE } from "../useSearchSchoolByUdise";
 
 const UserCreate = (props: any) => {
   const { user: _loggedInUser } = useLogin();
+  const [userCreated, setUserCreated] = useState(false);
   const [state, setState] = useState({
     userName: "",
     fullName: "",
@@ -56,8 +57,8 @@ const UserCreate = (props: any) => {
     };
     const res = client.post(endPoint, body);
     res.then((data) => {
-      if (data?.data) {
-        console.log(data);
+      if (data?.data?.responseCode === "OK") {
+        setUserCreated(true);
       }
     });
   };
@@ -69,7 +70,11 @@ const UserCreate = (props: any) => {
     { id: "school", name: "school" },
   ];
 
-  return (
+  return userCreated ? (
+    <>
+      <p>User Created Successfully</p>
+    </>
+  ) : (
     <Create {...props}>
       <SimpleForm onSubmit={createUser}>
         <TextInput

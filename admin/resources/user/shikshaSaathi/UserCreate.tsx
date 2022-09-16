@@ -5,6 +5,7 @@ import {
   TextInput,
   NumberInput,
   SelectInput,
+  Button,
 } from "react-admin";
 import { useLogin } from "../hooks";
 import { getClusters } from "../designation";
@@ -19,6 +20,7 @@ import { client } from "../../../api-clients/users-client";
 // const ApplicationId = "1ae074db-32f3-4714-a150-cc8a370eafd1";
 const UserCreate = (props: any) => {
   const { user: _loggedInUser } = useLogin();
+  const [userCreated, setUserCreated] = useState(false);
   const [state, setState] = useState({
     userName: "",
     fullName: "",
@@ -61,8 +63,8 @@ const UserCreate = (props: any) => {
     };
     const res = client.post(endPoint, body);
     res.then((data) => {
-      if (data?.data) {
-        console.log(data);
+      if (data?.data?.responseCode === "OK") {
+        setUserCreated(true);
       }
     });
   };
@@ -73,7 +75,12 @@ const UserCreate = (props: any) => {
   const blockChoices = getBlocks(state.district, "", _loggedInUser);
   const clusterChoices = getClusters(state.block, "", _loggedInUser);
 
-  return (
+  return userCreated ? (
+    <>
+      <p>User Successfully Created</p>
+      <Button label="Back" />
+    </>
+  ) : (
     <Create {...props}>
       <SimpleForm onSubmit={createUser}>
         <TextInput
