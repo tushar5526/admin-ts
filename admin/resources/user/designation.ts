@@ -84,17 +84,31 @@ const designationLevels = [
 ];
 
 export const getLowerDesignationsChoices = (_user: any) => {
-  const user = _user || null;
+  const user = _user?.user?.user || null;
   if (!user) {
     return [];
   }
-  const level = user?.data?.roleData?.geographic_level;
+  // const level = user?.data?.roleData?.geographic_level;
+
+  const level = user?.data?.roleData;
   if (!level) {
     return [];
   }
 
   const choices: { id: string; name: string }[] = [];
-  if (level === "District") {
+  if (level.state) {
+    designationLevels
+      .filter(
+        (a: any) =>
+          a.scope === "State" ||
+          a.scope === "District" ||
+          a.scope === "Block" ||
+          a.scope === "Cluster"
+      )
+      .forEach((item) =>
+        choices.push({ id: item.designation, name: item.designation })
+      );
+  } else if (level?.district) {
     designationLevels
       .filter(
         (a: any) =>
@@ -103,25 +117,15 @@ export const getLowerDesignationsChoices = (_user: any) => {
       .forEach((item) =>
         choices.push({ id: item.designation, name: item.designation })
       );
-  }
-  if (level === "Block") {
+  } else if (level?.block) {
     designationLevels
       .filter((a: any) => a.scope === "Block" || a.scope === "Cluster")
       .forEach((item) =>
         choices.push({ id: item.designation, name: item.designation })
       );
-  }
-  if (level === "Cluster") {
+  } else if (level.cluster) {
     designationLevels
       .filter((a: any) => a.scope === "Cluster")
-      .forEach((item) =>
-        choices.push({ id: item.designation, name: item.designation })
-      );
-  }
-
-  if (level === "State") {
-    designationLevels
-      .filter((a: any) => a.scope === "State")
       .forEach((item) =>
         choices.push({ id: item.designation, name: item.designation })
       );
@@ -180,12 +184,12 @@ export const getVisibility = (designation: string, level: string) => {
 };
 
 export const getAllDistricts = (district?: string, user?: any) => {
-  const level = user?.data?.roleData?.geographic_level;
-  if (
-    level === "District" ||
-    level === "Block" ||
-    (level === "Cluster" && user?.data?.roleData?.district !== "ALL")
-  ) {
+  const _user = user?.user?.user || null;
+
+  const level = _user?.data?.roleData;
+  console.log(level, "level");
+
+  if (level?.district || level?.state || level?.cluster || level?.block) {
     const districts = () => {
       if (!data) {
         return [];
@@ -197,7 +201,7 @@ export const getAllDistricts = (district?: string, user?: any) => {
         };
       });
     };
-    return districts;
+    return districts();
   }
   const districts = () => {
     if (!data) {
@@ -214,11 +218,10 @@ export const getAllDistricts = (district?: string, user?: any) => {
 };
 
 export const getBlocks = (district: string, block?: string, user?: any) => {
-  const level = user?.data?.roleData?.geographic_level;
-  if (
-    level === "Block" ||
-    (level === "Cluster" && user?.data?.roleData?.block !== "ALL")
-  ) {
+  const _user = user?.user?.user || null;
+
+  const level = _user?.data?.roleData;
+  if (level?.block || level?.cluster) {
     const blocks = () => {
       if (!district || !data) {
         return [];
@@ -254,8 +257,10 @@ export const getBlocks = (district: string, block?: string, user?: any) => {
 };
 
 export const getClusters = (block: string, cluster?: string, user?: any) => {
-  const level = user?.data?.roleData?.geographic_level;
-  if (level === "Cluster" && user?.data?.roleData?.cluster !== "ALL") {
+  const _user = user?.user?.user || null;
+
+  const level = _user?.data?.roleData;
+  if (level?.cluster) {
     // @ts-ignore
     const clusters = () => {
       if (!block || !data) {

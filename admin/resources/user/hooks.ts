@@ -23,8 +23,7 @@ export const useLogin = (): ReturnType => {
 
   useEffect(() => {
     if (localStorage.getItem("userData")) {
-      let userData = JSON.parse(localStorage.getItem("userData") as string);
-      setUser(userData["user"]);
+      setUser(JSON.parse(localStorage.getItem("userData") as string));
       setUserType(localStorage.getItem("userType") as any);
     }
   }, []);

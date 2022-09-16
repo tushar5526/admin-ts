@@ -15,6 +15,7 @@ import {
   getLowerDesignationsChoices,
   getVisibility,
 } from "../designation";
+import { client } from "../../../api-clients/users-client";
 // const ApplicationId = "1ae074db-32f3-4714-a150-cc8a370eafd1";
 const UserCreate = (props: any) => {
   const { user: _loggedInUser } = useLogin();
@@ -23,13 +24,47 @@ const UserCreate = (props: any) => {
     fullName: "",
     mobile: "",
     designation: "",
-    geographicLevel: "",
+    geographicLevel: "Block",
     district: "",
     block: "",
     cluster: "",
+    roles: [],
+    password: "1234abcd",
   });
-  const handleSubmit = () => {
-    console.log(state, "I am geting submitted ");
+  // to be called when submitted
+  const createUser = () => {
+    // to be completed
+    const endPoint = "/admin/createUser";
+    const body = {
+      registration: {
+        applicationId: "1ae074db-32f3-4714-a150-cc8a370eafd1",
+        roles: state.roles,
+        username: state.userName,
+      },
+      user: {
+        data: {
+          accountName: state.fullName,
+          phone: state.mobile,
+          roledata: {
+            block: state.block,
+            cluster: state.cluster,
+            designation: state.designation,
+            district: state.district,
+            geographic_level: state.geographicLevel,
+          },
+        },
+        fullName: state.fullName,
+        mobilePhone: state.mobile,
+        password: state.password,
+        username: state.userName,
+      },
+    };
+    const res = client.post(endPoint, body);
+    res.then((data) => {
+      if (data?.data) {
+        console.log(data);
+      }
+    });
   };
 
   //   const designation = getLowerDesignations(_loggedInUser);
@@ -40,7 +75,7 @@ const UserCreate = (props: any) => {
 
   return (
     <Create {...props}>
-      <SimpleForm onSubmit={handleSubmit}>
+      <SimpleForm onSubmit={createUser}>
         <TextInput
           onChange={(e) => setState({ ...state, userName: e.target.value })}
           source="username"
@@ -61,6 +96,7 @@ const UserCreate = (props: any) => {
           onChange={(e) =>
             setState({ ...state, geographicLevel: e.target.value })
           }
+          disabled
           source="geographic_level"
           label="GeoGraphic Level"
         />
@@ -71,27 +107,27 @@ const UserCreate = (props: any) => {
           label="Designation"
           choices={designationChoices}
         />
-        {/* {getVisibility(state.designation, "District") && ( */}
-        <SelectInput
-          value={state.district}
-          onChange={(e) => setState({ ...state, district: e.target.value })}
-          source="district"
-          label="District"
-          // @ts-ignore
-          choices={districtChoices}
-        />
-        {/* )} */}
+        {getVisibility(state.designation, "District") && (
+          <SelectInput
+            value={state.district}
+            onChange={(e) => setState({ ...state, district: e.target.value })}
+            source="district"
+            label="District"
+            // @ts-ignore
+            choices={districtChoices}
+          />
+        )}
 
-        {/* {getVisibility(state.designation, "Block") && state.district.length && ( */}
-        <SelectInput
-          value={state.block}
-          onChange={(e) => setState({ ...state, block: e.target.value })}
-          source="block"
-          label="Block"
-          // @ts-ignore
-          choices={blockChoices}
-        />
-        {/* )} */}
+        {getVisibility(state.designation, "Block") && state.district.length && (
+          <SelectInput
+            value={state.block}
+            onChange={(e) => setState({ ...state, block: e.target.value })}
+            source="block"
+            label="Block"
+            // @ts-ignore
+            choices={blockChoices}
+          />
+        )}
         {getVisibility(state.designation, "Cluster") &&
           state.district.length &&
           state.block.length && (
