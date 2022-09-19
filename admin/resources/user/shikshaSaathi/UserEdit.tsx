@@ -36,9 +36,6 @@ const displayRoles = (a: any) => {
   });
 };
 const UserForm = () => {
-  const record = useRecordContext();
-  const dataProvider = useDataProvider();
-
   return (
     <>
       <span>User Details</span>

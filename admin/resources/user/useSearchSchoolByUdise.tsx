@@ -13,7 +13,8 @@ export const SCHOOL_BY_UDISE = `query($udise: Int!){
      id
   }
 }`;
-export const Applications: { [key: string]: string } = {
+//@ts-ignore
+export const Applications: { [key: any]: string } = {
   esamvaad: "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da",
   "shiksha-saathi": "1ae074db-32f3-4714-a150-cc8a370eafd1",
 };

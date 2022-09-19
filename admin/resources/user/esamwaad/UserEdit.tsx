@@ -49,13 +49,22 @@ export const ChangePasswordButton = ({ record }: any) => {
   const dataProvider = useDataProvider();
   const notify = useNotify();
   const resource = useResourceContext();
+  console.log(
+    {
+      loginId: record.username,
+      password: resource === "e_samwaad_user" ? "himachal12345" : "1234abcd",
+    },
+    "record"
+  );
   const { mutate, isLoading } = useMutation(
     ["changePassword", record.id],
+
     () =>
       dataProvider.changePassword(resource, {
         loginId: record.username,
         password: resource === "e_samwaad_user" ? "himachal12345" : "1234abcd",
       }),
+
     {
       onSuccess: (data: any) => {
         notify(data?.data, { type: "success" });

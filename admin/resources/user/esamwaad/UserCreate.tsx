@@ -17,20 +17,20 @@ import { useSearchSchoolByUDISE } from "../useSearchSchoolByUdise";
 const UserCreate = (props: any) => {
   const { user: _loggedInUser } = useLogin();
   const [userCreated, setUserCreated] = useState(false);
+  const { school, refresh: fetchSchool } = useSearchSchoolByUDISE();
   const [state, setState] = useState({
     userName: "",
     fullName: "",
     mobile: "",
     roles: ["school"],
-    udise: "2100705302",
-    school: 34931,
+    udise: school?.udise,
+    school: school?.id,
     designation: "",
   });
-  // // const [school, setSchool] = useState(null as any);
-  // const { school, refresh: fetchSchool } = useSearchSchoolByUDISE();
-  // useEffect(() => {
-  //   fetchSchool(state.udise);
-  // }, [state]);
+
+  useEffect(() => {
+    fetchSchool(state.udise);
+  }, [state.udise]);
 
   // to be called when submitted
   const createUser = () => {
@@ -110,11 +110,22 @@ const UserCreate = (props: any) => {
           choices={designationChoices}
         />
         <ReferenceInput source="school_id" reference="school">
-          <TextInput
-            onChange={(e) => setState({ ...state, udise: e.target.value })}
-            source="udise"
-            label="School UDISE"
-          />
+          <>
+            {school && (
+              <span
+                style={{
+                  color: "#4f3cc9",
+                }}
+              >
+                {school?.name}
+              </span>
+            )}
+            <TextInput
+              onChange={(e) => setState({ ...state, udise: e.target.value })}
+              source="udise"
+              label="School UDISE"
+            />
+          </>
         </ReferenceInput>
       </SimpleForm>
     </Create>
