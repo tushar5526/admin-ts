@@ -28,6 +28,7 @@ const Login = () => {
   const notify = useNotify();
   const login = useLogin();
   const location = useLocation();
+
   const handleSubmit = (auth: FormValues) => {
     setLoading(true);
     login(

@@ -6,6 +6,7 @@ import {
   ReferenceField,
   TextField,
   FunctionField,
+  TextInput,
 } from "react-admin";
 import { ListDataGridWithPermissions } from "../../../components/lists";
 
@@ -34,24 +35,33 @@ const DisplayRoles = (a: any) => {
     );
   });
 };
-const UserList = () => (
-  <ListDataGridWithPermissions dataGridProps={{ rowClick: "edit" }}>
-    <TextField source="username" />
-    <FunctionField
-      label="Full Name"
-      render={(record: any) => `${record.firstName} ${record.lastName}`}
-    />
-    ;
-    <NumberField source="mobilePhone" label="Mobile Phone" />
-    <FunctionField
-      label="Full Name"
-      render={(record: any) => `${record.firstName} ${record.lastName}`}
-    />
-    ;
-    <FunctionField
-      label="Role"
-      render={(record: any) => DisplayRoles(record)}
-    />
-  </ListDataGridWithPermissions>
-);
+
+const UserList = () => {
+  const Filters = [
+    <TextInput label="Username" source="username" alwaysOn key={"search"} />,
+  ];
+  return (
+    <ListDataGridWithPermissions
+      listProps={{ filters: Filters }}
+      dataGridProps={{ rowClick: "edit" }}
+    >
+      <TextField source="username" />
+      <FunctionField
+        label="Full Name"
+        render={(record: any) => `${record.firstName} ${record.lastName}`}
+      />
+      ;
+      <NumberField source="mobilePhone" label="Mobile Phone" />
+      <FunctionField
+        label="Full Name"
+        render={(record: any) => `${record.firstName} ${record.lastName}`}
+      />
+      ;
+      <FunctionField
+        label="Role"
+        render={(record: any) => DisplayRoles(record)}
+      />
+    </ListDataGridWithPermissions>
+  );
+};
 export default UserList;
