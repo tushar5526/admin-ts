@@ -46,12 +46,13 @@ export const DisplayRoles = (a: any) => {
   });
 };
 export const ChangePasswordButton = ({ record }: any) => {
+  console.log(record,"this is record")
   const dataProvider = useDataProvider();
   const notify = useNotify();
   const resource = useResourceContext();
   console.log(
     {
-      loginId: record.username,
+      loginId: record?.username,
       password: resource === "e_samwaad_user" ? "himachal12345" : "1234abcd",
     },
     "record"
@@ -248,6 +249,7 @@ const NonSchoolModeUserForm = (record: any) => {
 };
 const UserForm = () => {
   const record = useRecordContext();
+  console.log(record, "this is record");
   const roles = useMemo(() => {
     if (record?.registrations) {
       const registration = record.registrations?.find(
