@@ -1,12 +1,10 @@
 import {
-  BooleanField,
-  Datagrid,
-  List,
   NumberField,
-  ReferenceField,
   TextField,
   FunctionField,
   TextInput,
+  EditButton,
+  ShowButton,
 } from "react-admin";
 import { ListDataGridWithPermissions } from "../../../components/lists";
 
@@ -41,10 +39,7 @@ const UserList = () => {
     <TextInput label="Username" source="username" alwaysOn key={"search"} />,
   ];
   return (
-    <ListDataGridWithPermissions
-      listProps={{ filters: Filters }}
-      dataGridProps={{ rowClick: "edit" }}
-    >
+    <ListDataGridWithPermissions listProps={{ filters: Filters }}>
       <TextField source="username" />
       <FunctionField
         label="Full Name"
