@@ -132,6 +132,7 @@ const SchoolModeUserForm = ({ record }: any) => {
           render={(record: any) => DisplayRoles(record)}
         />
       </Labeled>
+
       <SchoolUDISEInput />
       <ChangePasswordButton record={record} />
     </>

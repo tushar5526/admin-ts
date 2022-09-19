@@ -111,15 +111,12 @@ const UserCreate = (props: any) => {
         />
         <ReferenceInput source="school_id" reference="school">
           <>
-            {school && (
-              <span
-                style={{
-                  color: "#4f3cc9",
-                }}
-              >
-                {school?.name}
-              </span>
+            {school ? (
+              <span>School : {school?.name}</span>
+            ) : (
+              <span>No School</span>
             )}
+
             <TextInput
               onChange={(e) => setState({ ...state, udise: e.target.value })}
               source="udise"
