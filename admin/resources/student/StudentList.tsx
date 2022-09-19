@@ -1,4 +1,10 @@
-import { Pagination, ReferenceInput, useDataProvider } from "react-admin";
+import {
+  Labeled,
+  Pagination,
+  ReferenceInput,
+  SearchInput,
+  useDataProvider,
+} from "react-admin";
 import {
   BooleanField,
   Datagrid,
@@ -146,7 +152,7 @@ const StudentList = () => {
   }, [selectedCwsn, studentData]);
 
   const Filters = [
-    <TextInput label="name" source={"name"} alwaysOn key={"search"} />,
+    <SearchInput placeholder="Name" source={"name"} alwaysOn key={"search"} />,
     <SelectInput
       label="Status"
       key={"is_enabled"}

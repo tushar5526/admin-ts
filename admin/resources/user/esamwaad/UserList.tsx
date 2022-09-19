@@ -5,8 +5,11 @@ import {
   TextInput,
   EditButton,
   ShowButton,
+  SearchInput,
+  Filter,
 } from "react-admin";
 import { ListDataGridWithPermissions } from "../../../components/lists";
+import { useRecordContext } from "react-admin";
 
 const ApplicationId = "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da";
 const DisplayRoles = (a: any) => {
@@ -35,11 +38,16 @@ const DisplayRoles = (a: any) => {
 };
 
 const UserList = () => {
-  const Filters = [
-    <TextInput label="Username" source="username" alwaysOn key={"search"} />,
+  const CustomerFilter = [
+    <SearchInput
+      placeholder="Username"
+      source="username"
+      resettable
+      alwaysOn
+    />,
   ];
   return (
-    <ListDataGridWithPermissions listProps={{ filters: Filters }}>
+    <ListDataGridWithPermissions listProps={{ filters: CustomerFilter }}>
       <TextField source="username" />
       <FunctionField
         label="Full Name"
@@ -56,6 +64,8 @@ const UserList = () => {
         label="Role"
         render={(record: any) => DisplayRoles(record)}
       />
+      <EditButton />
+      <ShowButton />
     </ListDataGridWithPermissions>
   );
 };
