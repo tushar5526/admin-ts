@@ -56,8 +56,6 @@ const UserList = () => {
         label="Role"
         render={(record: any) => DisplayRoles(record)}
       />
-      <EditButton />
-      <ShowButton />
     </ListDataGridWithPermissions>
   );
 };
