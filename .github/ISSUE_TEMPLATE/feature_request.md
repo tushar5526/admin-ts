@@ -1,11 +1,10 @@
 ---
 name: Feature request
-about: Request a new feature in generator-create-rc-admin
+about: Request a new feature in x-admin
 labels: enhancement
 ---
 
-<!-- Before filling this issue, please read the wiki (https://github.com/Samagra-Development/generator-create-rc-admin/wiki)
-and search if the bug do not already exists in the issues (https://github.com/Samagra-Development/generator-create-rc-admin/issues). -->
+<!-- Before filling this issue search if the bug do not already exists in the issues (https://github.com/https://github.com/Samarth-HP/admin-ts/issues). -->
 
 ### Description
 
