@@ -9,7 +9,7 @@ import {
   Filter,
 } from "react-admin";
 import { ListDataGridWithPermissions } from "../../../components/lists";
-import { useRecordContext } from "react-admin";
+import { useRecordContext, useListContext } from "react-admin";
 
 const ApplicationId = "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da";
 const DisplayRoles = (a: any) => {
@@ -38,6 +38,8 @@ const DisplayRoles = (a: any) => {
 };
 
 const UserList = () => {
+  const { data, isLoading } = useListContext();
+  console.log(data, "of users");
   const CustomerFilter = [
     <SearchInput
       placeholder="Username"
@@ -64,8 +66,6 @@ const UserList = () => {
         label="Role"
         render={(record: any) => DisplayRoles(record)}
       />
-      <EditButton />
-      <ShowButton />
     </ListDataGridWithPermissions>
   );
 };

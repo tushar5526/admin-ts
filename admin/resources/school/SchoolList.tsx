@@ -1,4 +1,9 @@
-import { TextField, ReferenceField } from "react-admin";
+import {
+  TextField,
+  ReferenceField,
+  FunctionField,
+  useRecordContext,
+} from "react-admin";
 import { WithMyDistricts } from "../../components/withAccesses";
 import { ListDataGridWithPermissions } from "../../components/lists";
 
@@ -18,27 +23,38 @@ const SchoolList = () => {
                 },
               },
             }}
-            dataGridProps={{ rowClick: "edit" }}
           >
             <TextField label="UDISE" source="udise" />
-            <ReferenceField source="location_id" reference="location">
+            <ReferenceField
+              source="location_id"
+              label="District"
+              reference="location"
+            >
               <TextField label="District" source="district" />
             </ReferenceField>
-            <ReferenceField source="location_id" reference="location">
+            <ReferenceField
+              source="location_id"
+              label="Block"
+              reference="location"
+            >
               <TextField label="Block" source="block" />
             </ReferenceField>{" "}
-            <ReferenceField source="location_id" reference="location">
+            <ReferenceField
+              source="location_id"
+              label="Cluster"
+              reference="location"
+            >
               <TextField label="Cluster" source="cluster" />
             </ReferenceField>
-            {/*<FunctionField*/}
-            {/*  label="Session"*/}
-            {/*  render={(record: any) => {*/}
-            {/*    const obj = config.schoolSession.find(*/}
-            {/*      (elem) => elem.id === record.session*/}
-            {/*    );*/}
-            {/*    return obj?.name;*/}
-            {/*  }}*/}
-            {/*/>*/}
+            {/* <FunctionField
+              label="Session"
+              render={(record: any) => {
+                const obj = config.schoolSession.find(
+                  (elem: any) => elem.id === record.session
+                );
+                return obj?.name;
+              }}
+            /> */}
           </ListDataGridWithPermissions>
         );
       }}
