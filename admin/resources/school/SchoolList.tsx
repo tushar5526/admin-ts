@@ -1,9 +1,4 @@
-import {
-  TextField,
-  ReferenceField,
-  FunctionField,
-  useRecordContext,
-} from "react-admin";
+import { TextField, ReferenceField } from "react-admin";
 import { WithMyDistricts } from "../../components/withAccesses";
 import { ListDataGridWithPermissions } from "../../components/lists";
 

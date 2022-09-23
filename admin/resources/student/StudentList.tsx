@@ -3,6 +3,7 @@ import {
   Pagination,
   ReferenceInput,
   SearchInput,
+  ShowButton,
   useDataProvider,
 } from "react-admin";
 import {
@@ -248,14 +249,16 @@ const StudentList = () => {
     <Pagination rowsPerPageOptions={[50, 75, 100]} />
   );
   return (
+    //  <List filters={Filters} pagination={<StudentPagination />}>
+    //   <Datagrid rowClick="edit"></Datagrid>
     <List filters={Filters} pagination={<StudentPagination />}>
-      <Datagrid rowClick="edit">
+      <Datagrid>
         <TextField source="id" />
         <TextField source="name" />
-        <ReferenceField source="school_id" reference="school">
+        <ReferenceField label={"School"} source="school_id" reference="school">
           <TextField label={"SCHOOL"} source="name" />
         </ReferenceField>
-        <ReferenceField source="school_id" reference="school">
+        <ReferenceField label={"Udise"} source="school_id" reference="school">
           <TextField label={"UDISE"} source="udise" />
         </ReferenceField>
         <TextField source="father_name" />
@@ -266,6 +269,7 @@ const StudentList = () => {
         <TextField source="category" />
         <BooleanField source="is_cwsn" />
         <BooleanField source="is_enabled" />
+        <ShowButton />
       </Datagrid>
     </List>
   );
