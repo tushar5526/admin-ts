@@ -1,4 +1,5 @@
 import React from "react";
+import { useRecordContext } from "react-admin";
 import {
   FunctionField,
   NumberField,
@@ -17,6 +18,7 @@ const UserShow = () => {
       return <span>-</span>;
     }
     const { roles } = registration;
+    console.log(roles, "roles");
     return roles.map((role: any, index: number) => {
       return (
         <span
@@ -33,6 +35,7 @@ const UserShow = () => {
       );
     });
   };
+
   return (
     <Show>
       <SimpleShowLayout>

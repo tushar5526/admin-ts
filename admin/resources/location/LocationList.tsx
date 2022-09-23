@@ -126,10 +126,7 @@ const LocationList = () => {
     ),
   ];
   return (
-    <ListDataGridWithPermissions
-      listProps={{ filters: Filters }}
-      dataGridProps={{ rowClick: "edit" }}
-    >
+    <ListDataGridWithPermissions listProps={{ filters: Filters }}>
       <TextField source="id" />
       <TextField source="district" />
       <TextField source="block" />

@@ -1,4 +1,10 @@
-import { Datagrid, List, useResourceContext } from "react-admin";
+import {
+  Datagrid,
+  EditButton,
+  List,
+  ShowButton,
+  useResourceContext,
+} from "react-admin";
 import { usePermissions } from "ra-core";
 import { ItemWithPermissionResolver } from "../layout/MenuOptions";
 
@@ -23,9 +29,14 @@ const ListDataGridWithPermissions = ({
   if (!ResourceWithPermission?.resourcePermissions?.canDelete) {
     _dataGridProps.bulkActionButtons = null;
   }
+
   return (
     <List {...(listProps || {})}>
-      <Datagrid {...(_dataGridProps || {})}>{children}</Datagrid>
+      <Datagrid {...(_dataGridProps || {})}>
+        {children}
+        {ResourceWithPermission?.resourcePermissions?.canEdit && <EditButton />}
+        {ResourceWithPermission?.resourcePermissions?.canList && <ShowButton />}
+      </Datagrid>
     </List>
   );
 };
