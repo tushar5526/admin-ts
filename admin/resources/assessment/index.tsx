@@ -1,10 +1,12 @@
 import SchoolIcon from "@mui/icons-material/School";
 import AssessmentList from "./assessmentList";
-
+import AssessmentEdit from "./assessmentEdit";
+import AssessmentShow from "./assessmentShow";
 
 export default {
   list: AssessmentList,
-  // edit: null,
+  edit: AssessmentEdit,
+  show: AssessmentShow,
   icon: SchoolIcon,
   permissions: {
     canEdit: ['Admin'],
