@@ -79,7 +79,7 @@ const UserList = () => {
   return (
     <ListDataGridWithPermissions
       listProps={{ filters: Filters }}
-      dataGridProps={{ rowClick: "edit" }}
+      dataGridProps={{ rowClick: "show" }}
     >
       <TextField source="username" />
       <TextField source="fullName" />
@@ -88,7 +88,7 @@ const UserList = () => {
         label="Role"
         render={(record: any) => DisplayRoles(record)}
       />
-      <FunctionField
+      {/* <FunctionField
         label="District"
         render={(record: any) => getCorrespondingTeacherDistrict(record)}
       />{" "}
@@ -99,7 +99,7 @@ const UserList = () => {
       <FunctionField
         label="Cluster"
         render={(record: any) => getCorrespondingTeacherCluster(record)}
-      />
+      /> */}
     </ListDataGridWithPermissions>
   );
 };

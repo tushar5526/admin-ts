@@ -12,10 +12,12 @@ const ListDataGridWithPermissions = ({
   children,
   listProps,
   dataGridProps,
+  withDelete = false,
 }: {
   children: any;
   listProps?: any;
   dataGridProps?: any;
+  withDelete?: boolean;
 }) => {
   const { permissions } = usePermissions();
   const resource = useResourceContext();
@@ -32,10 +34,9 @@ const ListDataGridWithPermissions = ({
 
   return (
     <List {...(listProps || {})}>
-      <Datagrid {...(_dataGridProps || {})}>
+      <Datagrid bulkActionButtons={withDelete} {...(_dataGridProps || {})}>
         {children}
         {ResourceWithPermission?.resourcePermissions?.canEdit && <EditButton />}
-        {ResourceWithPermission?.resourcePermissions?.canList && <ShowButton />}
       </Datagrid>
     </List>
   );

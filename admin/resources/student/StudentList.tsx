@@ -252,7 +252,7 @@ const StudentList = () => {
     //  <List filters={Filters} pagination={<StudentPagination />}>
     //   <Datagrid rowClick="edit"></Datagrid>
     <List filters={Filters} pagination={<StudentPagination />}>
-      <Datagrid>
+      <Datagrid rowClick={"show"}>
         <TextField source="id" />
         <TextField source="name" />
         <ReferenceField label={"School"} source="school_id" reference="school">

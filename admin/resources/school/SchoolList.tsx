@@ -8,6 +8,7 @@ const SchoolList = () => {
       {(districts: any) => {
         return (
           <ListDataGridWithPermissions
+            dataGridProps={{ rowClick: "show" }}
             listProps={{
               filter: {
                 location: {

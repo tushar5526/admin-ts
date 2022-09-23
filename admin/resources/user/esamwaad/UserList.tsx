@@ -9,6 +9,7 @@ import {
   Filter,
   useGetOne,
   LinearProgress,
+  Loading,
 } from "react-admin";
 import { ListDataGridWithPermissions } from "../../../components/lists";
 import { useRecordContext, useListContext } from "react-admin";
@@ -88,7 +89,10 @@ const UserList = () => {
     />,
   ];
   return (
-    <ListDataGridWithPermissions listProps={{ filters: CustomerFilter }}>
+    <ListDataGridWithPermissions
+      dataGridProps={{ rowClick: "show" }}
+      listProps={{ filters: CustomerFilter }}
+    >
       <TextField source="username" />
       <FunctionField
         label="Full Name"

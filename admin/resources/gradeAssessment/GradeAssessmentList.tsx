@@ -3,7 +3,10 @@ import { ListDataGridWithPermissions } from "../../components/lists";
 
 const GradeAssessmentList = () => {
   return (
-    <ListDataGridWithPermissions>
+    <ListDataGridWithPermissions
+      dataGridProps={{ rowClick: "show" }}
+      withDelete={true}
+    >
       <TextField source="id" />
       <ReferenceField source="assessment_id" reference="assessment">
         <TextField label={"Type"} source="type" />
