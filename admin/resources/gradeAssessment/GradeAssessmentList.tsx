@@ -4,6 +4,8 @@ import {
   DateField,
   TextInput,
   useDataProvider,
+  FunctionField,
+  SelectInput,
 } from "react-admin";
 import { ListDataGridWithPermissions } from "../../components/lists";
 import { useQuery } from "react-query";
@@ -19,8 +21,22 @@ const GradeAssessmentList = () => {
   const initialFilters = params.filter ? JSON.parse(params.filter) : null;
 
   const [selectUdise, setSelectUdise] = useState(initialFilters?.udise || "");
+  const [selectedDistrict, setSelectedDistrict] = useState(
+    initialFilters?.district || ""
+  );
+
+  const [selectedBlock, setSelectedBlock] = useState(
+    initialFilters?.block || ""
+  );
 
   const dataProvider = useDataProvider();
+  const { data: _districtData } = useQuery(["lcoation", "getList", {}], () =>
+    dataProvider.getList("location", {
+      pagination: { perPage: 10000, page: 1 },
+      sort: { field: "id", order: "asc" },
+      filter: {},
+    })
+  );
 
   const {
     data: _schoolData,
@@ -33,11 +49,48 @@ const GradeAssessmentList = () => {
       filter: {},
     })
   );
+  const districtData = useMemo(() => {
+    return _districtData?.data;
+  }, [_districtData]);
+  const districts = useMemo(() => {
+    if (!districtData) {
+      return [];
+    }
+    return _.uniqBy(districtData, "district").map((a) => {
+      return {
+        id: a.district,
+        name: a.district,
+      };
+    });
+  }, [districtData]);
+
+  const displayDistrict = (a: any) => {
+    const data = districtData?.filter((item: any, index: number) => {
+      return item.id == a.id;
+    })[0];
+
+    return data?.district || "";
+  };
+  const displayBlock = (a: any) => {
+    const data = districtData?.filter((item: any, index: number) => {
+      return item.id == a.id;
+    })[0];
+
+    return data?.block || "";
+  };
+  const blocks = useMemo(() => {
+    return _.uniqBy(districtData, "block").map((a) => {
+      return {
+        id: a.block,
+        name: a.block,
+      };
+    });
+  }, [districtData]);
 
   const schoolData = useMemo(() => {
     return _schoolData?.data;
   }, [_schoolData]);
-  console.log(schoolData, "schoolData");
+  // console.log(schoolData, "schoolData");
 
   const school = useMemo(() => {
     if (!selectUdise || !schoolData) {
@@ -57,6 +110,17 @@ const GradeAssessmentList = () => {
     <TextInput label="School" source="school_id" key={"search"} />,
     <TextInput label="Grade Number" source="grade_number" key={"search"} />,
     <TextInput label="Udise" source="udise" key={"search"} />,
+    <TextInput label="Udise" source="udise" alwaysOn key={"search"} />,
+    <SelectInput
+      label="Block"
+      key="block"
+      onChange={(e) => {
+        setSelectedBlock(e.target.value);
+      }}
+      value={selectedBlock}
+      source="block"
+      choices={blocks}
+    />,
   ];
   return (
     <ListDataGridWithPermissions listProps={{ filters: Filters }}>
@@ -65,12 +129,25 @@ const GradeAssessmentList = () => {
       <TextField source="grade_number" />
       <TextField source="section" />
       <TextField source="school_id" />
-
       <ReferenceField label="Udise" source="school_id" reference="school">
         <TextField source="udise" />
       </ReferenceField>
-      <TextField source="streams_id" />
+      <FunctionField
+        label="District"
+        render={(record: any) => displayDistrict(record)}
+      />
+      <FunctionField
+        label="Block"
+        render={(record: any) => displayBlock(record)}
+      />
+      {/* <ReferenceField label="District" source="location" reference="school">
+        <TextField source="district" />
+      </ReferenceField>
+      <ReferenceField label="Block" source="district" reference="location">
+        <TextField source="block" />
+      </ReferenceField> */}
 
+      <TextField source="streams_id" />
       <DateField source="created" />
       <DateField source="updated" />
     </ListDataGridWithPermissions>
