@@ -1,36 +1,32 @@
-import React from "react";
 import {
+  TextField,
   BooleanField,
   NumberField,
   ReferenceField,
-  Show,
   SimpleShowLayout,
-  TextField,
+  Show,
 } from "react-admin";
 
-const StudentShow = () => {
-  return (
-    <Show>
-      <SimpleShowLayout>
-        <TextField source="id" />
+const StudentShow = () => (
+  <Show>
+    <SimpleShowLayout>
+      <TextField source="id" />
+      <TextField source="name" />
+      <ReferenceField label={"SCHOOL"} source="school_id" reference="school">
         <TextField source="name" />
-        <ReferenceField label={"School"} source="school_id" reference="school">
-          <TextField label={"SCHOOL"} source="name" />
-        </ReferenceField>
-        <ReferenceField label={"Udise"} source="school_id" reference="school">
-          <TextField label={"UDISE"} source="udise" />
-        </ReferenceField>
-        <TextField source="father_name" />
-        <TextField source="mother_name" />
-        <TextField source="gender" />
-        <NumberField source="grade_number" />
-        <TextField source="stream_tag" />
-        <TextField source="category" />
-        <BooleanField source="is_cwsn" />
-        <BooleanField source="is_enabled" />
-      </SimpleShowLayout>
-    </Show>
-  );
-};
-
+      </ReferenceField>
+      <ReferenceField label={"UDISE"} source="school_id" reference="school">
+        <TextField source="udise" />
+      </ReferenceField>
+      <TextField source="father_name" />
+      <TextField source="mother_name" />
+      <TextField source="gender" />
+      <NumberField source="grade_number" />
+      <TextField source="stream_tag" />
+      <TextField source="category" />
+      <BooleanField source="is_cwsn" />
+      <BooleanField source="is_enabled" />
+    </SimpleShowLayout>
+  </Show>
+);
 export default StudentShow;

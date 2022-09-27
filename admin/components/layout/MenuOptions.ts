@@ -44,7 +44,7 @@ const MenuOptions: any[] = [
   {
     name: "Assessment",
     resource: "assessment",
-    props: gradeAssessment,
+    props: assessment,
   },
   {
     name: "School Mapping For Monitoring",

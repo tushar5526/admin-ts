@@ -41,6 +41,7 @@ const AssessmentList = () => {
         sortable={false}
       />
       <BooleanField label="Is Enabled" source="is_enabled" />
+      <EditButton />
     </ListDataGridWithPermissions>
   );
 };
