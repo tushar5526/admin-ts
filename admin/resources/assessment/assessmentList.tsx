@@ -8,7 +8,7 @@ import { ListDataGridWithPermissions } from "../../components/lists";
 
 const AssessmentList = () => {
   return (
-    <ListDataGridWithPermissions>
+    <ListDataGridWithPermissions dataGridProps={{ rowClick: "show" }}>
       <TextField source="id" />
       <TextField source="type" />
       <ReferenceField
@@ -41,7 +41,6 @@ const AssessmentList = () => {
         sortable={false}
       />
       <BooleanField label="Is Enabled" source="is_enabled" />
-      <EditButton />
     </ListDataGridWithPermissions>
   );
 };

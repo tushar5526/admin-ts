@@ -1,4 +1,5 @@
 import {
+  EditButton,
   Labeled,
   Pagination,
   ReferenceInput,
