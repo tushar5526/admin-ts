@@ -11,7 +11,7 @@ import { useRecordContext } from "react-admin";
 const AssessmentList = () => {
   const record = useRecordContext();
   return (
-    <ListDataGridWithPermissions>
+    <ListDataGridWithPermissions dataGridProps={{ rowClick: "show" }}>
       <TextField source="id" />
       <TextField source="type" />
       <ReferenceField

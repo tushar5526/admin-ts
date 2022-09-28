@@ -41,22 +41,21 @@ const App = () => {
   };
   const prepareDataProviders = async () => {
     try {
-      const hasuraDp = await getDataProvider(session);
+      const hasuraDP = await getDataProvider(session);
       const _dataProvider = combineDataProviders((resource) => {
         switch (resource) {
           case "teacher":
           case "school":
           case "student":
-            return hasuraDp;
+          case "deadline":
+          case "submission_type":
           case "location":
-            return hasuraDp;
           case "ss_school_allocation_data":
           case "ss_school_allocation_quarter":
-            return hasuraDp;
           case "grade_assessment":
           case "assessment":
           case "stream":
-            return hasuraDp;
+            return hasuraDP;
           case "users":
             return JSONDataProvider;
           case "e_samwaad_user":

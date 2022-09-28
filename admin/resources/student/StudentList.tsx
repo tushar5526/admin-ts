@@ -1,4 +1,5 @@
 import {
+  EditButton,
   Labeled,
   Pagination,
   ReferenceInput,
@@ -6,6 +7,7 @@ import {
   ShowButton,
   useDataProvider,
 } from "react-admin";
+
 import {
   BooleanField,
   Datagrid,
@@ -252,14 +254,14 @@ const StudentList = () => {
     //  <List filters={Filters} pagination={<StudentPagination />}>
     //   <Datagrid rowClick="edit"></Datagrid>
     <List filters={Filters} pagination={<StudentPagination />}>
-      <Datagrid rowClick={"show"}>
+      <Datagrid rowClick="show"  bulkActionButtons={false}>
         <TextField source="id" />
         <TextField source="name" />
-        <ReferenceField label={"School"} source="school_id" reference="school">
-          <TextField label={"SCHOOL"} source="name" />
+        <ReferenceField  label="SCHOOL" source="school_id" reference="school">
+          <TextField  source="name" />
         </ReferenceField>
-        <ReferenceField label={"Udise"} source="school_id" reference="school">
-          <TextField label={"UDISE"} source="udise" />
+        <ReferenceField label="UDISE" source="school_id" reference="school">
+          <TextField source="udise" />
         </ReferenceField>
         <TextField source="father_name" />
         <TextField source="mother_name" />
@@ -267,9 +269,9 @@ const StudentList = () => {
         <NumberField source="grade_number" />
         <TextField source="stream_tag" />
         <TextField source="category" />
-        <BooleanField source="is_cwsn" />
-        <BooleanField source="is_enabled" />
-        <ShowButton />
+        <BooleanField source="is_cwsn" label={"CWSN"}/>
+        <BooleanField source="is_enabled" label={"Enabled"}/>
+        <EditButton/>
       </Datagrid>
     </List>
   );

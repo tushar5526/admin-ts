@@ -1,11 +1,10 @@
-import React from "react";
 import {
+  TextField,
   BooleanField,
   NumberField,
   ReferenceField,
-  Show,
   SimpleShowLayout,
-  TextField,
+  Show,
 } from "react-admin";
 import ShowWrapper from "../../StyleWrappers/ShowWrapper/ShowWrapper";
 
