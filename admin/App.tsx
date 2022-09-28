@@ -47,12 +47,11 @@ const App = () => {
           case "teacher":
           case "school":
           case "student":
-            return hasuraDP;
+          case "deadline":
+          case "submission_type":
           case "location":
-            return hasuraDP;
           case "ss_school_allocation_data":
           case "ss_school_allocation_quarter":
-            return hasuraDP;
           case "grade_assessment":
           case "assessment":
           case "stream":
