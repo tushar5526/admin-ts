@@ -25,7 +25,9 @@ const App = () => {
       image: null,
     },
     expires: "2022-09-23T04:48:50.273Z",
-    jwt: localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).user.token : "",
+    jwt: localStorage.getItem("userData")
+      ? JSON.parse(localStorage.getItem("userData") || "").user.token
+      : "",
     role: "Admin",
     fullName: "Samarth-Admin",
     username: "samarth-admin",

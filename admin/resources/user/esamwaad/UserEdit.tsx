@@ -49,13 +49,22 @@ export const ChangePasswordButton = ({ record }: any) => {
   const dataProvider = useDataProvider();
   const notify = useNotify();
   const resource = useResourceContext();
+  console.log(
+    {
+      loginId: record.record?.username,
+      password: resource === "e_samwaad_user" ? "himachal12345" : "1234abcd",
+    },
+    "record"
+  );
   const { mutate, isLoading } = useMutation(
-    ["changePassword", record.id],
+    ["changePassword", record.record.id],
+
     () =>
       dataProvider.changePassword(resource, {
-        loginId: record.username,
+        loginId: record.record.username,
         password: resource === "e_samwaad_user" ? "himachal12345" : "1234abcd",
       }),
+
     {
       onSuccess: (data: any) => {
         notify(data?.data, { type: "success" });
@@ -123,6 +132,7 @@ const SchoolModeUserForm = ({ record }: any) => {
           render={(record: any) => DisplayRoles(record)}
         />
       </Labeled>
+
       <SchoolUDISEInput />
       <ChangePasswordButton record={record} />
     </>
@@ -238,6 +248,7 @@ const NonSchoolModeUserForm = (record: any) => {
 };
 const UserForm = () => {
   const record = useRecordContext();
+  console.log(record, "this is record");
   const roles = useMemo(() => {
     if (record?.registrations) {
       const registration = record.registrations?.find(

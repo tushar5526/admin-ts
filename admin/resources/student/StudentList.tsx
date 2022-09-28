@@ -1,4 +1,13 @@
-import { EditButton, Pagination, ReferenceInput, ShowButton, useDataProvider } from "react-admin";
+import {
+  EditButton,
+  Labeled,
+  Pagination,
+  ReferenceInput,
+  SearchInput,
+  ShowButton,
+  useDataProvider,
+} from "react-admin";
+
 import {
   BooleanField,
   Datagrid,
@@ -146,7 +155,7 @@ const StudentList = () => {
   }, [selectedCwsn, studentData]);
 
   const Filters = [
-    <TextInput label="name" source={"name"} alwaysOn key={"search"} />,
+    <SearchInput placeholder="Name" source={"name"} alwaysOn key={"search"} />,
     <SelectInput
       label="Status"
       key={"is_enabled"}
@@ -242,6 +251,8 @@ const StudentList = () => {
     <Pagination rowsPerPageOptions={[50, 75, 100]} />
   );
   return (
+    //  <List filters={Filters} pagination={<StudentPagination />}>
+    //   <Datagrid rowClick="edit"></Datagrid>
     <List filters={Filters} pagination={<StudentPagination />}>
       <Datagrid rowClick="show"  bulkActionButtons={false}>
         <TextField source="id" />

@@ -7,7 +7,6 @@ import {
   Show,
 } from "react-admin";
 
-
 const StudentShow = () => (
   <Show>
     <SimpleShowLayout>

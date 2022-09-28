@@ -1,4 +1,4 @@
-import { TextField, ReferenceField, DateField, BooleanField, NumberField, EditButton, TextInput, NumberInput, BooleanInput, Edit, SimpleForm } from "react-admin";
+import { TextInput, NumberInput, BooleanInput, Edit, SimpleForm } from "react-admin";
 import { ListDataGridWithPermissions } from "../../components/lists";
 
 const AssessmentEdit = () => {

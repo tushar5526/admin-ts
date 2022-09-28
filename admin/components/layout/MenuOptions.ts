@@ -38,7 +38,7 @@ const MenuOptions: any[] = [
   },
   {
     name: "Grade Assessment",
-    resource: "gradeAssessment",
+    resource: "grade_assessment",
     props: gradeAssessment,
   },
   {
