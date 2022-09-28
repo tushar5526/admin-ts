@@ -34,7 +34,14 @@ const ListDataGridWithPermissions = ({
 
   return (
     <List {...(listProps || {})}>
-      <Datagrid bulkActionButtons={withDelete} {...(_dataGridProps || {})}>
+      <Datagrid   sx={{
+                "& .RaDatagrid-headerCell": {
+                    backgroundColor: "#d9d9d9",
+                    fontWeight: "bold"
+                },
+
+            }}
+            bulkActionButtons={withDelete} {...(_dataGridProps || {})}>
         {children}
         {ResourceWithPermission?.resourcePermissions?.canEdit && <EditButton />}
       </Datagrid>

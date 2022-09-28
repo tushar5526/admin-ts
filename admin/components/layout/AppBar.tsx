@@ -1,6 +1,6 @@
 import * as React from "react";
-import {AppBar, Logout, UserMenu, useTranslate} from "react-admin";
-import {Link} from "react-router-dom";
+import { AppBar, Logout, UserMenu, useTranslate } from "react-admin";
+import { Link } from "react-router-dom";
 import {
     MenuItem,
     ListItemIcon,
@@ -8,7 +8,7 @@ import {
     Typography,
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
-import {forwardRef} from "react";
+import { forwardRef } from "react";
 
 
 // eslint-disable-next-line react/display-name
@@ -23,7 +23,7 @@ const ConfigurationMenu = forwardRef((props, ref) => {
             to="/configuration"
         >
             <ListItemIcon>
-                <SettingsIcon/>
+                <SettingsIcon />
             </ListItemIcon>
             <ListItemText>{translate("pos.configuration")}</ListItemText>
         </MenuItem>
@@ -31,7 +31,7 @@ const ConfigurationMenu = forwardRef((props, ref) => {
 });
 const CustomUserMenu = () => (
     <UserMenu>
-        <Logout/>
+        <Logout />
     </UserMenu>
 );
 
@@ -39,10 +39,15 @@ const CustomAppBar = (props: any) => {
     return (
         <AppBar
             {...props}
-            color="secondary"
             elevation={1}
-            userMenu={<CustomUserMenu/>}
+            userMenu={<CustomUserMenu />}
+            sx={{
+                ".RaUserMenu-userButton": {
+                    backgroundColor: "#5a968b"
+                }
+            }}
         >
+            <img id="samarth-logo" src="https://himachal.nic.in/WriteReadData/l892s/16_l892s/samarth-logo-v9---lowres-22244626.png" />
             <Typography
                 variant="h6"
                 color="inherit"

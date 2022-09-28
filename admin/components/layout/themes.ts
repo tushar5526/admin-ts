@@ -31,8 +31,8 @@ export const lightTheme = {
           borderLeft: "3px solid #fff",
           "&.RaMenuItemLink-active": {
             borderLeft: "3px solid #4f3cc9",
-            backgroundColor: "#4f3cc9 !important",
-            color: "#ffffff !important",
+            backgroundColor: "#5a968b !important",
+            color: "#000000 !important",
           },
         },
       },
@@ -51,9 +51,9 @@ export const lightTheme = {
     MuiAppBar: {
       styleOverrides: {
         colorSecondary: {
-          color: "#808080",
-          backgroundColor: "#fff",
-        },
+          color: "black",
+          backgroundColor: "#a1dfc1",
+        }
       },
     },
 

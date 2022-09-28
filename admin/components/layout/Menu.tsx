@@ -29,9 +29,10 @@ const Menu = ({dense = false,}: MenuProps) => {
     return (
         <Box
             sx={{
+                marginLeft : -0.5,
+                backgroundColor: "#d9d9d9",
+                height: "100%",
                 width: open ? 250 : 50,
-                marginTop: 1,
-                marginBottom: 1,
                 transition: (theme) =>
                     theme.transitions.create("width", {
                         easing: theme.transitions.easing.sharp,
@@ -41,6 +42,7 @@ const Menu = ({dense = false,}: MenuProps) => {
         >
             {MenuItemsWithPermissionResolver(permissions).map((option) => {
                 return (
+
                     <MenuItemLink
                         key={option.name}
                         to={`/${option.resource}`}
