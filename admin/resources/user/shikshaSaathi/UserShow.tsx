@@ -5,6 +5,7 @@ import {
   SimpleShowLayout,
   Show,
 } from "react-admin";
+import ShowWrapper from "../../../StyleWrappers/ShowWrapper/ShowWrapper";
 const ApplicationId = "1ae074db-32f3-4714-a150-cc8a370eafd1";
 const DisplayRoles = (a: any) => {
   const registration = a.registrations?.find(
@@ -32,17 +33,17 @@ const DisplayRoles = (a: any) => {
 };
 const UserShow = () => {
   return (
-    <Show>
-      <SimpleShowLayout>
-        <TextField source="username" />
-        <TextField source="fullName" />
-        <NumberField source="mobilePhone" label="Mobile Phone" />
-        <FunctionField
-          label="Role"
-          render={(record: any) => DisplayRoles(record)}
-        />
-      </SimpleShowLayout>
-    </Show>
+    <ShowWrapper>
+      {" "}
+      <TextField source="username" />
+      <TextField source="fullName" />
+      <NumberField source="mobilePhone" label="Mobile Phone" />
+      <FunctionField
+        label="Role"
+        render={(record: any) => DisplayRoles(record)}
+      />
+    </ShowWrapper>
+    // show wrapper added
   );
 };
 export default UserShow;

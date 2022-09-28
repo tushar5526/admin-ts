@@ -3,10 +3,13 @@ import {
   ReferenceField,
   DateField,
   BooleanField,
+  FunctionField,
 } from "react-admin";
 import { ListDataGridWithPermissions } from "../../components/lists";
+import { useRecordContext } from "react-admin";
 
 const AssessmentList = () => {
+  const record = useRecordContext();
   return (
     <ListDataGridWithPermissions>
       <TextField source="id" />

@@ -13,3 +13,29 @@ body {
   align-content: center;
   justify-content: flex-end;
 }
+
+.show_wrapper_layout {
+  background: #fff;
+  border: none;
+  display: flex;
+}
+
+.show_wapper {
+  border: none;
+}
+
+.show_wapper div {
+  border: none;
+  background: whitesmoke;
+}
+
+.show_layout {
+  width: 100% !important;
+  display: flex !important;
+  height: 100% !important;
+}
+
+.show_layout div {
+  width: 100% !important;
+  height: 100vh !important;
+}
