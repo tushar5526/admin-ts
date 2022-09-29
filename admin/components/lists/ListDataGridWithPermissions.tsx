@@ -34,7 +34,8 @@ const ListDataGridWithPermissions = ({
 
   return (
     <List {...(listProps || {})}>
-      <Datagrid bulkActionButtons={withDelete} {...(_dataGridProps || {})}>
+      <Datagrid
+        bulkActionButtons={withDelete} {...(_dataGridProps || {})}>
         {children}
         {ResourceWithPermission?.resourcePermissions?.canEdit && <EditButton />}
       </Datagrid>
