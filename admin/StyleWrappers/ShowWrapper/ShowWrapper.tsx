@@ -6,9 +6,7 @@ const ShowWrapper = ({ children }: any) => {
     <div className="show_wapper">
       <Show>
         <div className="show_wrapper_layout">
-          <SimpleShowLayout className="show_layout">
-            {children}
-          </SimpleShowLayout>
+          <SimpleShowLayout>{children}</SimpleShowLayout>
         </div>
       </Show>
     </div>

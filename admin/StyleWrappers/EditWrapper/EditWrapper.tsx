@@ -1,7 +1,8 @@
 import React from "react";
+import { EditButton } from "react-admin";
 
 const EditWrapper = () => {
-  return <div>EditWrapper</div>;
+  return <EditButton />;
 };
 
 export default EditWrapper;

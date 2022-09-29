@@ -7,7 +7,9 @@ import {
   SimpleShowLayout,
   TextField,
 } from "react-admin";
+import InputFlexWrapper from "../../../StyleWrappers/InputFlexWrapper/InputFlexWrapper";
 import ShowWrapper from "../../../StyleWrappers/ShowWrapper/ShowWrapper";
+import DownLabledInput from "../../../components/utilities/DownLabledInput/DownLabledInput";
 
 const ApplicationId = "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da";
 const UserShow = () => {
@@ -19,7 +21,6 @@ const UserShow = () => {
       return <span>-</span>;
     }
     const { roles } = registration;
-    console.log(roles, "roles");
     return roles.map((role: any, index: number) => {
       return (
         <span
@@ -39,18 +40,23 @@ const UserShow = () => {
 
   return (
     <ShowWrapper>
-      <TextField source="username" />
       <FunctionField
-        label="Full Name"
-        render={(record: any) => `${record.firstName} ${record.lastName}`}
+        render={(record: any) => {
+          return (
+            <>
+              <InputFlexWrapper>
+                <DownLabledInput i={record?.username} />
+
+                <DownLabledInput
+                  label="Full Name"
+                  i={`${record?.firstName} ${record?.lastName}`}
+                />
+                <DownLabledInput i={record?.mobilePhone} label="Mobile Phone" />
+              </InputFlexWrapper>
+            </>
+          );
+        }}
       />
-      ;
-      <NumberField source="mobilePhone" label="Mobile Phone" />
-      <FunctionField
-        label="Full Name"
-        render={(record: any) => `${record.firstName} ${record.lastName}`}
-      />
-      ;
       <FunctionField
         label="Role"
         render={(record: any) => DisplayRoles(record)}
