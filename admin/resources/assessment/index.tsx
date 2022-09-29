@@ -9,9 +9,9 @@ export default {
   show: AssessmentShow,
   icon: SchoolIcon,
   permissions: {
-    canEdit: ['Admin'],
-    canDelete: ['Admin'],
-    canCreate: ['Admin'],
-    canList: ['Admin'],
-  }
+    canEdit: ["Admin"],
+    canDelete: ["Admin"],
+    canCreate: ["Admin"],
+    canList: ["Admin"],
+  },
 };
