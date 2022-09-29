@@ -48,14 +48,7 @@ const CustomAppBar = (props: any) => {
             }}
         >
             <img id="samarth-logo" src="https://himachal.nic.in/WriteReadData/l892s/16_l892s/samarth-logo-v9---lowres-22244626.png" />
-            <Typography
-                variant="h6"
-                color="inherit"
-                sx={{
-                    flex: 1,
-                }}
-                id="react-admin-title"
-            />
+            <Typography sx={{flex: 1}}/>
         </AppBar>
     );
 };
