@@ -1,6 +1,8 @@
 import React from "react";
 import {
+  BooleanInput,
   Create,
+  NumberInput,
   ReferenceField,
   ReferenceInput,
   SimpleForm,
@@ -12,33 +14,23 @@ const SchoolCreate = () => {
   return (
     <Create>
       <SimpleForm>
-        <TextInput label="UDISE" source="udise" />
-        <ReferenceInput
-          source="location_id"
-          label="District"
-          reference="location"
-        >
-          <TextInput label="District" source="district" />
+        <NumberInput source="enroll_count" />
+        <BooleanInput source="is_active" />
+        <TextInput source="latitude" />
+        <ReferenceInput source="location_id" reference="locations">
+          <TextInput source="block" />
         </ReferenceInput>
-        <ReferenceInput source="location_id" label="Block" reference="location">
-          <TextInput label="Block" source="block" />
-        </ReferenceInput>{" "}
-        <ReferenceInput
-          source="location_id"
-          label="Cluster"
-          reference="location"
-        >
-          <TextInput label="Cluster" source="cluster" />
+        <ReferenceInput source="location_id" reference="locations">
+          <TextInput source="cluster" />
         </ReferenceInput>
-        {/* <FunctionField
-              label="Session"
-              render={(record: any) => {
-                const obj = config.schoolSession.find(
-                  (elem: any) => elem.id === record.session
-                );
-                return obj?.name;
-              }}
-            /> */}
+        <ReferenceInput source="location_id" reference="locations">
+          <TextInput source="districts" />
+        </ReferenceInput>
+        <TextInput source="longitude" />
+        <TextInput source="name" />
+        <TextInput source="session" />
+        <TextInput source="type" />
+        <NumberInput source="udise" />
       </SimpleForm>
     </Create>
   );

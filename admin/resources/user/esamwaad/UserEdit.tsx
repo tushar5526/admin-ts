@@ -57,7 +57,7 @@ export const ChangePasswordButton = ({ record }: any) => {
     "record"
   );
   const { mutate, isLoading } = useMutation(
-    ["changePassword", record.record.id],
+    ["changePassword", record.id],
 
     () =>
       dataProvider.changePassword(resource, {

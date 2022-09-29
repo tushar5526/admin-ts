@@ -1,8 +1,36 @@
-import { TextField, ReferenceField } from "react-admin";
+import {
+  TextField,
+  ReferenceField,
+  TextInput,
+  FunctionField,
+  SelectInput,
+} from "react-admin";
 import { WithMyDistricts } from "../../components/withAccesses";
 import { ListDataGridWithPermissions } from "../../components/lists";
+import { BooleanField } from "react-admin";
 
 const SchoolList = () => {
+  const typeChoice = [
+    { id: "GPS", name: "GPS" },
+    { id: "GMS", name: "GMS" },
+    { id: "GHS", name: "GHS" },
+    { id: "GSSS", name: "GSSS" },
+  ];
+  const sessionChoices = [
+    { id: "S", name: "S" },
+    { id: "W", name: "W" },
+  ];
+  const activeChoices = [
+    { id: true, name: true },
+    { id: false, name: false },
+  ];
+  const Filters = [
+    <TextInput label="School Name" source="name" alwaysOn key={"search"} />,
+    <TextInput label="Udise" source="udise" key={"search"} />,
+    <SelectInput label="Type" source="type" choices={typeChoice} />,
+    <SelectInput label="Session" source="session" choices={sessionChoices} />,
+    <SelectInput label="Active" source="is_active" choices={activeChoices} />,
+  ];
   return (
     <WithMyDistricts>
       {(districts: any) => {
@@ -18,9 +46,13 @@ const SchoolList = () => {
                   },
                 },
               },
+              filters: Filters,
             }}
           >
             <TextField label="UDISE" source="udise" />
+            <TextField label="Name" source="name" />
+            <TextField label="Type" source="type" />
+            <TextField label="Session" source="session" />
             <ReferenceField
               source="location_id"
               label="District"
@@ -51,6 +83,7 @@ const SchoolList = () => {
                 return obj?.name;
               }}
             /> */}
+            <BooleanField label="Active" source="is_active" />
           </ListDataGridWithPermissions>
         );
       }}

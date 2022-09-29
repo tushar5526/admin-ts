@@ -123,7 +123,10 @@ const GradeAssessmentList = () => {
     />,
   ];
   return (
-    <ListDataGridWithPermissions listProps={{ filters: Filters }}>
+    <ListDataGridWithPermissions
+      dataGridProps={{ rowClick: "show" }}
+      listProps={{ filters: Filters }}
+    >
       <TextField source="id" />
       <TextField label={"Assessment"} source="assessment_id" />
       <TextField source="grade_number" />
