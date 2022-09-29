@@ -1,5 +1,5 @@
 import React from "react";
-import { useRecordContext } from "react-admin";
+import { LinearProgress, useGetOne, useRecordContext } from "react-admin";
 import {
   FunctionField,
   NumberField,
@@ -21,6 +21,7 @@ const UserShow = () => {
       return <span>-</span>;
     }
     const { roles } = registration;
+    console.log(roles, "roles");
     return roles.map((role: any, index: number) => {
       return (
         <span
@@ -38,10 +39,45 @@ const UserShow = () => {
     });
   };
 
+  const getLocationDataByRecord = (id: any) => {
+    const TEACHER = "teacher";
+    //@ts-ignore
+    const { data: teacher } = useGetOne("teacher", { user_id: id });
+    const { data: school } = useGetOne("school", {
+      //@ts-ignore
+      school_id: teacher?.school_id,
+    });
+    const { data: location } = useGetOne("location", {
+      //@ts-ignore
+      id: school?.location_id,
+    });
+    return location;
+  };
+  const getCorrespondingTeacherDistrict = (record: any) => {
+    const location = getLocationDataByRecord(record?.id);
+
+    return location?.district;
+  };
+
+  const getCorrespondingTeacherBlock = (record: any) => {
+    const location = getLocationDataByRecord(record?.id);
+
+    return location?.block;
+  };
+
+  const getCorrespondingTeacherCluster = (record: any) => {
+    const location = getLocationDataByRecord(record?.id);
+
+    return location?.cluster;
+  };
+
   return (
     <ShowWrapper>
       <FunctionField
         render={(record: any) => {
+          const block = getCorrespondingTeacherBlock(record);
+          const district = getCorrespondingTeacherDistrict(record);
+          const cluster = getCorrespondingTeacherCluster(record);
           return (
             <>
               <InputFlexWrapper>
@@ -52,6 +88,9 @@ const UserShow = () => {
                   i={`${record?.firstName} ${record?.lastName}`}
                 />
                 <DownLabledInput i={record?.mobilePhone} label="Mobile Phone" />
+                <DownLabledInput i={district} label="District" />
+                <DownLabledInput i={block} label="Block" />
+                <DownLabledInput i={cluster} label="Cluster" />
               </InputFlexWrapper>
             </>
           );
@@ -59,7 +98,9 @@ const UserShow = () => {
       />
       <FunctionField
         label="Role"
-        render={(record: any) => DisplayRoles(record)}
+        render={(record: any) => {
+          return record.roles ? DisplayRoles(record) : null;
+        }}
       />
     </ShowWrapper>
   );

@@ -52,7 +52,9 @@ const UserShow = () => {
 
       <FunctionField
         label="Role"
-        render={(record: any) => DisplayRoles(record)}
+        render={(record: any) => {
+          return record.roles ? DisplayRoles(record) : null;
+        }}
       />
     </ShowWrapper>
     // show wrapper added

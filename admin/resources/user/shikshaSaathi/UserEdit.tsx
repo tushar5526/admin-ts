@@ -46,7 +46,9 @@ const UserForm = () => {
       <Labeled label="Roles">
         <FunctionField
           label="Role"
-          render={(record: any) => displayRoles(record)}
+          render={(record: any) => {
+            return record.roles ? displayRoles(record) : null;
+          }}
         />
       </Labeled>
       <SelectInput source="designation" choices={designationLevels} />

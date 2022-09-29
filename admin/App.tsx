@@ -16,6 +16,16 @@ import { MenuItemsWithPermissionResolver } from "./components/layout/MenuOptions
 //
 const JSONDp = jsonServerProvider("https://jsonplaceholder.typicode.com");
 
+const fixBlankPage = () => {
+  // temporary fix
+  if (
+    !window.location.href.includes("#/login") &&
+    !window.location.href.includes("student")
+  ) {
+    window.location.href += "#/login";
+  }
+};
+
 const App = () => {
   const [dataProvider, setDataProvider] = useState(null as any);
   const session: any = {
@@ -73,9 +83,11 @@ const App = () => {
   };
   useEffect(() => {
     prepareDataProviders();
+    fixBlankPage();
   }, []);
 
   if (!dataProvider) return <p>Loading...</p>;
+
   return (
     <Admin
       dataProvider={dataProvider}

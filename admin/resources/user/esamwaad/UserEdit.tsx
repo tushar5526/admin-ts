@@ -129,7 +129,9 @@ const SchoolModeUserForm = ({ record }: any) => {
       <Labeled label="Roles">
         <FunctionField
           label="Role"
-          render={(record: any) => DisplayRoles(record)}
+          render={(record: any) => {
+            return record.roles ? DisplayRoles(record) : null;
+          }}
         />
       </Labeled>
 

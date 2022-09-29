@@ -86,7 +86,9 @@ const UserList = () => {
       <NumberField source="mobilePhone" label="Mobile Phone" />
       <FunctionField
         label="Role"
-        render={(record: any) => DisplayRoles(record)}
+        render={(record: any) => {
+          return record.roles ? DisplayRoles(record) : null;
+        }}
       />
       {/* <FunctionField
         label="District"

@@ -1,5 +1,6 @@
 :root {
   --gray-primary: #d9d9d9;
+  --green-primary: #5a968b;
 }
 body {
   margin: 2px 0;
@@ -70,4 +71,28 @@ body {
 .input_flex_wrapper {
   display: grid;
   column-gap: 10em;
+}
+
+.cta_buttons {
+  display: flex;
+  font-size: 24px;
+  justify-content: space-evenly;
+}
+
+.cta_buttons button {
+  font-size: 24px;
+  outline: none;
+  border-radius: 8px;
+  text-align: center;
+  width: 12%;
+  cursor: pointer;
+}
+
+.cta_btn_active {
+  background: var(--green-primary);
+}
+
+.edit_button {
+  border-color: var(--green-primary);
+  color: var(--green-primary);
 }
