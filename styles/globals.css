@@ -23,7 +23,7 @@ body {
 }
 
 /* Styling Input Fields*/
-.MuiInputBase-root{
+.MuiInputBase-root {
   background-color: #d9d9d9 !important;
 }
 
@@ -103,6 +103,7 @@ body {
   text-align: center;
   width: 12%;
   cursor: pointer;
+  border: 1px solid black;
 }
 
 .cta_btn_active {
