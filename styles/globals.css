@@ -114,3 +114,7 @@ body {
   border-color: var(--green-primary);
   color: var(--green-primary);
 }
+
+.active_chip {
+  background: var(--gray-primary) !important;
+}
