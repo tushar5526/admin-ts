@@ -53,7 +53,7 @@ export const lightTheme = {
         colorSecondary: {
           color: "black",
           backgroundColor: "#a1dfc1",
-        }
+        },
       },
     },
 

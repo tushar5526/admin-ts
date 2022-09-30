@@ -77,9 +77,6 @@ const getCorrespondingTeacherCluster = (record: any) => {
   return <TextField label="Cluster" source="cluster" record={location} />;
 };
 const UserList = () => {
-  // const { data, isLoading } = useListContext();
-  // console.log(data, "of users");
-
   const CustomerFilter = [
     <SearchInput
       placeholder="Username"
