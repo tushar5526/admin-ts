@@ -1,24 +1,10 @@
 import { AuthProvider } from "react-admin";
-import { client } from "./api-clients/users-client";
+import { getToken } from "./Login/utils";
 
 const AuthApplicationID = "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da";
-const getToken = async (userName: string, password: string) => {
-  const body: any = {
-    password: `${password}`,
-    loginId: `${userName}`,
-    applicationId: AuthApplicationID,
-  };
-  const response = await client.post("/user/login", body);
-  if (response?.data?.result?.data) {
-    localStorage.setItem(
-      "userData",
-      JSON.stringify(response?.data?.result?.data)
-    );
-  }
-};
 
 const authProvider: AuthProvider = {
-  login: ({ username, password }) => {
+  login: async ({ username, password }) => {
     return getToken(username, password);
   },
   logout: () => {
@@ -26,6 +12,7 @@ const authProvider: AuthProvider = {
     return Promise.resolve();
   },
   checkError: (error) => {
+    console.log("login errror ");
     return Promise.resolve();
   },
   checkAuth: () =>

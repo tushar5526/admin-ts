@@ -20,6 +20,7 @@ import {
 } from "react-admin";
 
 import Box from "@mui/material/Box";
+import { loginPreCheck } from "./utils";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -28,33 +29,38 @@ const Login = () => {
   const notify = useNotify();
   const login = useLogin();
   const location = useLocation();
-
-  const handleSubmit = (auth: FormValues) => {
-    setLoading(true);
-    login(
-      auth,
-      location.state ? (location.state as any).nextPathname : "/"
-    ).catch((error: Error) => {
-      setLoading(false);
-      notify(
-        typeof error === "string"
-          ? error
-          : typeof error === "undefined" || !error.message
-          ? "ra.auth.sign_in_error"
-          : error.message,
-        {
-          type: "warning",
-          messageArgs: {
-            _:
-              typeof error === "string"
-                ? error
-                : error && error.message
-                ? error.message
-                : undefined,
-          },
-        }
-      );
-    });
+  const handleSubmit = async (auth: FormValues) => {
+    //@ts-ignore
+    const isCorrect = await loginPreCheck(auth?.username, auth?.password);
+    if (isCorrect) {
+      setLoading(true);
+      login(
+        auth,
+        location.state ? (location.state as any).nextPathname : "/"
+      ).catch((error: Error) => {
+        setLoading(false);
+        notify(
+          typeof error === "string"
+            ? error
+            : typeof error === "undefined" || !error.message
+            ? "ra.auth.sign_in_error"
+            : error.message,
+          {
+            type: "warning",
+            messageArgs: {
+              _:
+                typeof error === "string"
+                  ? error
+                  : error && error.message
+                  ? error.message
+                  : undefined,
+            },
+          }
+        );
+      });
+    } else {
+      notify(`Invalid Credentials`, { type: "error" });
+    }
   };
 
   return (

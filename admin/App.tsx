@@ -8,7 +8,7 @@ import location from "./resources/location";
 import jsonServerProvider from "ra-data-json-server";
 import school from "./resources/student";
 import authProvider from "./authProvider";
-import Login from "./Login";
+import Login from "./Login/Login";
 import { EsamwaadUserDataProvider } from "./customDataProviders/userDataProviders";
 import { lightTheme } from "./components/layout/themes";
 import { Layout } from "./components/layout";
