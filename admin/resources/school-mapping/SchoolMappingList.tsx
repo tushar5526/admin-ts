@@ -134,10 +134,16 @@ const SchoolMappingList = () => {
     });
   }, [selectedBlock, districtData]);
 
+  const quarterChoices = [
+    { id: 1, name: 1 },
+    { id: 2, name: 2 },
+    { id: 3, name: 3 },
+    { id: 4, name: 4 },
+  ];
   const importButton = <button>Import</button>;
   const Filters = [
     <TextInput label="Username" source={"username"} alwaysOn key={"search"} />,
-    <TextInput label="Quarter" source={"quarter"} key={"search"} />,
+    <SelectInput label="Quarter" source={"quarter"} choices={quarterChoices} />,
     <ReferenceInput
       key={"school_id"}
       label="School"
