@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mui/icons-material": "^5.10.6",
     "graphql": "^16.6.0",
     "graphql-ast-types-browser": "^1.0.2",
     "lodash": "^4.17.21",

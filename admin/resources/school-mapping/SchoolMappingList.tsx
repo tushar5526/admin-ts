@@ -19,6 +19,7 @@ import { Box, Typography } from "@mui/material";
 import { ListDataGridWithPermissions } from "../../components/lists";
 import { useMemo, useState } from "react";
 import * as _ from "lodash";
+import FormatSelectorModal from "./FormatSelectorModal";
 
 const QuarterField = ({ label }: { label: string }) => {
   const record = useRecordContext();
@@ -75,7 +76,7 @@ const SchoolMappingList = () => {
   const [selectedCluster, setSelectedCluster] = useState(
     initialFilters?.cluster || ""
   );
-
+  const [open, setOpen] = useState(false);
   const dataProvider = useDataProvider();
   const {
     data: _districtData,
@@ -199,13 +200,13 @@ const SchoolMappingList = () => {
     ),
   ];
 
+  const toggleModal = () => setOpen(!open);
+
   return (
     <>
       <div className="student_mapping_imp">
-        <Button
-          label="Import"
-          onClick={() => console.log("I am import button")}
-        />
+        <Button label="Import" onClick={toggleModal} />
+        <FormatSelectorModal open={open} handleOpen={toggleModal} />
       </div>
       <ListDataGridWithPermissions
         listProps={{ filters: Filters }}
