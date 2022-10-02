@@ -6,8 +6,8 @@ import {
   Show,
 } from "react-admin";
 import DownLabledInput from "../../../components/utilities/DownLabledInput/DownLabledInput";
-import InputFlexWrapper from "../../../StyleWrappers/InputFlexWrapper/InputFlexWrapper";
-import ShowWrapper from "../../../StyleWrappers/ShowWrapper/ShowWrapper";
+import InputFlexWrapper from "../../../StyleWrappers/InputFlexWrapper";
+import ShowWrapper from "../../../StyleWrappers/ShowWrapper";
 const ApplicationId = "1ae074db-32f3-4714-a150-cc8a370eafd1";
 const DisplayRoles = (a: any) => {
   const registration = a.registrations?.find(

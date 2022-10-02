@@ -7,6 +7,7 @@ import {
   Edit,
   SimpleForm,
 } from "react-admin";
+import EditWrapper from "../../StyleWrappers/EditWrapper";
 
 const LocationForm = () => {
   const record = useRecordContext();
@@ -27,10 +28,8 @@ const LocationForm = () => {
 };
 
 export const LocationEdit = () => (
-  <Edit mutationMode={"pessimistic"}>
-    <SimpleForm>
-      <LocationForm />
-    </SimpleForm>
-  </Edit>
+  <EditWrapper>
+    <LocationForm />
+  </EditWrapper>
 );
 export default LocationEdit;

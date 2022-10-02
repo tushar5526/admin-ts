@@ -5,17 +5,16 @@ import {
   Edit,
   SimpleForm,
 } from "react-admin";
+import EditWrapper from "../../StyleWrappers/EditWrapper";
 
 export const SchoolEdit = () => (
-  <Edit mutationMode={"pessimistic"}>
-    <SimpleForm>
-      <ReferenceInput source="id" reference="location">
-        <SelectInput disabled optionText={"id"} />
-      </ReferenceInput>
-      <TextInput source="district" />
-      <TextInput source="block" />
-      <TextInput source="cluster" />
-    </SimpleForm>
-  </Edit>
+  <EditWrapper>
+    <ReferenceInput source="id" reference="location">
+      <SelectInput disabled optionText={"id"} />
+    </ReferenceInput>
+    <TextInput source="district" />
+    <TextInput source="block" />
+    <TextInput source="cluster" />
+  </EditWrapper>
 );
 export default SchoolEdit;

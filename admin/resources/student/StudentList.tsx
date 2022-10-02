@@ -1,5 +1,4 @@
 import {
-  EditButton,
   Labeled,
   Pagination,
   ReferenceInput,
@@ -23,6 +22,7 @@ import { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import * as _ from "lodash";
 import { isBoolean } from "lodash";
+import EditButtonWrapper from "../../StyleWrappers/EditButtonWrapper";
 
 const StudentList = () => {
   const location = useLocation();
@@ -269,7 +269,7 @@ const StudentList = () => {
         <TextField source="category" />
         <BooleanField source="is_cwsn" label={"CWSN"}/>
         <BooleanField source="is_enabled" label={"Enabled"}/>
-        <EditButton/>
+        <EditButtonWrapper/>
       </Datagrid>
     </List>
   );
