@@ -248,11 +248,9 @@ const StudentList = () => {
     ),
   ];
   const StudentPagination = () => (
-    <Pagination rowsPerPageOptions={[50, 75, 100]} />
+    <Pagination rowsPerPageOptions={[ 10, 50, 75, 100]} />
   );
   return (
-    //  <List filters={Filters} pagination={<StudentPagination />}>
-    //   <Datagrid rowClick="edit"></Datagrid>
     <List filters={Filters} pagination={<StudentPagination />}>
       <Datagrid rowClick="show"  bulkActionButtons={false}>
         <TextField source="id" />
