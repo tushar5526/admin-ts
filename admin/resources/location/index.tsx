@@ -8,7 +8,6 @@ import LocationCreate from "./LocationCreate";
 export default {
   list: LocationList,
   edit: LocationEdit,
-  icon: SchoolIcon,
   show: LocationShow,
   create: LocationCreate,
   permissions: {

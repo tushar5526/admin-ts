@@ -8,7 +8,6 @@ import SchoolCreate from "./SchoolCreate";
 export default {
   list: SchoolList,
   edit: SchoolEdit,
-  icon: SchoolIcon,
   show: SchoolShow,
   create: SchoolCreate,
   permissions: {

@@ -10,7 +10,6 @@ export default {
   edit: UserEdit,
   create: UserCreate,
   show: UserShow,
-  icon: SchoolIcon,
   permissions: {
     canEdit: ["Admin"],
     canDelete: ["Admin"],

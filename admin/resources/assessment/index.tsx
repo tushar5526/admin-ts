@@ -7,7 +7,6 @@ export default {
   list: AssessmentList,
   edit: AssessmentEdit,
   show: AssessmentShow,
-  icon: SchoolIcon,
   permissions: {
     canEdit: ["Admin"],
     canDelete: ["Admin"],

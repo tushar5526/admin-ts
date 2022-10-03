@@ -5,12 +5,13 @@ import location from "../../resources/location";
 import school from "../../resources/school";
 import gradeAssessment from "../../resources/gradeAssessment";
 import assessment from "../../resources/assessment";
-import teacher from "../../resources/teacher";
 import mapping from "../../resources/school-mapping";
+import SchoolIcon from "@mui/icons-material/School";
 
 const MenuOptions: any[] = [
   {
     name: "Student",
+    icon: SchoolIcon,
     resource: "student",
     props: student,
     permissions: ["Admin"],
@@ -19,37 +20,44 @@ const MenuOptions: any[] = [
     name: "E Samwaad Users",
     resource: "e_samwaad_user",
     props: Esamwaad,
+    icon: SchoolIcon,
     permissions: ["Admin"],
   },
   {
     name: "Shiksha Saathi Users",
     resource: "shiksha_saathi_user",
     props: ShikshaSaathi,
+    icon: SchoolIcon,
   },
   {
     name: "School",
     resource: "school",
     props: school,
+    icon: SchoolIcon,
   },
   {
     name: "Location",
     resource: "location",
     props: location,
+    icon: SchoolIcon,
   },
   {
     name: "Grade Assessment",
     resource: "grade_assessment",
     props: gradeAssessment,
+    icon: SchoolIcon,
   },
   {
     name: "Assessment",
     resource: "assessment",
     props: assessment,
+    icon: SchoolIcon,
   },
   {
     name: "School Mapping For Monitoring",
     resource: "ss_school_allocation_data",
     props: mapping,
+    icon: SchoolIcon,
   },
 ];
 export const MenuItemsWithPermissionResolver = (permissions: any) => {
