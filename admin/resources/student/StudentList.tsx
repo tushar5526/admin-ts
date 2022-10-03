@@ -1,5 +1,4 @@
 import {
-  EditButton,
   Labeled,
   Pagination,
   ReferenceInput,
@@ -23,6 +22,7 @@ import { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import * as _ from "lodash";
 import { isBoolean } from "lodash";
+import EditButtonWrapper from "../../StyleWrappers/EditButtonWrapper";
 
 const StudentList = () => {
   const location = useLocation();
@@ -248,11 +248,9 @@ const StudentList = () => {
     ),
   ];
   const StudentPagination = () => (
-    <Pagination rowsPerPageOptions={[50, 75, 100]} />
+    <Pagination rowsPerPageOptions={[ 10, 50, 75, 100]} />
   );
   return (
-    //  <List filters={Filters} pagination={<StudentPagination />}>
-    //   <Datagrid rowClick="edit"></Datagrid>
     <List filters={Filters} pagination={<StudentPagination />}>
       <Datagrid rowClick="show"  bulkActionButtons={false}>
         <TextField source="id" />
@@ -271,7 +269,7 @@ const StudentList = () => {
         <TextField source="category" />
         <BooleanField source="is_cwsn" label={"CWSN"}/>
         <BooleanField source="is_enabled" label={"Enabled"}/>
-        <EditButton/>
+        <EditButtonWrapper/>
       </Datagrid>
     </List>
   );

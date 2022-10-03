@@ -8,9 +8,9 @@ import {
   FunctionField,
 } from "react-admin";
 import DownLabledInput from "../../components/utilities/DownLabledInput/DownLabledInput";
-import ShowWrapper from "../../StyleWrappers/ShowWrapper/ShowWrapper";
+import ShowWrapper from "../../StyleWrappers/ShowWrapper";
 import { useRecordContext } from "react-admin";
-import InputFlexWrapper from "../../StyleWrappers/InputFlexWrapper/InputFlexWrapper";
+import InputFlexWrapper from "../../StyleWrappers/InputFlexWrapper";
 
 const StudentShow = () => {
   const record = useRecordContext();
