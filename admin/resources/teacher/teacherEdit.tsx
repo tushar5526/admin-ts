@@ -1,7 +1,50 @@
-import { TextInput, ReferenceInput, SelectInput, ReferenceField } from "react-admin";
+import { TextInput, ReferenceInput, SelectInput, ReferenceField, useDataProvider, useNotify, useResourceContext, Button } from "react-admin";
+import { useMutation, useQuery } from "react-query";
 import EditWrapper from "../../StyleWrappers/EditWrapper";
 
-const TeacherEdit = () => {
+const ChangePasswordButton = ({ record }: any) => {
+    const dataProvider = useDataProvider();
+    const notify = useNotify();
+    const resource = useResourceContext();
+    console.log(record) // Not Coming.
+    // console.log(
+    //   {
+    //     loginId: record.record?.username,
+    //     password: resource === "e_samwaad_user" ? "himachal12345" : "1234abcd",
+    //   },
+    //   "record"
+    // );
+    // const { mutate, isLoading } = useMutation(
+    //   ["changePassword", record.id],
+  
+    //   () =>
+    //     dataProvider.changePassword(resource, {
+    //       loginId: record.record.username,
+    //       password: resource === "e_samwaad_user" ? "himachal12345" : "1234abcd",
+    //     }),
+  
+    //   {
+    //     onSuccess: (data: any) => {
+    //       notify(data?.data, { type: "success" });
+    //     },
+    //     onError: (error: any) => {
+    //       notify(error.toString(), { type: "error" });
+    //     },
+    //   }
+    // );
+    return (
+      <Button
+        variant={"contained"}
+        sx={{ marginTop: "10px" }}
+        // onClick={() => mutate()}
+        // disabled={isLoading}
+      >
+        <>Change Password</>
+      </Button>
+    );
+  };
+
+const TeacherEdit = ({ record }: any) => {
     const statusChoices = [
         {
             id: "PENDING",
@@ -36,6 +79,7 @@ const TeacherEdit = () => {
     ];
     return (
         <EditWrapper>
+            <TextInput source="id" disabled/>
             <TextInput source="user_id" />
             <ReferenceField label="SCHOOL" source="school_id" reference="school">
                 <TextInput source="name" />
@@ -46,6 +90,7 @@ const TeacherEdit = () => {
             <TextInput label="Mode of employment" source="employment" />
             <TextInput label="Designation" source="designation" />
             <SelectInput label="Account Status" source="account_status" choices={statusChoices} emptyText="NULL"/>
+            <ChangePasswordButton record={record}/>
         </EditWrapper>
     );
 };

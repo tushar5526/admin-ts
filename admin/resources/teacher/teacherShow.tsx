@@ -1,5 +1,7 @@
-import { TextField, ReferenceField, DateField, BooleanField, useRecordContext } from "react-admin";
+import { TextField, ReferenceField, DateField, BooleanField, useRecordContext, FunctionField } from "react-admin";
 import { ListDataGridWithPermissions } from "../../components/lists";
+import DownLabledInput from "../../components/utilities/DownLabledInput/DownLabledInput";
+import InputFlexWrapper from "../../StyleWrappers/InputFlexWrapper";
 import ShowWrapper from "../../StyleWrappers/ShowWrapper";
 
 const statusChoices = [
@@ -39,17 +41,44 @@ const statusChoices = [
 const TeacherList = () => {
     return (
         <ShowWrapper>
-            <TextField source="user_id"/>
-            <ReferenceField label="SCHOOL" source="school_id" reference="school">
-                <TextField source="name" />
-            </ReferenceField>
-            <ReferenceField label="UDISE" source="school_id" reference="school">
-                <TextField source="udise" />
-            </ReferenceField>
-            <TextField label="Mode of employment" source="employment" />
-            <TextField label="Designation" source="designation" />
-            <ColoredChipField label="Account Status" source="account_status" />
-        </ShowWrapper>
+            <FunctionField
+                render={(record: any) => {
+                    return (
+                        <>
+                            <InputFlexWrapper>
+                                {" "}
+                                <DownLabledInput i={record?.id} label={"ID"} />
+                                <ReferenceField label="SCHOOL" source="school_id" reference="school">
+                                    <FunctionField
+                                        render={(record: any) => {
+                                            return (
+                                                <DownLabledInput i={record?.name} label={"School"} />
+                                            );
+                                        }}
+                                    />
+                                </ReferenceField>
+                                <ReferenceField
+                                    label={"Udise"}
+                                    source="school_id"
+                                    reference="school"
+                                >
+                                    <FunctionField
+                                        render={(record: any) => {
+                                            return (
+                                                <DownLabledInput i={record?.udise} label={"Udise"} />
+                                            );
+                                        }}
+                                    />
+                                </ReferenceField>
+                                <DownLabledInput i={record?.employment} label={"Employment"} />
+                                <DownLabledInput i={record?.designation} label={"Designation"} />
+                                <DownLabledInput i={record?.account_status} label={"Account Status"} />
+                            </InputFlexWrapper>
+                        </>
+                    );
+                }}
+            />
+        </ShowWrapper >
     );
 };
 export default TeacherList;

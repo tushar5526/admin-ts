@@ -52,8 +52,8 @@ const ColoredChipField = (props: any) => {
 
 const TeacherList = () => {
     return (
-        <ListDataGridWithPermissions>
-            <TextField source="user_id"/>
+        <ListDataGridWithPermissions dataGridProps={{ rowClick: "show" }}>
+            <TextField source="id" />
             <ReferenceField label="SCHOOL" source="school_id" reference="school">
                 <TextField source="name" />
             </ReferenceField>
