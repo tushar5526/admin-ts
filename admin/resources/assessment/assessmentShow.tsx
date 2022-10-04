@@ -13,10 +13,18 @@ import { ListDataGridWithPermissions } from "../../components/lists";
 import InputFlexWrapper from "../../StyleWrappers/InputFlexWrapper/InputFlexWrapper";
 import ShowWrapper from "../../StyleWrappers/ShowWrapper/ShowWrapper";
 import DownLabledInput from "../../components/utilities/DownLabledInput/DownLabledInput";
+import { useState } from "react";
 
 const AssessmentList = () => {
   return (
-    <ShowWrapper>
+    <ShowWrapper
+      astShow={{
+        val: "",
+      }}
+      simpleShowProp={{
+        val: "",
+      }}
+    >
       <FunctionField
         render={(record: any) => {
           return (

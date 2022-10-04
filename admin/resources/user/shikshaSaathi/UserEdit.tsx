@@ -43,6 +43,7 @@ const UserForm = () => {
       <TextInput source="username" disabled={true} />
       <TextInput source="fullName" label="Full Name" />
       <TextInput source="mobilePhone" label="Mobile Phone" />
+      <TextInput source="" label="Change Password" />
       <Labeled label="Roles">
         <FunctionField
           label="Role"

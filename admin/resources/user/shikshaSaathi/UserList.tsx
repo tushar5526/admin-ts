@@ -75,6 +75,9 @@ const getCorrespondingTeacherCluster = (record: any) => {
 const UserList = () => {
   const Filters = [
     <TextInput label="Username" source="username" alwaysOn key={"search"} />,
+    <TextInput label="District" source="district" key={"search"} />,
+    <TextInput label="Block" source="block" key={"search"} />,
+    <TextInput label="Cluster" source="cluster" key={"search"} />,
   ];
   return (
     <ListDataGridWithPermissions
@@ -90,7 +93,7 @@ const UserList = () => {
           return record.roles ? DisplayRoles(record) : null;
         }}
       />
-      {/* <FunctionField
+      <FunctionField
         label="District"
         render={(record: any) => getCorrespondingTeacherDistrict(record)}
       />{" "}
@@ -101,7 +104,7 @@ const UserList = () => {
       <FunctionField
         label="Cluster"
         render={(record: any) => getCorrespondingTeacherCluster(record)}
-      /> */}
+      />
     </ListDataGridWithPermissions>
   );
 };

@@ -13,7 +13,14 @@ import DownLabledInput from "../../components/utilities/DownLabledInput/DownLabl
 
 const GradeAssessmentShow = () => {
   return (
-    <ShowWrapper>
+    <ShowWrapper
+      show={{
+        val: "",
+      }}
+      simpleShowProp={{
+        val: "",
+      }}
+    >
       <FunctionField
         render={(record: any) => {
           return (
