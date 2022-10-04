@@ -1,6 +1,6 @@
 import { TextField, ReferenceField, DateField, BooleanField, useRecordContext } from "react-admin";
 import { ListDataGridWithPermissions } from "../../components/lists";
-import { Chip } from "@mui/material";
+import ShowWrapper from "../../StyleWrappers/ShowWrapper";
 
 const statusChoices = [
     {
@@ -35,24 +35,10 @@ const statusChoices = [
     },
 ];
 
-const ColoredChipField = (props: any) => {
-    const record = useRecordContext();
-
-    let data = statusChoices.find(
-        (elem) => elem.id === record[props.source]
-    );
-    return (
-        <Chip
-            style={{ backgroundColor: data?.color, color: "#FFF" }}
-            label={data?.name}
-        />
-    );
-};
-
 
 const TeacherList = () => {
     return (
-        <ListDataGridWithPermissions>
+        <ShowWrapper>
             <TextField source="user_id"/>
             <ReferenceField label="SCHOOL" source="school_id" reference="school">
                 <TextField source="name" />
@@ -63,7 +49,7 @@ const TeacherList = () => {
             <TextField label="Mode of employment" source="employment" />
             <TextField label="Designation" source="designation" />
             <ColoredChipField label="Account Status" source="account_status" />
-        </ListDataGridWithPermissions>
+        </ShowWrapper>
     );
 };
 export default TeacherList;
