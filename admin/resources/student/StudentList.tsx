@@ -155,7 +155,7 @@ const StudentList = () => {
   }, [selectedCwsn, studentData]);
 
   const Filters = [
-    <SearchInput placeholder="Name" source={"name"} alwaysOn key={"search"} />,
+    <SearchInput placeholder="ID" source={"id"} alwaysOn key={"search"} />,
     <SelectInput
       label="Status"
       key={"is_enabled"}
