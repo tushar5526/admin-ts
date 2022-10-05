@@ -7,9 +7,9 @@ import {
   SimpleShowLayout,
   TextField,
 } from "react-admin";
-import InputFlexWrapper from "../../../StyleWrappers/InputFlexWrapper";
-import ShowWrapper from "../../../StyleWrappers/ShowWrapper";
-import DownLabledInput from "../../../components/utilities/DownLabledInput/DownLabledInput";
+import InputFlexWrapper from "../../../components/styleWrappers/InputFlexWrapper";
+import ShowWrapper from "../../../components/styleWrappers/ShowWrapper";
+import DownLabledInput from "../../../components/styleWrappers/DownLabledInput";
 
 const ApplicationId = "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da";
 const UserShow = () => {

@@ -1,7 +1,6 @@
 import { TextInput, ReferenceInput, SelectInput, ReferenceField, useDataProvider, useNotify, useResourceContext, Button } from "react-admin";
 import { useMutation, useQuery } from "react-query";
-import EditWrapper from "../../StyleWrappers/EditWrapper";
-
+import EditWrapper from "../../components/styleWrappers/EditWrapper";
 const ChangePasswordButton = ({ record }: any) => {
     const dataProvider = useDataProvider();
     const notify = useNotify();

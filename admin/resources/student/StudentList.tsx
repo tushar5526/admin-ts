@@ -23,7 +23,7 @@ import { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import * as _ from "lodash";
 import { isBoolean } from "lodash";
-import EditButtonWrapper from "../../StyleWrappers/EditButtonWrapper";
+import EditButtonWrapper from "../../components/styleWrappers/EditButtonWrapper";
 
 const StudentList = () => {
   const location = useLocation();

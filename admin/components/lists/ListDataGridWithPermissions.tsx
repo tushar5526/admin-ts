@@ -6,7 +6,7 @@ import {
 } from "react-admin";
 import { usePermissions } from "ra-core";
 import { ItemWithPermissionResolver } from "../layout/MenuOptions";
-import EditButtonWrapper from "../../StyleWrappers/EditButtonWrapper";
+import EditButtonWrapper from "../styleWrappers/EditButtonWrapper";
 
 const ListDataGridWithPermissions = ({
   children,

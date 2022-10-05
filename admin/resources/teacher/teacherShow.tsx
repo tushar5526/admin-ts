@@ -1,8 +1,8 @@
 import { TextField, ReferenceField, DateField, BooleanField, useRecordContext, FunctionField } from "react-admin";
 import { ListDataGridWithPermissions } from "../../components/lists";
-import DownLabledInput from "../../components/utilities/DownLabledInput/DownLabledInput";
-import InputFlexWrapper from "../../StyleWrappers/InputFlexWrapper";
-import ShowWrapper from "../../StyleWrappers/ShowWrapper";
+import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
+import InputFlexWrapper from "../../components/styleWrappers/InputFlexWrapper";
+import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
 
 const statusChoices = [
     {

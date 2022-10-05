@@ -7,7 +7,7 @@ import {
   Edit,
   SimpleForm,
 } from "react-admin";
-import EditWrapper from "../../StyleWrappers/EditWrapper";
+import EditWrapper from "../../components/styleWrappers/EditWrapper";
 
 const LocationForm = () => {
   const record = useRecordContext();
