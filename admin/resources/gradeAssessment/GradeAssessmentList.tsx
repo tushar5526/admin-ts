@@ -6,6 +6,8 @@ import {
   useDataProvider,
   FunctionField,
   SelectInput,
+  ReferenceInput,
+  AutocompleteInput,
 } from "react-admin";
 import { ListDataGridWithPermissions } from "../../components/lists";
 import { useQuery } from "react-query";
@@ -107,20 +109,8 @@ const GradeAssessmentList = () => {
     });
   }, [selectUdise, schoolData]);
   const Filters = [
-    <TextInput label="School" source="school_id" key={"search"} />,
-    <TextInput label="Grade Number" source="grade_number" key={"search"} />,
-    <TextInput label="Udise" source="udise" key={"search"} />,
-    <TextInput label="Udise" source="udise" alwaysOn key={"search"} />,
-    <SelectInput
-      label="Block"
-      key="block"
-      onChange={(e) => {
-        setSelectedBlock(e.target.value);
-      }}
-      value={selectedBlock}
-      source="block"
-      choices={blocks}
-    />,
+    <TextInput label="ID" source="id" alwaysOn />,
+    <TextInput label="Grade Number" source="grade_number" key={"search"}/>
   ];
   return (
     <ListDataGridWithPermissions
@@ -135,21 +125,21 @@ const GradeAssessmentList = () => {
       <ReferenceField label="Udise" source="school_id" reference="school">
         <TextField source="udise" />
       </ReferenceField>
-      <FunctionField
-        label="District"
-        render={(record: any) => displayDistrict(record)}
-      />
-      <FunctionField
-        label="Block"
-        render={(record: any) => displayBlock(record)}
-      />
-      {/* <ReferenceField label="District" source="location" reference="school">
-        <TextField source="district" />
+      <ReferenceField label="District" source="school_id" reference="school">
+        <ReferenceField source="location_id" reference="location">
+          <TextField source="district" />
+        </ReferenceField>
       </ReferenceField>
-      <ReferenceField label="Block" source="district" reference="location">
-        <TextField source="block" />
-      </ReferenceField> */}
-
+      <ReferenceField label="Block" source="school_id" reference="school">
+        <ReferenceField source="location_id" reference="location">
+          <TextField source="block" />
+        </ReferenceField>
+      </ReferenceField>
+      <ReferenceField label="Cluster" source="school_id" reference="school">
+        <ReferenceField source="location_id" reference="location">
+          <TextField source="cluster" />
+        </ReferenceField>
+      </ReferenceField>
       <TextField source="streams_id" />
       <DateField source="created" />
       <DateField source="updated" />

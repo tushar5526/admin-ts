@@ -8,7 +8,7 @@ import {
   NumberInput,
   ReferenceInput,
 } from "react-admin";
-import EditWrapper from "../../StyleWrappers/EditWrapper";
+import EditWrapper from "../../components/styleWrappers/EditWrapper";
 
 const StudentForm = () => {
   const record = useRecordContext();

@@ -1,6 +1,6 @@
-import {TextField, ReferenceField, DateField, BooleanField, useRecordContext} from "react-admin";
-import {ListDataGridWithPermissions} from "../../components/lists";
-import {Chip} from "@mui/material";
+import { TextField, ReferenceField, DateField, BooleanField, useRecordContext } from "react-admin";
+import { ListDataGridWithPermissions } from "../../components/lists";
+import { Chip } from "@mui/material";
 
 const statusChoices = [
     {
@@ -34,7 +34,8 @@ const statusChoices = [
         color: "#cbcbcb",
     },
 ];
-const ColoredChipField = (props:any) => {
+
+const ColoredChipField = (props: any) => {
     const record = useRecordContext();
 
     let data = statusChoices.find(
@@ -42,7 +43,7 @@ const ColoredChipField = (props:any) => {
     );
     return (
         <Chip
-            style={{backgroundColor: data?.color, color: "#FFF"}}
+            style={{ backgroundColor: data?.color, color: "#FFF" }}
             label={data?.name}
         />
     );
@@ -51,24 +52,17 @@ const ColoredChipField = (props:any) => {
 
 const TeacherList = () => {
     return (
-        <ListDataGridWithPermissions>
-            <ReferenceField source="user_id" reference="user">
-                <TextField label="Username" source="username"  />
+        <ListDataGridWithPermissions dataGridProps={{ rowClick: "show" }}>
+            <TextField source="id" />
+            <ReferenceField label="SCHOOL" source="school_id" reference="school">
+                <TextField source="name" />
             </ReferenceField>
-
-            {/*<TextField*/}
-            {/*    label="Employee Name"*/}
-            {/*    source="user.first_name"*/}
-            {/*    sortable={false}*/}
-            {/*/>*/}
-            {/*<TextField*/}
-            {/*    label="Contact Number"*/}
-            {/*    source="user.mobile_phone"*/}
-            {/*    sortable={false}*/}
-            {/*/>*/}
-            <TextField label="Mode of employment" source="employment"/>
-            <TextField label="Designation" source="designation"/>
-            <ColoredChipField label="Account Status" source="account_status"/>
+            <ReferenceField label="UDISE" source="school_id" reference="school">
+                <TextField source="udise" />
+            </ReferenceField>
+            <TextField label="Mode of employment" source="employment" />
+            <TextField label="Designation" source="designation" />
+            <ColoredChipField label="Account Status" source="account_status" />
         </ListDataGridWithPermissions>
     );
 };
