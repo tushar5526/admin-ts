@@ -1,5 +1,6 @@
 import {
   Labeled,
+  NumberInput,
   Pagination,
   ReferenceInput,
   SearchInput,
@@ -78,12 +79,11 @@ const StudentList = () => {
     });
   }, [studentData]);
   const grade = useMemo(() => {
-    const yesBool = isBoolean(selectedStatus);
-    if (!yesBool || !studentData) {
+    if (!studentData) {
       return [];
     }
     return _.uniqBy(
-      studentData.filter((d) => d.is_enabled === selectedStatus),
+      studentData,
       "grade_number"
     ).map((a) => {
       return {
@@ -94,11 +94,11 @@ const StudentList = () => {
   }, [selectedStatus, studentData]);
 
   const streams = useMemo(() => {
-    if (!selectedGrade || !studentData) {
+    if (!studentData) {
       return [];
     }
     return _.uniqBy(
-      studentData.filter((d) => d.grade_number === selectedGrade),
+      studentData,
       "stream_tag"
     ).map((a) => {
       return {
@@ -109,11 +109,11 @@ const StudentList = () => {
   }, [selectedGrade, studentData]);
 
   const category = useMemo(() => {
-    if (!selectedStream || !studentData) {
+    if (!studentData) {
       return [];
     }
     return _.uniqBy(
-      studentData.filter((d) => d.stream_tag === selectedStream),
+      studentData,
       "category"
     ).map((a) => {
       return {
@@ -124,11 +124,11 @@ const StudentList = () => {
   }, [selectedStream, studentData]);
 
   const cwsn = useMemo(() => {
-    if (!selectedCategory || !studentData) {
+    if (!studentData) {
       return [];
     }
     return _.uniqBy(
-      studentData.filter((d) => d.category === selectedCategory),
+      studentData,
       "is_cwsn"
     ).map((a) => {
       return {
@@ -139,12 +139,11 @@ const StudentList = () => {
   }, [selectedCategory, studentData]);
 
   const gender = useMemo(() => {
-    const yesBool = isBoolean(selectedCwsn);
-    if (!yesBool || !studentData) {
+    if (!studentData) {
       return [];
     }
     return _.uniqBy(
-      studentData.filter((d) => d.is_cwsn === selectedCwsn),
+      studentData,
       "gender"
     ).map((a) => {
       return {
@@ -155,7 +154,21 @@ const StudentList = () => {
   }, [selectedCwsn, studentData]);
 
   const Filters = [
-    <SearchInput placeholder="ID" source={"id"} alwaysOn key={"search"} />,
+    <TextInput label="ID" source={"id"} alwaysOn key={"search"} />,
+    <SelectInput
+      label="Grade"
+      onChange={(e) => {
+        setSelectedStatus(null);
+        setSelectedGrade(e.target.value);
+        setSelectedStream(null);
+        setSelectedCategory(null);
+        setSelectedCwsn(null);
+        setSelectedGender(null);
+      }}
+      value={selectedGrade}
+      source="grade_number"
+      choices={grade}
+    />,
     <SelectInput
       label="Status"
       key={"is_enabled"}
@@ -170,93 +183,79 @@ const StudentList = () => {
       value={selectedStatus}
       source="is_enabled"
       choices={enabled}
+      isRequired={true}
     />,
-    selectedStatus === "" ? (
-      <></>
-    ) : (
-      <SelectInput
-        label="Grade"
-        onChange={(e) => {
-          setSelectedGrade(e.target.value);
-          setSelectedStream(null);
-          setSelectedCategory(null);
-          setSelectedCwsn(null);
-          setSelectedGender(null);
-        }}
-        value={selectedGrade}
-        source="grade_number"
-        choices={grade}
-      />
-    ),
-    selectedGrade ? (
-      <SelectInput
-        label="Stream"
-        onChange={(e) => {
-          setSelectedStream(e.target.value);
-          setSelectedCategory(null);
-          setSelectedCwsn(null);
-          setSelectedGender(null);
-        }}
-        value={selectedStream}
-        source="stream_tag"
-        choices={streams}
-      />
-    ) : (
-      <></>
-    ),
-    selectedStream ? (
-      <SelectInput
-        label="Category"
-        onChange={(e) => {
-          setSelectedCategory(e.target.value);
-          setSelectedCwsn(null);
-          setSelectedGender(null);
-        }}
-        value={selectedCategory}
-        source="category"
-        choices={category}
-      />
-    ) : (
-      <></>
-    ),
-    selectedCategory ? (
-      <SelectInput
-        label="cwsn"
-        onChange={(e) => {
-          setSelectedCwsn(e.target.value);
-          setSelectedGender(null);
-        }}
-        value={selectedCwsn}
-        source="is_cwsn"
-        choices={cwsn}
-      />
-    ) : (
-      <></>
-    ),
-    selectedCwsn === "" ? (
-      <></>
-    ) : (
-      <SelectInput
-        label="gender"
-        onChange={(e) => {
-          setSelectedGender(e.target.value);
-        }}
-        value={selectedGender}
-        source="gender"
-        choices={gender}
-      />
-    ),
+    <SelectInput
+      label="Stream"
+      onChange={(e) => {
+        setSelectedStatus(null);
+        setSelectedGrade(null);
+        setSelectedStream(e.target.value);
+        setSelectedCategory(null);
+        setSelectedCwsn(null);
+        setSelectedGender(null);
+      }}
+      value={selectedStream}
+      source="stream_tag"
+      choices={streams}
+      isRequired={true}
+    />,
+    <SelectInput
+      label="Category"
+      onChange={(e) => {
+        setSelectedStatus(null);
+        setSelectedGrade(null);
+        setSelectedStream(null);
+        setSelectedCategory(e.target.value);
+        setSelectedCwsn(null);
+        setSelectedGender(null);
+      }}
+      value={selectedCategory}
+      source="category"
+      choices={category}
+      isRequired={true}
+    />,
+    <SelectInput
+      label="cwsn"
+      onChange={(e) => {
+        setSelectedStatus(null);
+        setSelectedGrade(null);
+        setSelectedStream(null);
+        setSelectedCategory(null);
+        setSelectedCwsn(e.target.value);
+        setSelectedGender(null);
+      }}
+      value={selectedCwsn}
+      source="is_cwsn"
+      choices={cwsn}
+      isRequired={true}
+    />,
+    <SelectInput
+      label="gender"
+      onChange={(e) => {
+        setSelectedStatus(null);
+        setSelectedGrade(null);
+        setSelectedStream(null);
+        setSelectedCategory(null);
+        setSelectedCwsn(null);
+        setSelectedGender(e.target.value);
+      }}
+      value={selectedGender}
+      source="gender"
+      choices={gender}
+      isRequired={true}
+    />
   ];
   const StudentPagination = () => (
-    <Pagination rowsPerPageOptions={[ 10, 50, 75, 100]} />
+    <Pagination rowsPerPageOptions={[10, 50, 75, 100]} />
   );
   return (
     <List filters={Filters} pagination={<StudentPagination />}>
-      <Datagrid rowClick="show"  bulkActionButtons={false}>
+      <Datagrid rowClick="show" bulkActionButtons={false}>
         <TextField source="id" />
         <TextField source="name" />
-        <ReferenceField  label="SCHOOL" source="school_id" reference="school">
-          <TextField  source="name" />
+        <ReferenceField label="SCHOOL" source="school_id" reference="school">
+          <TextField source="name" />
         </ReferenceField>
         <ReferenceField label="UDISE" source="school_id" reference="school">
           <TextField source="udise" />
@@ -267,9 +266,9 @@ const StudentList = () => {
         <NumberField source="grade_number" />
         <TextField source="stream_tag" />
         <TextField source="category" />
-        <BooleanField source="is_cwsn" label={"CWSN"}/>
-        <BooleanField source="is_enabled" label={"Enabled"}/>
-        <EditButtonWrapper/>
+        <BooleanField source="is_cwsn" label={"CWSN"} />
+        <BooleanField source="is_enabled" label={"Enabled"} />
+        <EditButtonWrapper />
       </Datagrid>
     </List>
   );
