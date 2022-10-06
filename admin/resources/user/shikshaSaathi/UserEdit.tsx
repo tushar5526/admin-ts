@@ -8,6 +8,7 @@ import {
   useRecordContext,
   useDataProvider,
 } from "react-admin";
+import { ChangePasswordButton } from "../ChangePasswordButton";
 import { designationLevels } from "../esamwaad/designation";
 const ApplicationId = "1ae074db-32f3-4714-a150-cc8a370eafd1";
 
@@ -43,15 +44,22 @@ const UserForm = () => {
       <TextInput source="username" disabled={true} />
       <TextInput source="fullName" label="Full Name" />
       <TextInput source="mobilePhone" label="Mobile Phone" />
-      <Labeled label="Roles">
-        <FunctionField
-          label="Role"
-          render={(record: any) => {
-            return displayRoles(record);
-          }}
-        />
-      </Labeled>
       <SelectInput source="designation" choices={designationLevels} />
+      <FunctionField
+        label="Role"
+        render={(record: any) => {
+          return (
+            <>
+              {displayRoles(record)}
+              <br />
+              <br />
+              <ChangePasswordButton record={record} />
+              <br />
+              <br />
+            </>
+          );
+        }}
+      />
     </>
   );
 };

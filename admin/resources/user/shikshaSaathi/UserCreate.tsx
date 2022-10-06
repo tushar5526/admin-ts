@@ -145,7 +145,6 @@ const UserCreate = (props: any) => {
               onChange={(e) => setState({ ...state, cluster: e.target.value })}
               source="cluster"
               label="Cluster"
-              // @ts-ignore
               choices={clusterChoices}
             />
           )}

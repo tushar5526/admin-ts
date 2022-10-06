@@ -11,6 +11,7 @@ import {
 import { ListDataGridWithPermissions } from "../../../components/lists";
 import { useQuery } from "react-query";
 import { useDataProvider } from "react-admin";
+import { ChangePasswordButton } from "../ChangePasswordButton";
 const ApplicationId = "1ae074db-32f3-4714-a150-cc8a370eafd1";
 const DisplayRoles = (a: any) => {
   const registration = a.registrations?.find(
@@ -79,15 +80,15 @@ const UserList = () => {
   const Filters = [
     <TextInput label="Username" source="username" alwaysOn key={"search"} />,
   ];
-  // const dataProvider = useDataProvider();
-  // const { data } = useQuery(["shiksha_saathi_user", "getList", {}], () =>
-  //   dataProvider.getList("shiksha_saathi_user", {
-  //     pagination: { perPage: 10000, page: 1 },
-  //     sort: { field: "id", order: "asc" },
-  //     filter: {},
-  //   })
-  // );
-  // console.log(data, "user");
+  const dataProvider = useDataProvider();
+  const { data } = useQuery(["e_samwaad_user", "getList", {}], () =>
+    dataProvider.getList("e_samwaad_user", {
+      pagination: { perPage: 10000, page: 1 },
+      sort: { field: "id", order: "asc" },
+      filter: {},
+    })
+  );
+  console.log(data, "user");
   return (
     <ListDataGridWithPermissions
       listProps={{ filters: Filters }}
