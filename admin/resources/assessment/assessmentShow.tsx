@@ -10,9 +10,9 @@ import {
   FunctionField,
 } from "react-admin";
 import { ListDataGridWithPermissions } from "../../components/lists";
-import InputFlexWrapper from "../../StyleWrappers/InputFlexWrapper/InputFlexWrapper";
-import ShowWrapper from "../../StyleWrappers/ShowWrapper/ShowWrapper";
-import DownLabledInput from "../../components/utilities/DownLabledInput/DownLabledInput";
+import InputFlexWrapper from "../../components/styleWrappers/InputFlexWrapper";
+import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
+import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
 import { useState } from "react";
 
 const AssessmentList = () => {

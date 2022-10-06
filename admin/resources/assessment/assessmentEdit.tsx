@@ -12,7 +12,7 @@ import EditWrapper from "../../components/styleWrappers/EditWrapper";
 const AssessmentEdit = () => {
   return (
     <EditWrapper>
-      <TextInput source="id" disabled/>
+      <TextInput source="id" disabled />
       <TextInput source="type" />
       <ReferenceField
         source="deadline_id"
@@ -38,12 +38,9 @@ const AssessmentEdit = () => {
       >
         <TextInput source="category" />
       </ReferenceField>
-      <TextInput
-        label="Evaluation Params"
-        source="evaluation_params"
-      />
+      <TextInput label="Evaluation Params" source="evaluation_params" />
       <BooleanInput label="Is Enabled" source="is_enabled" />
-      </EditWrapper>
+    </EditWrapper>
   );
 };
 export default AssessmentEdit;

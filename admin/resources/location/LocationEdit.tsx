@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import {
   TextInput,
   useRecordContext,
@@ -7,14 +8,10 @@ import {
   Edit,
   SimpleForm,
 } from "react-admin";
-<<<<<<< HEAD
+import EditWrapper from "../../components/styleWrappers/EditWrapper";
 import { useLocation } from "react-router-dom";
-import { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import * as _ from "lodash";
-=======
-import EditWrapper from "../../components/styleWrappers/EditWrapper";
->>>>>>> ae47e25700e8d8c41f10b5529c8efc65734ca0c2
 
 const LocationForm = () => {
   const record = useRecordContext();
