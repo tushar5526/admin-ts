@@ -2,17 +2,12 @@ import {
   NumberField,
   TextField,
   FunctionField,
-  TextInput,
-  ShowButton,
   SearchInput,
-  Filter,
   useGetOne,
   LinearProgress,
-  Loading,
   ReferenceField,
 } from "react-admin";
 import { ListDataGridWithPermissions } from "../../../components/lists";
-import { useRecordContext, useListContext } from "react-admin";
 
 const ApplicationId = "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da";
 const DisplayRoles = (a: any) => {
@@ -48,6 +43,7 @@ const getTeacherDataByRecord = (id: any) => {
 };
 const getCorrespondingTeacherDistrict = (record: any) => {
   const teacher = getTeacherDataByRecord(record?.id);
+  console.log(teacher, "teacher");
 
   if (!teacher) return <LinearProgress />;
 
@@ -76,7 +72,6 @@ const getCorrespondingTeacherBlock = (record: any) => {
 
 const getCorrespondingTeacherCluster = (record: any) => {
   const teacher = getTeacherDataByRecord(record?.id);
-  console.log(record, "record");
 
   if (!teacher) return <LinearProgress />;
   return (
