@@ -47,7 +47,7 @@ const UserForm = () => {
         <FunctionField
           label="Role"
           render={(record: any) => {
-            return record.roles ? displayRoles(record) : null;
+            return displayRoles(record);
           }}
         />
       </Labeled>
