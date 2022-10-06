@@ -7,10 +7,14 @@ import {
   Edit,
   SimpleForm,
 } from "react-admin";
+<<<<<<< HEAD
 import { useLocation } from "react-router-dom";
 import { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import * as _ from "lodash";
+=======
+import EditWrapper from "../../components/styleWrappers/EditWrapper";
+>>>>>>> ae47e25700e8d8c41f10b5529c8efc65734ca0c2
 
 const LocationForm = () => {
   const record = useRecordContext();
@@ -135,10 +139,8 @@ const LocationForm = () => {
 };
 
 export const LocationEdit = () => (
-  <Edit mutationMode={"pessimistic"}>
-    <SimpleForm>
-      <LocationForm />
-    </SimpleForm>
-  </Edit>
+  <EditWrapper>
+    <LocationForm />
+  </EditWrapper>
 );
 export default LocationEdit;

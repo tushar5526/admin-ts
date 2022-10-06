@@ -8,6 +8,7 @@ import {
   NumberInput,
   ReferenceInput,
 } from "react-admin";
+import EditWrapper from "../../components/styleWrappers/EditWrapper";
 
 const StudentForm = () => {
   const record = useRecordContext();
@@ -17,7 +18,7 @@ const StudentForm = () => {
     <>
       <span>Student Details</span>
 
-      <TextInput source="id" />
+      <TextInput source="id" disabled />
       <TextInput source="name" />
       <ReferenceInput source="school_id" reference="school">
         <TextInput label={"SCHOOL"} source="name" />
@@ -37,15 +38,8 @@ const StudentForm = () => {
   );
 };
 const StudentEdit = () => (
-  <Edit>
-    <SimpleForm
-    //   onSubmit={(values) => {
-    //     // We will get Form Values on submission
-    //     console.log(values);
-    //   }}
-    >
-      <StudentForm />
-    </SimpleForm>
-  </Edit>
+  <EditWrapper>
+    <StudentForm />
+  </EditWrapper>
 );
 export default StudentEdit;

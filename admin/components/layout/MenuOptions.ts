@@ -7,6 +7,7 @@ import gradeAssessment from "../../resources/gradeAssessment";
 import assessment from "../../resources/assessment";
 import mapping from "../../resources/school-mapping";
 import SchoolIcon from "@mui/icons-material/School";
+import teacher from "../../resources/teacher";
 
 const MenuOptions: any[] = [
   {
@@ -14,6 +15,12 @@ const MenuOptions: any[] = [
     icon: SchoolIcon,
     resource: "student",
     props: student,
+    permissions: ["Admin"],
+  },
+  {
+    name: "Teacher",
+    resource: "teacher",
+    props: teacher,
     permissions: ["Admin"],
   },
   {

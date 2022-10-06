@@ -3,7 +3,6 @@ import {
   TextField,
   FunctionField,
   TextInput,
-  EditButton,
   ShowButton,
   SearchInput,
   Filter,
@@ -78,6 +77,7 @@ const getCorrespondingTeacherCluster = (record: any) => {
 };
 const UserList = () => {
   const CustomerFilter = [
+    // eslint-disable-next-line react/jsx-key
     <SearchInput
       placeholder="Username"
       source="username"

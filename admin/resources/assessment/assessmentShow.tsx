@@ -18,7 +18,7 @@ import { useState } from "react";
 const AssessmentList = () => {
   return (
     <ShowWrapper
-      astShow={{
+      show={{
         val: "",
       }}
       simpleShowProp={{

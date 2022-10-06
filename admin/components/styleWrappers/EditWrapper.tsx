@@ -1,14 +1,13 @@
 import React from "react";
-import { EditButton, Edit, SimpleForm } from "react-admin";
+import { Edit, SimpleForm } from "react-admin";
 
 const EditWrapper = (props: any) => {
   return (
     <div>
-      <Edit className="show_wrapper" mutationMode={"pessimistic"}>
-        <div className="show_wrapper_layout">
+      <Edit className="edit_wrapper" mutationMode={"pessimistic"}>
+        <div className="edit_wrapper_layout">
           <SimpleForm>
             {props.children}
-            <EditButton className="edit_button" />
           </SimpleForm>
         </div>
       </Edit>

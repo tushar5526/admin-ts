@@ -7,10 +7,10 @@ import {
   Show,
   FunctionField,
 } from "react-admin";
-import DownLabledInput from "../../components/utilities/DownLabledInput/DownLabledInput";
-import ShowWrapper from "../../StyleWrappers/ShowWrapper/ShowWrapper";
+import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
+import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
 import { useRecordContext } from "react-admin";
-import InputFlexWrapper from "../../StyleWrappers/InputFlexWrapper/InputFlexWrapper";
+import InputFlexWrapper from "../../components/styleWrappers/InputFlexWrapper";
 
 const StudentShow = () => {
   const record = useRecordContext();

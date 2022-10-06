@@ -9,6 +9,7 @@ import {
 } from "react-admin";
 import { useLogin } from "../hooks";
 import { getClusters } from "../designation";
+import { designationLevels } from "../esamwaad/designation";
 import {
   getAllDistricts,
   getBlocks,
@@ -21,6 +22,7 @@ import { client } from "../../../api-clients/users-client";
 const UserCreate = (props: any) => {
   const { user: _loggedInUser } = useLogin();
   const [userCreated, setUserCreated] = useState(false);
+  const [scope, setScope] = useState("No");
   const [state, setState] = useState({
     userName: "",
     fullName: "",
@@ -109,12 +111,22 @@ const UserCreate = (props: any) => {
         />
         <SelectInput
           value={state.designation}
-          onChange={(e) => setState({ ...state, designation: e.target.value })}
+          onChange={(e) => {
+            const des = e.target.value;
+            setState({ ...state, designation: des });
+            const scopeData = designationLevels.filter((s) => {
+              if (s.designation == des) {
+                return s.scope;
+              }
+            });
+            setScope(scopeData[0].scope);
+          }}
           source="designation"
           label="Designation"
           choices={designationChoices}
         />
-        {getVisibility(state.designation, "District") && (
+
+        {scope === "District" || scope === "Block" || scope === "Cluster" ? (
           <SelectInput
             value={state.district}
             onChange={(e) => setState({ ...state, district: e.target.value })}
@@ -123,9 +135,9 @@ const UserCreate = (props: any) => {
             // @ts-ignore
             choices={districtChoices}
           />
-        )}
+        ) : null}
 
-        {getVisibility(state.designation, "Block") && state.district.length && (
+        {scope === "Block" || scope === "Cluster" ? (
           <SelectInput
             value={state.block}
             onChange={(e) => setState({ ...state, block: e.target.value })}
@@ -134,19 +146,17 @@ const UserCreate = (props: any) => {
             // @ts-ignore
             choices={blockChoices}
           />
-        )}
-        {getVisibility(state.designation, "Cluster") &&
-          state.district.length &&
-          state.block.length && (
-            <SelectInput
-              value={state.cluster}
-              onChange={(e) => setState({ ...state, cluster: e.target.value })}
-              source="cluster"
-              label="Cluster"
-              // @ts-ignore
-              choices={clusterChoices}
-            />
-          )}
+        ) : null}
+        {scope === "Cluster" ? (
+          <SelectInput
+            value={state.cluster}
+            onChange={(e) => setState({ ...state, cluster: e.target.value })}
+            source="cluster"
+            label="Cluster"
+            // @ts-ignore
+            choices={clusterChoices}
+          />
+        ) : null}
       </SimpleForm>
     </Create>
   );

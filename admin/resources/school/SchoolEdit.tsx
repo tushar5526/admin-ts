@@ -92,7 +92,7 @@ export const SchoolEdit = () => {
         </ReferenceInput> */}
         <NumberInput source="enroll_count" />
         <BooleanInput source="is_active" />
-        <TextInput type="number" source="latitude" />
+        <TextInput source="latitude" />
         <ReferenceInput source="location_id" reference="location">
           <TextInput source="districts" />
         </ReferenceInput>
