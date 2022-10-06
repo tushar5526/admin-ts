@@ -4,14 +4,10 @@ import {
   ReferenceInput,
   useDataProvider,
   SelectInput,
-  Edit,
-  SimpleForm,
 } from "react-admin";
 import EditWrapper from "../../components/styleWrappers/EditWrapper";
 
 const LocationForm = () => {
-  const record = useRecordContext();
-  const dataProvider = useDataProvider();
   return (
     <>
       <span>Location Details</span>

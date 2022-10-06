@@ -92,7 +92,6 @@ const GradeAssessmentList = () => {
   const schoolData = useMemo(() => {
     return _schoolData?.data;
   }, [_schoolData]);
-  // console.log(schoolData, "schoolData");
 
   const school = useMemo(() => {
     if (!selectUdise || !schoolData) {
@@ -110,7 +109,7 @@ const GradeAssessmentList = () => {
   }, [selectUdise, schoolData]);
   const Filters = [
     <TextInput label="ID" source="id" alwaysOn />,
-    <TextInput label="Grade Number" source="grade_number" key={"search"}/>
+    <TextInput label="Grade Number" source="grade_number" key={"search"} />,
   ];
   return (
     <ListDataGridWithPermissions

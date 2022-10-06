@@ -9,6 +9,9 @@ import {
   useGetOne,
 } from "react-admin";
 import { ListDataGridWithPermissions } from "../../../components/lists";
+import { useQuery } from "react-query";
+import { useDataProvider } from "react-admin";
+import { ChangePasswordButton } from "../ChangePasswordButton";
 const ApplicationId = "1ae074db-32f3-4714-a150-cc8a370eafd1";
 const DisplayRoles = (a: any) => {
   const registration = a.registrations?.find(
@@ -87,7 +90,7 @@ const UserList = () => {
       <FunctionField
         label="Role"
         render={(record: any) => {
-          return record.roles ? DisplayRoles(record) : null;
+          return DisplayRoles(record);
         }}
       />
       {/* <FunctionField

@@ -2,17 +2,15 @@ import * as React from "react";
 import { Admin, Resource, combineDataProviders } from "react-admin";
 import { useEffect, useState } from "react";
 import getDataProvider from "./customDataProviders";
-import student from "./resources/student";
-import location from "./resources/location";
-
 import jsonServerProvider from "ra-data-json-server";
-import school from "./resources/student";
 import authProvider from "./authProvider";
 import Login from "./Login/Login";
 import { EsamwaadUserDataProvider } from "./customDataProviders/userDataProviders";
 import { lightTheme } from "./components/layout/themes";
 import { Layout } from "./components/layout";
 import { MenuItemsWithPermissionResolver } from "./components/layout/MenuOptions";
+import * as MuiIcons from "@mui/icons-material"
+
 //
 const JSONDp = jsonServerProvider("https://jsonplaceholder.typicode.com");
 
@@ -45,9 +43,7 @@ const App = () => {
   };
   const JSONDataProvider = {
     ...JSONDp,
-    updateSamarthUser: (...r: any) => {
-      console.log(r);
-    },
+    updateSamarthUser: (...r: any) => {},
   };
   const prepareDataProviders = async () => {
     try {
@@ -77,9 +73,7 @@ const App = () => {
         }
       });
       setDataProvider(_dataProvider);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
   useEffect(() => {
     prepareDataProviders();
@@ -98,8 +92,17 @@ const App = () => {
     >
       {(permissions) =>
         MenuItemsWithPermissionResolver(permissions).map((option, index) => {
+       const IconComponent = () => {
+            const Icon = MuiIcons[option.icon];
+            return <Icon />
+          }
           return (
-            <Resource key={index} name={option.resource} {...option.props} />
+            <Resource
+              icon={IconComponent}
+              key={index}
+              name={option?.resource}
+              {...option?.props}
+            />
           );
         })
       }

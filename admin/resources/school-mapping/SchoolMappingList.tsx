@@ -34,7 +34,6 @@ const QuarterField = ({ label }: { label: string }) => {
         filter: { quarter_id: record.quarter },
       })
   );
-  console.log(data, "school mapping data");
   if (isLoading) {
     return <LinearProgress />;
   }
