@@ -5,6 +5,8 @@ import {
   Edit,
   SimpleForm,
   useDataProvider,
+  NumberInput,
+  BooleanInput,
 } from "react-admin";
 import { useLocation } from "react-router-dom";
 import { useMemo, useState } from "react";
@@ -85,46 +87,26 @@ export const SchoolEdit = () => {
   return (
     <Edit mutationMode={"pessimistic"}>
       <SimpleForm>
-        <ReferenceInput source="id" reference="location">
+        {/* <ReferenceInput source="id" reference="location">
           <SelectInput disabled optionText={"id"} />
+        </ReferenceInput> */}
+        <NumberInput source="enroll_count" />
+        <BooleanInput source="is_active" />
+        <TextInput type="number" source="latitude" />
+        <ReferenceInput source="location_id" reference="location">
+          <TextInput source="districts" />
         </ReferenceInput>
-        <ReferenceInput source="district" reference="location">
-          <SelectInput
-            label="District"
-            onChange={(e) => {
-              const nam: any = districtData?.filter((item) => {
-                return e.target.value === item.id;
-              });
-              setSelectedDistrict(nam[0].district);
-            }}
-            value={selectedDistrict}
-            source="district"
-            choices={districts}
-          />
+        <ReferenceInput source="location_id" reference="location">
+          <TextInput source="block" />
         </ReferenceInput>
-        <ReferenceInput source="block" reference="location">
-          <SelectInput
-            label="Block"
-            onChange={(e) => {
-              const nam: any = districtData?.filter((item) => {
-                return e.target.value === item.id;
-              });
-              setSelectedBlock(nam[0].block);
-            }}
-            value={selectedBlock}
-            source="block"
-            choices={blocks}
-          />
+        <ReferenceInput source="location_id" reference="location">
+          <TextInput source="cluster" />
         </ReferenceInput>
-        <ReferenceInput source="cluster" reference="location">
-          <SelectInput
-            label="Cluster"
-            onChange={(e) => setSelectedCluster(e.target.name)}
-            value={selectedCluster}
-            source="cluster"
-            choices={clusters}
-          />
-        </ReferenceInput>
+        <TextInput source="longitude" />
+        <TextInput source="name" />
+        <TextInput source="session" />
+        <TextInput source="type" />
+        <NumberInput source="udise" />
       </SimpleForm>
     </Edit>
   );

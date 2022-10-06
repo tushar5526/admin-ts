@@ -93,7 +93,11 @@ const UserList = () => {
           return record.roles ? DisplayRoles(record) : null;
         }}
       />
-      <FunctionField
+      <TextField source="district" label="District" />
+      <TextField source="block" label="District" />
+      <TextField source="cluster" label="District" />
+
+      {/* <FunctionField
         label="District"
         render={(record: any) => getCorrespondingTeacherDistrict(record)}
       />{" "}
@@ -104,7 +108,7 @@ const UserList = () => {
       <FunctionField
         label="Cluster"
         render={(record: any) => getCorrespondingTeacherCluster(record)}
-      />
+      /> */}
     </ListDataGridWithPermissions>
   );
 };
