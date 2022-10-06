@@ -2,6 +2,7 @@ import React from "react";
 import {
   BooleanInput,
   Create,
+  NumberField,
   NumberInput,
   ReferenceField,
   ReferenceInput,
@@ -16,7 +17,7 @@ const SchoolCreate = () => {
       <SimpleForm>
         <NumberInput source="enroll_count" />
         <BooleanInput source="is_active" />
-        <TextInput source="latitude" />
+        <NumberInput source="latitude" />
         <ReferenceInput source="location_id" reference="locations">
           <TextInput source="block" />
         </ReferenceInput>
@@ -26,7 +27,7 @@ const SchoolCreate = () => {
         <ReferenceInput source="location_id" reference="locations">
           <TextInput source="districts" />
         </ReferenceInput>
-        <TextInput source="longitude" />
+        <NumberField source="longitude" />
         <TextInput source="name" />
         <TextInput source="session" />
         <TextInput source="type" />

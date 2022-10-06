@@ -20,7 +20,6 @@ const DisplayRoles = (a: any) => {
   if (!registration) {
     return <span>-</span>;
   }
-  console.log(registration, "registation");
   const { roles } = registration;
   return roles.map((role: any, index: number) => {
     return (
@@ -80,15 +79,6 @@ const UserList = () => {
   const Filters = [
     <TextInput label="Username" source="username" alwaysOn key={"search"} />,
   ];
-  const dataProvider = useDataProvider();
-  const { data } = useQuery(["e_samwaad_user", "getList", {}], () =>
-    dataProvider.getList("e_samwaad_user", {
-      pagination: { perPage: 10000, page: 1 },
-      sort: { field: "id", order: "asc" },
-      filter: {},
-    })
-  );
-  console.log(data, "user");
   return (
     <ListDataGridWithPermissions
       listProps={{ filters: Filters }}

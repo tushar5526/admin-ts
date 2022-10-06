@@ -7,6 +7,7 @@ import gradeAssessment from "../../resources/gradeAssessment";
 import assessment from "../../resources/assessment";
 import mapping from "../../resources/school-mapping";
 import SchoolIcon from "@mui/icons-material/School";
+import teacher from "../../resources/teacher";
 
 const MenuOptions: any[] = [
   {

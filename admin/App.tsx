@@ -43,9 +43,7 @@ const App = () => {
   };
   const JSONDataProvider = {
     ...JSONDp,
-    updateSamarthUser: (...r: any) => {
-      console.log(r);
-    },
+    updateSamarthUser: (...r: any) => {},
   };
   const prepareDataProviders = async () => {
     try {
@@ -75,9 +73,7 @@ const App = () => {
         }
       });
       setDataProvider(_dataProvider);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
   useEffect(() => {
     prepareDataProviders();
