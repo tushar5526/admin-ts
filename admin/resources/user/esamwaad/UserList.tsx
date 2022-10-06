@@ -3,7 +3,6 @@ import {
   TextField,
   FunctionField,
   TextInput,
-  EditButton,
   ShowButton,
   SearchInput,
   Filter,

@@ -6,9 +6,9 @@ import {
   SimpleShowLayout,
   TextField,
 } from "react-admin";
-import InputFlexWrapper from "../../StyleWrappers/InputFlexWrapper/InputFlexWrapper";
-import ShowWrapper from "../../StyleWrappers/ShowWrapper/ShowWrapper";
-import DownLabledInput from "../../components/utilities/DownLabledInput/DownLabledInput";
+import InputFlexWrapper from "../../components/styleWrappers/InputFlexWrapper";
+import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
+import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
 
 const SchoolShow = () => {
   return (

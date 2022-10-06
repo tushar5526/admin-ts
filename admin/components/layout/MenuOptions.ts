@@ -17,6 +17,12 @@ const MenuOptions: any[] = [
     permissions: ["Admin"],
   },
   {
+    name: "Teacher",
+    resource: "teacher",
+    props: teacher,
+    permissions: ["Admin"],
+  },
+  {
     name: "E Samwaad Users",
     resource: "e_samwaad_user",
     props: Esamwaad,

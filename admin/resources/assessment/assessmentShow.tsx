@@ -4,17 +4,16 @@ import {
   DateField,
   BooleanField,
   NumberField,
-  EditButton,
   Show,
   SimpleShowLayout,
   FunctionField,
 } from "react-admin";
 import { ListDataGridWithPermissions } from "../../components/lists";
-import InputFlexWrapper from "../../StyleWrappers/InputFlexWrapper/InputFlexWrapper";
-import ShowWrapper from "../../StyleWrappers/ShowWrapper/ShowWrapper";
-import DownLabledInput from "../../components/utilities/DownLabledInput/DownLabledInput";
+import InputFlexWrapper from "../../components/styleWrappers/InputFlexWrapper";
+import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
+import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
 
-const AssessmentList = () => {
+const AssessmentShow = () => {
   return (
     <ShowWrapper>
       <FunctionField
@@ -52,4 +51,4 @@ const AssessmentList = () => {
     </ShowWrapper>
   );
 };
-export default AssessmentList;
+export default AssessmentShow;

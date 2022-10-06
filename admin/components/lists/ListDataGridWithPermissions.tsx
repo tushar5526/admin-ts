@@ -1,12 +1,12 @@
 import {
   Datagrid,
-  EditButton,
   List,
   ShowButton,
   useResourceContext,
 } from "react-admin";
 import { usePermissions } from "ra-core";
 import { ItemWithPermissionResolver } from "../layout/MenuOptions";
+import EditButtonWrapper from "../styleWrappers/EditButtonWrapper";
 
 const ListDataGridWithPermissions = ({
   children,
@@ -37,7 +37,7 @@ const ListDataGridWithPermissions = ({
       <Datagrid
         bulkActionButtons={withDelete} {...(_dataGridProps || {})}>
         {children}
-        {ResourceWithPermission?.resourcePermissions?.canEdit && <EditButton />}
+        {ResourceWithPermission?.resourcePermissions?.canEdit && <EditButtonWrapper />}
       </Datagrid>
     </List>
   );

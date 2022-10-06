@@ -1,28 +1,49 @@
 import {
   TextInput,
   NumberInput,
+  DateInput,
   BooleanInput,
   Edit,
   SimpleForm,
+  ReferenceField,
 } from "react-admin";
-import { ListDataGridWithPermissions } from "../../components/lists";
+import EditWrapper from "../../components/styleWrappers/EditWrapper";
 
 const AssessmentEdit = () => {
   return (
-    <Edit mutationMode={"pessimistic"}>
-      <SimpleForm>
-        <TextInput source="id" />
-        <TextInput source="type" />
-        {/* <DateField source="start"/>
-            <DateField source="end"/> */}
-        <NumberInput source="overall_pass_percentage" />
-        <NumberInput source="overall_total_marks" />
-        {/* <TextField source="deadline_id"label="Deadline ID"/> */}
-        <TextInput source="submission_type" />
-        <TextInput label="Evaluation Params" source="evaluation_params" />
-        <BooleanInput label="Is Enabled" source="is_enabled" />
-      </SimpleForm>
-    </Edit>
+    <EditWrapper>
+      <TextInput source="id" disabled/>
+      <TextInput source="type" />
+      <ReferenceField
+        source="deadline_id"
+        reference="deadline"
+        label="District"
+      >
+        <TextInput label={"District"} source="district" />
+      </ReferenceField>
+      <ReferenceField source="deadline_id" reference="deadline" label="Date">
+        <DateInput label={"Date"} source="date" />
+      </ReferenceField>
+      <ReferenceField
+        source="submission_type_v2_id"
+        reference="submission_type"
+        label="Aggregation"
+      >
+        <TextInput source="aggregation" />
+      </ReferenceField>
+      <ReferenceField
+        source="submission_type_v2_id"
+        reference="submission_type"
+        label="Category"
+      >
+        <TextInput source="category" />
+      </ReferenceField>
+      <TextInput
+        label="Evaluation Params"
+        source="evaluation_params"
+      />
+      <BooleanInput label="Is Enabled" source="is_enabled" />
+      </EditWrapper>
   );
 };
 export default AssessmentEdit;
