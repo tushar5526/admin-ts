@@ -8,9 +8,37 @@ import {
   useResourceContext,
   Button,
   TextField,
+  FunctionField,
 } from "react-admin";
 import { useMutation, useQuery } from "react-query";
 import EditWrapper from "../../components/styleWrappers/EditWrapper";
+import { ChangePasswordTeacher } from "./ChangePasswordTeacher";
+const ApplicationId = "1ae074db-32f3-4714-a150-cc8a370eafd1";
+
+const displayRoles = (a: any) => {
+  const registration = a.registrations?.find(
+    (r: any) => r.applicationId === ApplicationId
+  );
+  if (!registration) {
+    return <span>-</span>;
+  }
+  const { roles } = registration;
+  return roles.map((role: any, index: number) => {
+    return (
+      <span
+        style={{
+          border: "1px solid rgba(224, 224, 224, 1)",
+          padding: "5px",
+          marginRight: "5px",
+          marginBottom: "5px",
+        }}
+        key={index}
+      >
+        {role}
+      </span>
+    );
+  });
+};
 const ChangePasswordButton = ({ record }: any) => {
   const dataProvider = useDataProvider();
   const notify = useNotify();
@@ -92,6 +120,21 @@ const TeacherEdit = ({ record }: any) => {
       <TextInput label="Mode of employment" source="employment" />
       <TextInput label="Designation" source="designation" />
       <SelectInput label="Account Status" source="account_status" choices={statusChoices}/>
+      <FunctionField
+        label="Role"
+        render={(record: any) => {
+          return (
+            <>
+              {displayRoles(record)}
+              <br />
+              <br />
+              <ChangePasswordButton record={record} />
+              <br />
+              <br />
+            </>
+          );
+        }}
+      />
     </EditWrapper>
   );
 };
