@@ -18,6 +18,7 @@ import { Button, MenuItem, Select, Typography } from "@mui/material";
 import { useMutation, useQuery } from "react-query";
 import { useController } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { ChangePasswordButton } from "../ChangePasswordButton";
 
 const ApplicationId = "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da";
 
@@ -45,46 +46,7 @@ export const DisplayRoles = (a: any) => {
     );
   });
 };
-export const ChangePasswordButton = ({ record }: any) => {
-  const dataProvider = useDataProvider();
-  const notify = useNotify();
-  const resource = useResourceContext();
-  console.log(
-    {
-      loginId: record.record?.username,
-      password: resource === "e_samwaad_user" ? "himachal12345" : "1234abcd",
-    },
-    "record"
-  );
-  const { mutate, isLoading } = useMutation(
-    ["changePassword", record.id],
 
-    () =>
-      dataProvider.changePassword(resource, {
-        loginId: record.record.username,
-        password: resource === "e_samwaad_user" ? "himachal12345" : "1234abcd",
-      }),
-
-    {
-      onSuccess: (data: any) => {
-        notify(data?.data, { type: "success" });
-      },
-      onError: (error: any) => {
-        notify(error.toString(), { type: "error" });
-      },
-    }
-  );
-  return (
-    <Button
-      variant={"contained"}
-      sx={{ marginTop: "10px" }}
-      onClick={() => mutate()}
-      disabled={isLoading}
-    >
-      Change Password
-    </Button>
-  );
-};
 export const SchoolUDISEInput = () => {
   const record = useRecordContext();
   const [value, setValue] = useState(record?.data?.udise);
@@ -130,7 +92,7 @@ const SchoolModeUserForm = ({ record }: any) => {
         <FunctionField
           label="Role"
           render={(record: any) => {
-            return record.roles ? DisplayRoles(record) : null;
+            return DisplayRoles(record);
           }}
         />
       </Labeled>

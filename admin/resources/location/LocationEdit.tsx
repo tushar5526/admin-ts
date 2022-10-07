@@ -5,8 +5,6 @@ import {
   ReferenceInput,
   useDataProvider,
   SelectInput,
-  Edit,
-  SimpleForm,
 } from "react-admin";
 import EditWrapper from "../../components/styleWrappers/EditWrapper";
 import { useLocation } from "react-router-dom";
@@ -14,6 +12,7 @@ import { useQuery } from "react-query";
 import * as _ from "lodash";
 
 const LocationForm = () => {
+
   const record = useRecordContext();
   const location = useLocation();
   const params: any = new Proxy(new URLSearchParams(location.search), {
@@ -88,6 +87,7 @@ const LocationForm = () => {
       };
     });
   }, [selectedBlock, districtData]);
+
 
   return (
     <>

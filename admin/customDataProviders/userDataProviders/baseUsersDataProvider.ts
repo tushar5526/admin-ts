@@ -90,9 +90,7 @@ const dataProvider = {
           data: response?.data?.result,
         };
       }
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
     throw new Error("Unable to update");
   },
 };

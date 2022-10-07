@@ -32,7 +32,7 @@ const UserCreate = (props: any) => {
     district: "",
     block: "",
     cluster: "",
-    roles: [],
+    roles: ["school"],
     password: "1234abcd",
   });
   // to be called when submitted
@@ -64,6 +64,8 @@ const UserCreate = (props: any) => {
       },
     };
     const res = client.post(endPoint, body);
+    console.log(res, "response of user creation");
+
     res.then((data) => {
       if (data?.data?.responseCode === "OK") {
         setUserCreated(true);
@@ -146,6 +148,7 @@ const UserCreate = (props: any) => {
             // @ts-ignore
             choices={blockChoices}
           />
+
         ) : null}
         {scope === "Cluster" ? (
           <SelectInput
@@ -157,6 +160,7 @@ const UserCreate = (props: any) => {
             choices={clusterChoices}
           />
         ) : null}
+
       </SimpleForm>
     </Create>
   );

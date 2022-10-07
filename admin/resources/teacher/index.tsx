@@ -3,6 +3,7 @@ import TeacherEdit from "./teacherEdit";
 import TeacherList from "./teacherList";
 import TeacherShow from "./teacherShow";
 
+
 export default {
   list: TeacherList,
   edit: TeacherEdit,

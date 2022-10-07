@@ -2,16 +2,12 @@ import {
   NumberField,
   TextField,
   FunctionField,
-  TextInput,
-  ShowButton,
   SearchInput,
-  Filter,
   useGetOne,
   LinearProgress,
-  Loading,
+  ReferenceField,
 } from "react-admin";
 import { ListDataGridWithPermissions } from "../../../components/lists";
-import { useRecordContext, useListContext } from "react-admin";
 
 const ApplicationId = "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da";
 const DisplayRoles = (a: any) => {
@@ -38,42 +34,53 @@ const DisplayRoles = (a: any) => {
     );
   });
 };
-const getLocationDataByRecord = (id: any) => {
+const getTeacherDataByRecord = (id: any) => {
   const TEACHER = "teacher";
   //@ts-ignore
-  const { data: teacher } = useGetOne("teacher", { user_id: id });
-  const { data: school } = useGetOne("school", {
-    //@ts-ignore
-    school_id: teacher?.school_id,
-  });
-  const { data: location } = useGetOne("location", {
-    //@ts-ignore
-    id: school?.location_id,
-  });
-  return location;
+  const { data: teacher } = useGetOne(TEACHER, { user_id: id });
+
+  return teacher;
 };
 const getCorrespondingTeacherDistrict = (record: any) => {
-  const location = getLocationDataByRecord(record?.id);
+  const teacher = getTeacherDataByRecord(record?.id);
+  console.log(teacher, "teacher");
 
-  if (!location) return <LinearProgress />;
+  if (!teacher) return <LinearProgress />;
 
-  return <TextField label="District" source="district" record={location} />;
+  return (
+    <ReferenceField source="school_id" reference="school" record={teacher}>
+      <ReferenceField source="location_id" reference="location">
+        <TextField source="district" />
+      </ReferenceField>
+    </ReferenceField>
+  );
 };
 
 const getCorrespondingTeacherBlock = (record: any) => {
-  const location = getLocationDataByRecord(record?.id);
+  const teacher = getTeacherDataByRecord(record?.id);
 
-  if (!location) return <LinearProgress />;
+  if (!teacher) return <LinearProgress />;
 
-  return <TextField label="Block" source="block" record={location} />;
+  return (
+    <ReferenceField source="school_id" reference="school" record={teacher}>
+      <ReferenceField source="location_id" reference="location">
+        <TextField source="block" />
+      </ReferenceField>
+    </ReferenceField>
+  );
 };
 
 const getCorrespondingTeacherCluster = (record: any) => {
-  const location = getLocationDataByRecord(record?.id);
+  const teacher = getTeacherDataByRecord(record?.id);
 
-  if (!location) return <LinearProgress />;
-
-  return <TextField label="Cluster" source="cluster" record={location} />;
+  if (!teacher) return <LinearProgress />;
+  return (
+    <ReferenceField source="school_id" reference="school" record={teacher}>
+      <ReferenceField source="location_id" reference="location">
+        <TextField source="cluster" />
+      </ReferenceField>
+    </ReferenceField>
+  );
 };
 const UserList = () => {
   const CustomerFilter = [
@@ -101,7 +108,7 @@ const UserList = () => {
       <FunctionField
         label="Role"
         render={(record: any) => {
-          return record.roles ? DisplayRoles(record) : null;
+          return DisplayRoles(record);
         }}
       />
       <FunctionField
