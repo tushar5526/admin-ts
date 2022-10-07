@@ -92,13 +92,14 @@ const App = () => {
     >
       {(permissions) =>
         MenuItemsWithPermissionResolver(permissions).map((option, index) => {
-       const IconComponent = () => {
-            const Icon = MuiIcons[option.icon];
-            return <Icon />
-          }
+          // Need to fix type errors with Icon.
+          // const IconComponent = () => {
+          //   const Icon = null;
+          //   return <Icon />
+          // }
           return (
             <Resource
-              icon={IconComponent}
+              // icon={IconComponent}
               key={index}
               name={option?.resource}
               {...option?.props}
