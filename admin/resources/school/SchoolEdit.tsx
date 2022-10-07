@@ -19,11 +19,16 @@ export const SchoolEdit = () => {
     get: (searchParams, prop) => searchParams.get(prop as string),
   });
 
-  // const initialFilters = params.filter ? JSON.parse(params.filter) : null;
-  const [selectedDistrict, setSelectedDistrict] = useState("");
-  const [selectedBlock, setSelectedBlock] = useState("");
-  const [selectedCluster, setSelectedCluster] = useState("");
-
+  const initialFilters = params.filter ? JSON.parse(params.filter) : null;
+  const [selectedDistrict, setSelectedDistrict] = useState(
+    initialFilters?.district || ""
+  );
+  const [selectedBlock, setSelectedBlock] = useState(
+    initialFilters?.block || ""
+  );
+  const [selectedCluster, setSelectedCluster] = useState(
+    initialFilters?.cluster || ""
+  );
   const dataProvider = useDataProvider();
   const {
     data: _districtData,
@@ -47,7 +52,7 @@ export const SchoolEdit = () => {
     }
     return _.uniqBy(districtData, "district").map((a) => {
       return {
-        id: a.id,
+        id: a.district,
         name: a.district,
       };
     });
@@ -63,7 +68,7 @@ export const SchoolEdit = () => {
       "block"
     ).map((a) => {
       return {
-        id: a.id,
+        id: a.block,
         name: a.block,
       };
     });
@@ -78,7 +83,7 @@ export const SchoolEdit = () => {
       "cluster"
     ).map((a) => {
       return {
-        id: a.id,
+        id: a.cluster,
         name: a.cluster,
       };
     });
@@ -94,13 +99,39 @@ export const SchoolEdit = () => {
         <BooleanInput source="is_active" />
         <TextInput source="latitude" />
         <ReferenceInput source="location_id" reference="location">
-          <TextInput source="districts" />
+          <SelectInput
+            label="District"
+            key={"district"}
+            onChange={(e: any) => {
+              setSelectedDistrict(e.target.value);
+              setSelectedBlock(null);
+              setSelectedCluster(null);
+            }}
+            value={selectedDistrict}
+            source="district"
+            choices={districts}
+          />
         </ReferenceInput>
         <ReferenceInput source="location_id" reference="location">
-          <TextInput source="block" />
+          <SelectInput
+            label="Block"
+            onChange={(e) => {
+              setSelectedBlock(e.target.value);
+              setSelectedCluster(null);
+            }}
+            value={selectedBlock}
+            source="block"
+            choices={blocks}
+          />
         </ReferenceInput>
         <ReferenceInput source="location_id" reference="location">
-          <TextInput source="cluster" />
+          <SelectInput
+            label="Cluster"
+            onChange={(e) => setSelectedCluster(e.target.value)}
+            value={selectedCluster}
+            source="cluster"
+            choices={clusters}
+          />
         </ReferenceInput>
         <TextInput source="longitude" />
         <TextInput source="name" />

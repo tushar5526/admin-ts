@@ -12,7 +12,6 @@ import { useQuery } from "react-query";
 import * as _ from "lodash";
 
 const LocationForm = () => {
-
   const record = useRecordContext();
   const location = useLocation();
   const params: any = new Proxy(new URLSearchParams(location.search), {
@@ -87,7 +86,6 @@ const LocationForm = () => {
       };
     });
   }, [selectedBlock, districtData]);
-
 
   return (
     <>
