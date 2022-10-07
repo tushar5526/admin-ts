@@ -148,7 +148,6 @@ const UserCreate = (props: any) => {
             // @ts-ignore
             choices={blockChoices}
           />
-
         ) : null}
         {scope === "Cluster" ? (
           <SelectInput
@@ -160,7 +159,6 @@ const UserCreate = (props: any) => {
             choices={clusterChoices}
           />
         ) : null}
-
       </SimpleForm>
     </Create>
   );
