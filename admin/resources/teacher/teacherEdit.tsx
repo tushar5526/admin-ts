@@ -7,6 +7,7 @@ import {
   useNotify,
   useResourceContext,
   Button,
+  TextField,
 } from "react-admin";
 import { useMutation, useQuery } from "react-query";
 import EditWrapper from "../../components/styleWrappers/EditWrapper";
@@ -81,8 +82,7 @@ const TeacherEdit = ({ record }: any) => {
   ];
   return (
     <EditWrapper>
-      <TextInput source="id" disabled />
-      <TextInput source="user_id" />
+      <TextInput disabled source="id" />
       <ReferenceField label="SCHOOL" source="school_id" reference="school">
         <TextInput source="name" />
       </ReferenceField>
@@ -91,13 +91,7 @@ const TeacherEdit = ({ record }: any) => {
       </ReferenceField>
       <TextInput label="Mode of employment" source="employment" />
       <TextInput label="Designation" source="designation" />
-      <SelectInput
-        label="Account Status"
-        source="account_status"
-        choices={statusChoices}
-        emptyText="NULL"
-      />
-      <ChangePasswordButton record={record} />
+      <SelectInput label="Account Status" source="account_status" choices={statusChoices}/>
     </EditWrapper>
   );
 };
