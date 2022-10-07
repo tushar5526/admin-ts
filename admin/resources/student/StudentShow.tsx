@@ -16,7 +16,14 @@ const StudentShow = () => {
   const record = useRecordContext();
 
   return (
-    <ShowWrapper>
+    <ShowWrapper
+      show={{
+        val: "",
+      }}
+      simpleShowProp={{
+        val: "",
+      }}
+    >
       <FunctionField
         render={(record: any) => {
           return (

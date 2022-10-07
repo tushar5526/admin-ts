@@ -4,6 +4,7 @@ import {
   DateField,
   BooleanField,
   NumberField,
+  EditButton,
   Show,
   SimpleShowLayout,
   FunctionField,
@@ -12,10 +13,18 @@ import { ListDataGridWithPermissions } from "../../components/lists";
 import InputFlexWrapper from "../../components/styleWrappers/InputFlexWrapper";
 import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
 import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
+import { useState } from "react";
 
-const AssessmentShow = () => {
+const AssessmentList = () => {
   return (
-    <ShowWrapper>
+    <ShowWrapper
+      show={{
+        val: "",
+      }}
+      simpleShowProp={{
+        val: "",
+      }}
+    >
       <FunctionField
         render={(record: any) => {
           return (
@@ -51,4 +60,4 @@ const AssessmentShow = () => {
     </ShowWrapper>
   );
 };
-export default AssessmentShow;
+export default AssessmentList;

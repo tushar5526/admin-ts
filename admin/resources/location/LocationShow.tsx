@@ -6,7 +6,14 @@ import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
 
 const LocationShow = () => {
   return (
-    <ShowWrapper>
+    <ShowWrapper
+      show={{
+        val: "",
+      }}
+      simpleShowProp={{
+        val: "",
+      }}
+    >
       <FunctionField
         render={(record: any) => {
           return (

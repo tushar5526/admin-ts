@@ -7,7 +7,15 @@ import {
   TextInput,
   LinearProgress,
   useGetOne,
+  useDataProvider,
+  useRecordContext,
+  SelectInput,
 } from "react-admin";
+
+import { useQuery } from "react-query";
+import { useLocation } from "react-router-dom";
+import { useMemo, useState } from "react";
+import * as _ from "lodash";
 import { ListDataGridWithPermissions } from "../../../components/lists";
 import { useQuery } from "react-query";
 import { useDataProvider } from "react-admin";
@@ -76,8 +84,114 @@ const getCorrespondingTeacherCluster = (record: any) => {
   return <TextField label="Cluster" source="cluster" record={location} />;
 };
 const UserList = () => {
+  const dataProvider = useDataProvider();
+  const {
+    data: _districtData,
+    isLoading,
+    error,
+  } = useQuery(["location", "getList", {}], () =>
+    dataProvider.getList("location", {
+      pagination: { perPage: 10000, page: 1 },
+      sort: { field: "id", order: "asc" },
+      filter: {},
+    })
+  );
+
+  const location = useLocation();
+  const params: any = new Proxy(new URLSearchParams(location.search), {
+    get: (searchParams, prop) => searchParams.get(prop as string),
+  });
+  const initialFilters = params.filter ? JSON.parse(params.filter) : null;
+  const [selectedDistrict, setSelectedDistrict] = useState(
+    initialFilters?.district || ""
+  );
+  const [selectedBlock, setSelectedBlock] = useState(
+    initialFilters?.block || ""
+  );
+  const [selectedCluster, setSelectedCluster] = useState(
+    initialFilters?.cluster || ""
+  );
+
+  const districtData = useMemo(() => {
+    return _districtData?.data;
+  }, [_districtData]);
+
+  const districts = useMemo(() => {
+    if (!districtData) {
+      return [];
+    }
+    return _.uniqBy(districtData, "district").map((a) => {
+      return {
+        id: a.district,
+        name: a.district,
+      };
+    });
+  }, [districtData]);
+
+  const blocks = useMemo(() => {
+    if (!selectedDistrict || !districtData) {
+      return [];
+    }
+    return _.uniqBy(
+      districtData.filter((d) => d.district === selectedDistrict),
+      "block"
+    ).map((a) => {
+      return {
+        id: a.block,
+        name: a.block,
+      };
+    });
+  }, [selectedDistrict, districtData]);
+  console.log(blocks, "block");
+
+  const clusters = useMemo(() => {
+    if (!selectedBlock || !districtData) {
+      return [];
+    }
+    return _.uniqBy(
+      districtData.filter((d) => d.block === selectedBlock),
+      "cluster"
+    ).map((a) => {
+      return {
+        id: a.cluster,
+        name: a.cluster,
+      };
+    });
+  }, [selectedBlock, districtData]);
+
   const Filters = [
     <TextInput label="Username" source="username" alwaysOn key={"search"} />,
+    <SelectInput
+      label="District"
+      key={"district"}
+      onChange={(e: any) => {
+        setSelectedDistrict(e.target.value);
+        setSelectedBlock(null);
+        setSelectedCluster(null);
+      }}
+      value={selectedDistrict}
+      source="data.roleData.district"
+      choices={districts}
+    />,
+    <SelectInput
+      label="Block"
+      onChange={(e) => {
+        setSelectedBlock(e.target.value);
+        setSelectedCluster(null);
+      }}
+      key="block"
+      value={selectedBlock}
+      source="block"
+      choices={blocks}
+    />,
+    <SelectInput
+      label="Cluster"
+      onChange={(e) => setSelectedCluster(e.target.value)}
+      value={selectedCluster}
+      source="cluster"
+      choices={clusters}
+      key="cluster"
+    />,
   ];
   return (
     <ListDataGridWithPermissions
@@ -93,6 +207,10 @@ const UserList = () => {
           return DisplayRoles(record);
         }}
       />
+      <TextField source="data.roleData.district" label="District" />
+      <TextField source="data.roleData.block" label="Block" />
+      <TextField source="data.roleData.cluster" label="Cluster" />
+
       {/* <FunctionField
         label="District"
         render={(record: any) => getCorrespondingTeacherDistrict(record)}

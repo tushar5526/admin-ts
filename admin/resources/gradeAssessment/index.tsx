@@ -7,7 +7,6 @@ import GradeAssessmentShow from "./GradeAssessmentShow";
 export default {
   list: GradeAssessmentList,
   edit: GradeAssessmentEdit,
-  icon: SchoolIcon,
   show: GradeAssessmentShow,
   permissions: {
     canEdit: ["Admin"],

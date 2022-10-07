@@ -2,13 +2,16 @@ import React from "react";
 import { Show, SimpleShowLayout } from "react-admin";
 import { useState } from "react";
 
-const ShowWrapper = ({ children }: any) => {
+const ShowWrapper = ({ children, show, simpleShowProp }: any) => {
   const [active, setActive] = useState(1);
+
   return (
     <div className="show_wapper">
-      <Show>
-        <div className="show_wrapper_layout">
-          <SimpleShowLayout>{children}</SimpleShowLayout>
+      <Show {...(show || {})}>
+        <div className="show_wapper_layout">
+          <SimpleShowLayout {...(simpleShowProp || {})}>
+            {children}
+          </SimpleShowLayout>
         </div>
         <div className="cta_buttons">
           <button

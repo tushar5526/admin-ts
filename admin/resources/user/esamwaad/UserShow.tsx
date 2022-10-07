@@ -42,11 +42,14 @@ const UserShow = () => {
   const getLocationDataByRecord = (id: any) => {
     const TEACHER = "teacher";
     //@ts-ignore
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { data: teacher } = useGetOne("teacher", { user_id: id });
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { data: school } = useGetOne("school", {
       //@ts-ignore
       school_id: teacher?.school_id,
     });
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { data: location } = useGetOne("location", {
       //@ts-ignore
       id: school?.location_id,
@@ -72,7 +75,14 @@ const UserShow = () => {
   };
 
   return (
-    <ShowWrapper>
+    <ShowWrapper
+      show={{
+        val: "",
+      }}
+      simpleShowProp={{
+        val: "",
+      }}
+    >
       <FunctionField
         render={(record: any) => {
           const block = getCorrespondingTeacherBlock(record);

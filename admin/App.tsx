@@ -9,7 +9,9 @@ import { EsamwaadUserDataProvider } from "./customDataProviders/userDataProvider
 import { lightTheme } from "./components/layout/themes";
 import { Layout } from "./components/layout";
 import { MenuItemsWithPermissionResolver } from "./components/layout/MenuOptions";
+
 import * as MuiIcons from "@mui/icons-material"
+
 
 //
 const JSONDp = jsonServerProvider("https://jsonplaceholder.typicode.com");
@@ -99,7 +101,11 @@ const App = () => {
           // }
           return (
             <Resource
-              // icon={IconComponent}
+
+
+              icon={IconComponent}
+
+
               key={index}
               name={option?.resource}
               {...option?.props}

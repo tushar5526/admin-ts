@@ -21,7 +21,7 @@ const SchoolCreate = () => {
         <ReferenceInput source="location_id" reference="locations">
           <TextInput source="block" />
         </ReferenceInput>
-        <ReferenceInput source="location_id" reference="locations">
+        <ReferenceInput source="location_id" reference="location">
           <TextInput source="cluster" />
         </ReferenceInput>
         <ReferenceInput source="location_id" reference="locations">

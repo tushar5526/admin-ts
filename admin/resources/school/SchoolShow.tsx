@@ -12,7 +12,14 @@ import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
 
 const SchoolShow = () => {
   return (
-    <ShowWrapper>
+    <ShowWrapper
+      show={{
+        val: "",
+      }}
+      simpleShowProp={{
+        val: "",
+      }}
+    >
       <FunctionField
         render={(record: any) => {
           return (
