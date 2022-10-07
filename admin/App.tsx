@@ -101,11 +101,6 @@ const App = () => {
           // }
           return (
             <Resource
-
-
-              icon={IconComponent}
-
-
               key={index}
               name={option?.resource}
               {...option?.props}
