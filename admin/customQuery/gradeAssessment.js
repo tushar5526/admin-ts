@@ -7,6 +7,8 @@ export const EXTENDED_GRADE_ASSESSMENT_RECORD = gql`
       type
     }
     school {
+        name
+        udise
         location {
           block
           cluster

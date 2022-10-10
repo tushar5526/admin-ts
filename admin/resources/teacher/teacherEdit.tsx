@@ -111,30 +111,11 @@ const TeacherEdit = ({ record }: any) => {
   return (
     <EditWrapper>
       <TextInput disabled source="id" />
-      <ReferenceField label="SCHOOL" source="school_id" reference="school">
-        <TextInput source="name" />
-      </ReferenceField>
-      <ReferenceField label="UDISE" source="school_id" reference="school">
-        <TextInput source="udise" />
-      </ReferenceField>
+      <TextInput source="school.name" label="School"/>
+      <TextInput source="school.udise" label="UDISE"/>
       <TextInput label="Mode of employment" source="employment" />
       <TextInput label="Designation" source="designation" />
       <SelectInput label="Account Status" source="account_status" choices={statusChoices}/>
-      <FunctionField
-        label="Role"
-        render={(record: any) => {
-          return (
-            <>
-              {displayRoles(record)}
-              <br />
-              <br />
-              <ChangePasswordButton record={record} />
-              <br />
-              <br />
-            </>
-          );
-        }}
-      />
     </EditWrapper>
   );
 };

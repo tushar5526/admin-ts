@@ -95,10 +95,14 @@ export const SchoolEdit = () => {
         {/* <ReferenceInput source="id" reference="location">
           <SelectInput disabled optionText={"id"} />
         </ReferenceInput> */}
+                <TextInput source="name" />
+        <TextInput source="session" />
+        <TextInput source="type" />
+        <NumberInput source="udise" />
         <NumberInput source="enroll_count" />
         <BooleanInput source="is_active" />
         <TextInput source="latitude" />
-        <ReferenceInput source="location_id" reference="location">
+        <TextInput source="longitude" />
           <SelectInput
             label="District"
             key={"district"}
@@ -108,11 +112,9 @@ export const SchoolEdit = () => {
               setSelectedCluster(null);
             }}
             value={selectedDistrict}
-            source="district"
+            source="location.district"
             choices={districts}
           />
-        </ReferenceInput>
-        <ReferenceInput source="location_id" reference="location">
           <SelectInput
             label="Block"
             onChange={(e) => {
@@ -120,24 +122,16 @@ export const SchoolEdit = () => {
               setSelectedCluster(null);
             }}
             value={selectedBlock}
-            source="block"
+            source="location.block"
             choices={blocks}
           />
-        </ReferenceInput>
-        <ReferenceInput source="location_id" reference="location">
           <SelectInput
             label="Cluster"
             onChange={(e) => setSelectedCluster(e.target.value)}
             value={selectedCluster}
-            source="cluster"
+            source="location.cluster"
             choices={clusters}
           />
-        </ReferenceInput>
-        <TextInput source="longitude" />
-        <TextInput source="name" />
-        <TextInput source="session" />
-        <TextInput source="type" />
-        <NumberInput source="udise" />
       </SimpleForm>
     </Edit>
   );

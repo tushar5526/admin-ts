@@ -254,12 +254,8 @@ const StudentList = () => {
       <Datagrid rowClick="show" bulkActionButtons={false}>
         <TextField source="id" />
         <TextField source="name" />
-        <ReferenceField label="SCHOOL" source="school_id" reference="school">
-          <TextField source="name" />
-        </ReferenceField>
-        <ReferenceField label="UDISE" source="school_id" reference="school">
-          <TextField source="udise" />
-        </ReferenceField>
+        <TextField source="school.name" label="School" />
+        <TextField source="school.udise" label="UDISE" />
         <TextField source="father_name" />
         <TextField source="mother_name" />
         <TextField source="gender" />

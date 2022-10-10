@@ -123,20 +123,10 @@ const GradeAssessmentList = () => {
       <TextField source="section" />
       <TextField source="school_id" />
       <TextField source="assessment.type" label="Assessment Type"/>
-      <ReferenceField label="Udise" source="school_id" reference="school">
-        <TextField source="udise" />
-      </ReferenceField>
+      <TextField source="school.udise" />
       <TextField source="school.location.district" label="District"/>
-      <ReferenceField label="Block" source="school_id" reference="school">
-        <ReferenceField source="location_id" reference="location">
-          <TextField source="block" />
-        </ReferenceField>
-      </ReferenceField>
-      <ReferenceField label="Cluster" source="school_id" reference="school">
-        <ReferenceField source="location_id" reference="location">
-          <TextField source="cluster" />
-        </ReferenceField>
-      </ReferenceField>
+      <TextField source="school.location.block" />
+      <TextField source="school.location.cluster" />
       <TextField source="streams_id" />
       <DateField source="created" />
       <DateField source="updated" />

@@ -2,6 +2,7 @@ import {
   TextInput,
   ReferenceField,
   DateInput,
+  SelectInput,
 } from "react-admin";
 import EditWrapper from "../../components/styleWrappers/EditWrapper";
 
@@ -13,24 +14,10 @@ const GradeAssessmentEdit = () => {
       <TextInput source="grade_number" />
       <TextInput source="section" />
       <TextInput source="school_id" />
-      <ReferenceField label="Udise" source="school_id" reference="school"> 
-        <TextInput source="udise" />
-      </ReferenceField>
-      <ReferenceField label="District" source="school_id" reference="school">
-        <ReferenceField source="location_id" reference="location">
-          <TextInput source="district" />
-        </ReferenceField>
-      </ReferenceField>
-      <ReferenceField label="Block" source="school_id" reference="school">
-        <ReferenceField source="location_id" reference="location">
-          <TextInput source="block" />
-        </ReferenceField>
-      </ReferenceField>
-      <ReferenceField label="Cluster" source="school_id" reference="school">
-        <ReferenceField source="location_id" reference="location">
-          <TextInput source="cluster" />
-        </ReferenceField>
-      </ReferenceField>
+      <TextInput source="school.udise" />
+      <SelectInput source="school.location.district" label="District" choices={[]} />
+      <SelectInput source="school.location.block" label="Block" choices={[]} />
+      <SelectInput source="school.location.cluster" label="Cluster" choices={[]} />
       <TextInput source="streams_id" />
       <DateInput source="created" />
       <DateInput source="updated" />
