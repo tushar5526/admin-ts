@@ -2,6 +2,7 @@
   --gray-primary: #d9d9d9;
   --green-primary: #5a968b;
 }
+
 body {
   margin: 0px 0;
 }
@@ -117,4 +118,41 @@ body {
 
 .active_chip {
   background: var(--gray-primary) !important;
+}
+
+.custom_text_field {
+  background: var(--gray-primary) !important;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  padding: 0rem 0.8rem;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.2) !important;
+  min-width: 15rem;
+  position: relative;
+  margin-bottom: -4rem;
+  height: 3.5rem;
+}
+
+.custom_text_field p:nth-child(1) {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 0rem;
+  margin-top: 1rem;
+  position: absolute;
+}
+
+.custom_text_field p:nth-child(2) {
+  font-size: 1.2rem;
+  line-height: 0.5rem;
+  position: absolute;
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 1rem;
+  top: 30%
+}
+
+.flex_show_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rem;
+  margin: 4rem 0rem 7rem 0rem;
+  justify-content: center;
 }
