@@ -82,6 +82,7 @@ const getCorrespondingTeacherCluster = (record: any) => {
 
   return <TextField label="Cluster" source="cluster" record={location} />;
 };
+
 const UserList = () => {
   const dataProvider = useDataProvider();
   const {
@@ -161,6 +162,12 @@ const UserList = () => {
   const Filters = [
     <TextInput label="Username" source="username" alwaysOn key={"search"} />,
     <SelectInput
+      label="Role"
+      source="data.roleData.role"
+      choices={districts}
+      key={"role"}
+    />,
+    <SelectInput
       label="District"
       key={"district"}
       onChange={(e: any) => {
@@ -192,6 +199,7 @@ const UserList = () => {
       key="cluster"
     />,
   ];
+
   return (
     <ListDataGridWithPermissions
       listProps={{ filters: Filters }}
