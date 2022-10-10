@@ -110,6 +110,7 @@ const GradeAssessmentList = () => {
   const Filters = [
     <TextInput label="ID" source="id" alwaysOn />,
     <TextInput label="Grade Number" source="grade_number" key={"search"} />,
+    <TextInput source="assessment#type" label="Assessment Type"/>
   ];
   return (
     <ListDataGridWithPermissions
@@ -121,14 +122,11 @@ const GradeAssessmentList = () => {
       <TextField source="grade_number" />
       <TextField source="section" />
       <TextField source="school_id" />
+      <TextField source="assessment.type" label="Assessment Type"/>
       <ReferenceField label="Udise" source="school_id" reference="school">
         <TextField source="udise" />
       </ReferenceField>
-      <ReferenceField label="District" source="school_id" reference="school">
-        <ReferenceField source="location_id" reference="location">
-          <TextField source="district" />
-        </ReferenceField>
-      </ReferenceField>
+      <TextField source="school.location.district" label="District"/>
       <ReferenceField label="Block" source="school_id" reference="school">
         <ReferenceField source="location_id" reference="location">
           <TextField source="block" />

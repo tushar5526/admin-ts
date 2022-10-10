@@ -9,7 +9,7 @@ import {
   buildMetaArgs,
   BuildMetaArgs,
 } from "../buildGqlQuery/buildArgs";
-import { buildFields, BuildFields } from "../buildGqlQuery/buildFields";
+import { customBuildFields, BuildFields } from "../buildGqlQuery/buildFields";
 import { buildQueryFactory } from "../buildQuery";
 import {
   BuildVariables,
@@ -49,7 +49,7 @@ const defaultOptions: Partial<Options> = {
 };
 
 const buildGqlQueryDefaults = {
-  buildFields,
+  customBuildFields,
   buildMetaArgs,
   buildArgs,
   buildApolloArgs,
@@ -83,7 +83,7 @@ export const buildCustomDataProvider: BuildCustomDataProvider = (
   const customBuildGqlQuery = (introspectionResults: IntrospectionResult) =>
     buildGqlQuery(
       introspectionResults,
-      buildGqlQueryOptions.buildFields,
+      buildGqlQueryOptions.customBuildFields,
       buildGqlQueryOptions.buildMetaArgs,
       buildGqlQueryOptions.buildArgs,
       buildGqlQueryOptions.buildApolloArgs,
