@@ -29,7 +29,7 @@ const AssessmentEdit = () => {
         label="Category"
       >
         <TextInput source="category" />
-      </ReferenceField> Don't Know where they come from */}
+      </ReferenceField>*/}
       <TextInput label="Evaluation Params" source="evaluation_params" />
       <BooleanInput label="Is Enabled" source="is_enabled" />
     </EditWrapper>

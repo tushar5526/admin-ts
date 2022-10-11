@@ -17,7 +17,7 @@ const AssessmentList = () => {
       <TextField label={"District"} source="deadline.district" />
       <DateField label={"Date"} source="deadline.date" />
       {/* <TextField source="submission_type.aggregation" />
-      <TextField source="submission_type.category" /> Don't know where they are*/}
+      <TextField source="submission_type.category" />*/}
       <TextField
         label="Evaluation Params"
         source="evaluation_params"
