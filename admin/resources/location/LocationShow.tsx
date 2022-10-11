@@ -1,34 +1,28 @@
 import React from "react";
-import { FunctionField, Show, SimpleShowLayout, TextField } from "react-admin";
+import { FunctionField, Show } from "react-admin";
 import InputFlexWrapper from "../../components/styleWrappers/InputFlexWrapper";
-import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
-import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
+// import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
+// import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
+import CustomTextField from "../../components/styleWrappers/CustomTextField";
 
 const LocationShow = () => {
   return (
-    <ShowWrapper
-      show={{
-        val: "",
-      }}
-      simpleShowProp={{
-        val: "",
-      }}
-    >
+    <Show>
       <FunctionField
         render={(record: any) => {
           return (
             <>
-              <InputFlexWrapper>
-                <DownLabledInput i={record.id} label="Id" />
-                <DownLabledInput i={record.district} label="District" />
-                <DownLabledInput i={record.block} label="Block" />
-                <DownLabledInput i={record.cluster} label="Cluster" />
+              <InputFlexWrapper flex>
+                <CustomTextField i={record.id} label="Id" />
+                <CustomTextField i={record.district} label="District" />
+                <CustomTextField i={record.block} label="Block" />
+                <CustomTextField i={record.cluster} label="Cluster" />
               </InputFlexWrapper>
             </>
           );
         }}
       />
-    </ShowWrapper>
+    </Show>
   );
 };
 

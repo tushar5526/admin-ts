@@ -1,61 +1,52 @@
 import React from "react";
 import {
-  DateField,
   FunctionField,
   ReferenceField,
-  Show,
-  SimpleShowLayout,
-  TextField,
+  Show
 } from "react-admin";
 import InputFlexWrapper from "../../components/styleWrappers/InputFlexWrapper";
-import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
-import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
+// import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
+// import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
+import CustomTextField from "../../components/styleWrappers/CustomTextField";
 
 const GradeAssessmentShow = () => {
   return (
-    <ShowWrapper
-      show={{
-        val: "",
-      }}
-      simpleShowProp={{
-        val: "",
-      }}
-    >
+    <Show >
       <FunctionField
         render={(record: any) => {
           return (
             <>
-              <InputFlexWrapper>
-                <DownLabledInput i={record.id} label="id" />
+              <InputFlexWrapper flex>
+                <CustomTextField i={record.id} label="id" />
                 <ReferenceField source="assessment_id" reference="assessment">
                   <FunctionField
                     render={(record: any) => (
-                      <DownLabledInput i={record.type} label="Type" />
+                      <CustomTextField i={record.type} label="Type" />
                     )}
                   />
                 </ReferenceField>
                 <ReferenceField source="school_id" reference="school">
                   <FunctionField
                     render={(record: any) => (
-                      <DownLabledInput i={record.name} label="School Name" />
+                      <CustomTextField i={record.name} label="School Name" />
                     )}
                   />
                 </ReferenceField>
 
-                <DownLabledInput i={record.section} label="Section" />
-                <DownLabledInput i={record.grade_number} label="Grade Number" />
+                <CustomTextField i={record.section} label="Section" />
+                <CustomTextField i={record.grade_number} label="Grade Number" />
                 <ReferenceField source="streams_id" reference="stream">
                   <FunctionField
                     render={(record: any) => (
-                      <DownLabledInput i={record.tag} label="Tag" />
+                      <CustomTextField i={record.tag} label="Tag" />
                     )}
                   />
                 </ReferenceField>
-                <DownLabledInput
+                <CustomTextField
                   i={record.created.split("T")[0]}
                   label="Created"
                 />
-                <DownLabledInput
+                <CustomTextField
                   i={record.updated.split("T")[0]}
                   label="Updated"
                 />
@@ -64,7 +55,7 @@ const GradeAssessmentShow = () => {
           );
         }}
       />
-    </ShowWrapper>
+    </Show>
   );
 };
 

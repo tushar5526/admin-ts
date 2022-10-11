@@ -1,37 +1,34 @@
 import {
-  TextField,
-  BooleanField,
-  NumberField,
   ReferenceField,
-  SimpleShowLayout,
-  Show,
   FunctionField,
+  Show,
+  TextInput
 } from "react-admin";
-import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
 import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
-import { useRecordContext } from "react-admin";
 import InputFlexWrapper from "../../components/styleWrappers/InputFlexWrapper";
+import CustomTextField from "../../components/styleWrappers/CustomTextField";
 
 const StudentShow = () => {
-  const record = useRecordContext();
-
   return (
-    <ShowWrapper
+    <Show      
+    >
+    {/* <ShowWrapper
       show={{
         val: "",
       }}
       simpleShowProp={{
         val: "",
       }}
-    >
+    > */}
       <FunctionField
         render={(record: any) => {
+          
           return (
             <>
-              <InputFlexWrapper>
+              <InputFlexWrapper flex >
                 {" "}
-                <DownLabledInput i={record?.id} label={"ID"} />
-                <DownLabledInput i={record?.name} label={"Name"} />
+                <CustomTextField i={record?.id} label={"ID"} />
+                <CustomTextField i={record?.name} label={"Name"} />
                 <ReferenceField
                   label={"Udise"}
                   source="school_id"
@@ -40,7 +37,7 @@ const StudentShow = () => {
                   <FunctionField
                     render={(record: any) => {
                       return (
-                        <DownLabledInput i={record?.name} label={"School"} />
+                        <CustomTextField i={record?.name} label={"School"} />
                       );
                     }}
                   />
@@ -53,29 +50,32 @@ const StudentShow = () => {
                   <FunctionField
                     render={(record: any) => {
                       return (
-                        <DownLabledInput i={record?.udise} label={"Udise"} />
+                        <CustomTextField i={record?.udise} label={"Udise"} />
                       );
                     }}
                   />
                 </ReferenceField>
-                <DownLabledInput i={record?.father_name} label={"Father"} />
-                <DownLabledInput i={record?.mother_name} label={"Mother"} />
-                <DownLabledInput i={record?.gender} label={"Gender"} />
-                <DownLabledInput
+                <CustomTextField i={record?.father_name} label={"Father"} />
+                <CustomTextField i={record?.mother_name} label={"Mother"} />
+                <CustomTextField i={record?.gender} label={"Gender"} />
+                <CustomTextField
                   i={record?.grade_number}
                   label={"Grade number"}
                 />
-                <DownLabledInput i={record?.stream_tag} label={"Stream tag"} />{" "}
-                <DownLabledInput i={record?.category} label={"Category"} />
-                <BooleanField source="is_cwsn" />
-                <BooleanField source="is_enabled" />
+                <CustomTextField i={record?.stream_tag} label={"Stream tag"} />{" "}
+                <CustomTextField i={record?.category} label={"Category"} />
+                <CustomTextField i={record.is_cwsn ? "True" : "False"} label={"CWSN"} />{" "}
+                <CustomTextField i={record.is_enabled ? "True" : "False"} label={"ENABLED"} />
               </InputFlexWrapper>
             </>
           );
         }}
       />
-    </ShowWrapper>
+    {/* </ShowWrapper> */}
+    </Show>
   );
+
+  
 };
 
 export default StudentShow;

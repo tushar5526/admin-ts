@@ -1,63 +1,46 @@
 import {
-  TextField,
-  ReferenceField,
-  DateField,
-  BooleanField,
-  NumberField,
-  EditButton,
   Show,
-  SimpleShowLayout,
   FunctionField,
 } from "react-admin";
-import { ListDataGridWithPermissions } from "../../components/lists";
 import InputFlexWrapper from "../../components/styleWrappers/InputFlexWrapper";
-import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
-import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
-import { useState } from "react";
+import CustomTextField from "../../components/styleWrappers/CustomTextField";
 
 const AssessmentList = () => {
   return (
-    <ShowWrapper
-      show={{
-        val: "",
-      }}
-      simpleShowProp={{
-        val: "",
-      }}
-    >
+    <Show>
       <FunctionField
         render={(record: any) => {
           return (
             <>
-              <InputFlexWrapper>
-                <DownLabledInput i={record.id} label="Id" />
-                <DownLabledInput label="Type" i={record.type} />
+              <InputFlexWrapper flex>
+                <CustomTextField i={record.id} label="Id" />
+                <CustomTextField label="Type" i={record.type} />
                 {/* <DateField source="start"/>
             <DateField source="end"/> */}
-                <DownLabledInput
+                <CustomTextField
                   i={record.overall_pass_percentage}
                   label="Overall Pass Percentage"
                 />{" "}
-                <DownLabledInput
+                <CustomTextField
                   i={record.overall_total_marks}
                   label="Overall Total Marks"
                 />
                 {/* <TextField source="deadline_id"label="Deadline ID"/> */}
-                <DownLabledInput
+                <CustomTextField
                   label="Submission Type"
                   i={record.submission_type}
                 />
-                <DownLabledInput
+                <CustomTextField
                   label="Evaluation Params"
                   i={record.evaluation_params}
                 />
-                <DownLabledInput label="Is Enabled" i={record.is_enabled} />
+                <CustomTextField label="Is Enabled" i={record.is_enabled ? "True" : "False"} />
               </InputFlexWrapper>
             </>
           );
         }}
       />
-    </ShowWrapper>
+    </Show>
   );
 };
 export default AssessmentList;

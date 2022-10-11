@@ -1,8 +1,9 @@
-import { TextField, ReferenceField, DateField, BooleanField, useRecordContext, FunctionField } from "react-admin";
-import { ListDataGridWithPermissions } from "../../components/lists";
-import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
+import { ReferenceField, FunctionField, Show } from "react-admin";
+// import { ListDataGridWithPermissions } from "../../components/lists";
+import CustomTextField from "../../components/styleWrappers/CustomTextField";
+// import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
 import InputFlexWrapper from "../../components/styleWrappers/InputFlexWrapper";
-import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
+// import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
 
 const statusChoices = [
     {
@@ -40,19 +41,19 @@ const statusChoices = [
 
 const TeacherList = () => {
     return (
-        <ShowWrapper>
+        <Show>
             <FunctionField
                 render={(record: any) => {
                     return (
                         <>
-                            <InputFlexWrapper>
+                            <InputFlexWrapper flex>
                                 {" "}
-                                <DownLabledInput i={record?.id} label={"ID"} />
+                                <CustomTextField i={record?.id} label={"ID"} />
                                 <ReferenceField label="SCHOOL" source="school_id" reference="school">
                                     <FunctionField
                                         render={(record: any) => {
                                             return (
-                                                <DownLabledInput i={record?.name} label={"School"} />
+                                                <CustomTextField i={record?.name} label={"School"} />
                                             );
                                         }}
                                     />
@@ -65,20 +66,20 @@ const TeacherList = () => {
                                     <FunctionField
                                         render={(record: any) => {
                                             return (
-                                                <DownLabledInput i={record?.udise} label={"Udise"} />
+                                                <CustomTextField i={record?.udise} label={"Udise"} />
                                             );
                                         }}
                                     />
                                 </ReferenceField>
-                                <DownLabledInput i={record?.employment} label={"Employment"} />
-                                <DownLabledInput i={record?.designation} label={"Designation"} />
-                                <DownLabledInput i={record?.account_status} label={"Account Status"} />
+                                <CustomTextField i={record?.employment} label={"Employment"} />
+                                <CustomTextField i={record?.designation} label={"Designation"} />
+                                <CustomTextField i={record?.account_status} label={"Account Status"} />
                             </InputFlexWrapper>
                         </>
                     );
                 }}
             />
-        </ShowWrapper >
+        </Show>
     );
 };
 export default TeacherList;
