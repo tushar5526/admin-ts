@@ -153,6 +153,6 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 8rem;
-  margin: 4rem 0rem 7rem 0rem;
+  margin: 2rem 0rem 7rem 0rem;
   justify-content: center;
 }

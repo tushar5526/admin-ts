@@ -1,7 +1,8 @@
 import {
   ReferenceField,
   FunctionField,
-  Show
+  Show,
+  TextInput
 } from "react-admin";
 import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
 import InputFlexWrapper from "../../components/styleWrappers/InputFlexWrapper";

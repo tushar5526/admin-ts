@@ -1,15 +1,13 @@
 import React from "react";
-import { LinearProgress, useGetOne, useRecordContext } from "react-admin";
+import { useGetOne } from "react-admin";
 import {
   FunctionField,
-  NumberField,
   Show,
-  SimpleShowLayout,
-  TextField,
 } from "react-admin";
 import InputFlexWrapper from "../../../components/styleWrappers/InputFlexWrapper";
-import ShowWrapper from "../../../components/styleWrappers/ShowWrapper";
-import DownLabledInput from "../../../components/styleWrappers/DownLabledInput";
+// import ShowWrapper from "../../../components/styleWrappers/ShowWrapper";
+// import DownLabledInput from "../../../components/styleWrappers/DownLabledInput";
+import CustomTextField from "../../../components/styleWrappers/CustomTextField";
 
 const ApplicationId = "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da";
 const UserShow = () => {
@@ -75,14 +73,7 @@ const UserShow = () => {
   };
 
   return (
-    <ShowWrapper
-      show={{
-        val: "",
-      }}
-      simpleShowProp={{
-        val: "",
-      }}
-    >
+    <Show>
       <FunctionField
         render={(record: any) => {
           const block = getCorrespondingTeacherBlock(record);
@@ -90,17 +81,17 @@ const UserShow = () => {
           const cluster = getCorrespondingTeacherCluster(record);
           return (
             <>
-              <InputFlexWrapper>
-                <DownLabledInput i={record?.username} />
+              <InputFlexWrapper flex>
+                <CustomTextField i={record?.username} />
 
-                <DownLabledInput
+                <CustomTextField
                   label="Full Name"
                   i={`${record?.firstName} ${record?.lastName}`}
                 />
-                <DownLabledInput i={record?.mobilePhone} label="Mobile Phone" />
-                <DownLabledInput i={district} label="District" />
-                <DownLabledInput i={block} label="Block" />
-                <DownLabledInput i={cluster} label="Cluster" />
+                <CustomTextField i={record?.mobilePhone} label="Mobile Phone" />
+                <CustomTextField i={district} label="District" />
+                <CustomTextField i={block} label="Block" />
+                <CustomTextField i={cluster} label="Cluster" />
               </InputFlexWrapper>
             </>
           );
@@ -112,7 +103,7 @@ const UserShow = () => {
           return DisplayRoles(record);
         }}
       />
-    </ShowWrapper>
+    </Show>
   );
 };
 

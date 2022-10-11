@@ -2,30 +2,22 @@ import React from "react";
 import {
   FunctionField,
   ReferenceField,
-  Show,
-  SimpleShowLayout,
-  TextField,
+  Show
 } from "react-admin";
 import InputFlexWrapper from "../../components/styleWrappers/InputFlexWrapper";
-import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
-import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
+// import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
+// import DownLabledInput from "../../components/styleWrappers/DownLabledInput";
+import CustomTextField from "../../components/styleWrappers/CustomTextField";
 
 const SchoolShow = () => {
   return (
-    <ShowWrapper
-      show={{
-        val: "",
-      }}
-      simpleShowProp={{
-        val: "",
-      }}
-    >
+    <Show>
       <FunctionField
         render={(record: any) => {
           return (
             <>
-              <InputFlexWrapper>
-                <DownLabledInput label="UDISE" i={record?.udise} />
+              <InputFlexWrapper flex>
+                <CustomTextField label="UDISE" i={record?.udise} />
                 <ReferenceField
                   source="location_id"
                   label="District"
@@ -34,7 +26,7 @@ const SchoolShow = () => {
                   <FunctionField
                     render={(record: any) => {
                       return (
-                        <DownLabledInput
+                        <CustomTextField
                           label="District"
                           i={record?.district}
                         />
@@ -50,7 +42,7 @@ const SchoolShow = () => {
                   <FunctionField
                     render={(record: any) => {
                       return (
-                        <DownLabledInput label="Block" i={record?.block} />
+                        <CustomTextField label="Block" i={record?.block} />
                       );
                     }}
                   />
@@ -64,7 +56,7 @@ const SchoolShow = () => {
                   <FunctionField
                     render={(record: any) => {
                       return (
-                        <DownLabledInput label="Cluster" i={record?.cluster} />
+                        <CustomTextField label="Cluster" i={record?.cluster} />
                       );
                     }}
                   />
@@ -74,7 +66,7 @@ const SchoolShow = () => {
           );
         }}
       />
-    </ShowWrapper>
+    </Show>
   );
 };
 
