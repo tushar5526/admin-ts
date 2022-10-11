@@ -109,7 +109,7 @@ const LocationCreate = () => {
             const nam: any = districtData?.filter((item) => {
               return e.target.value === item.id;
             });
-            setSelectedBlock(nam[0].block);
+            setSelectedBlock(nam[0]?.block);
           }}
           value={selectedBlock}
           source="block"
