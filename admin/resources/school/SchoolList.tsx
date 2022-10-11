@@ -53,27 +53,9 @@ const SchoolList = () => {
             <TextField label="Name" source="name" />
             <TextField label="Type" source="type" />
             <TextField label="Session" source="session" />
-            <ReferenceField
-              source="location_id"
-              label="District"
-              reference="location"
-            >
-              <TextField label="District" source="district" />
-            </ReferenceField>
-            <ReferenceField
-              source="location_id"
-              label="Block"
-              reference="location"
-            >
-              <TextField label="Block" source="block" />
-            </ReferenceField>{" "}
-            <ReferenceField
-              source="location_id"
-              label="Cluster"
-              reference="location"
-            >
-              <TextField label="Cluster" source="cluster" />
-            </ReferenceField>
+            <TextField label="District" source="location.district" />
+            <TextField label="Block" source="location.block" />
+            <TextField label="Cluster" source="location.cluster" />
             {/* <FunctionField
               label="Session"
               render={(record: any) => {

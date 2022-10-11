@@ -5,7 +5,9 @@ import { FetchType } from "../types";
 
 // Extending the nested query
 import { EXTENDED_GRADE_ASSESSMENT_RECORD } from "../../customQuery/gradeAssessment";
-
+import { EXTENDED_STUDENT_RECORD } from "../../customQuery/student" 
+import { EXTENDED_SCHOOL_RECORD } from "../../customQuery/school";
+import { EXTENDED_ASSESSMENT_RECORD} from "../../customQuery/assessment";
 import { buildFields } from "ra-data-hasura";
 
 export type BuildFields = (
@@ -30,6 +32,37 @@ export const customBuildFields: BuildFields = (type, fetchType: any) => {
     }
     return defaultFields;
   }
+
+  if (resourceName === "student" || resourceName === "teacher") {
+    if (["GET_LIST", "GET_ONE", "DELETE", "DELETE_MANY"].includes(fetchType)) {
+      const relatedEntities = extractFieldsFromQuery(
+        EXTENDED_STUDENT_RECORD
+      );
+      defaultFields.push(...relatedEntities);
+    }
+    return defaultFields;
+  }
+
+  if (resourceName === "school") {
+    if (["GET_LIST", "GET_ONE", "DELETE", "DELETE_MANY"].includes(fetchType)) {
+      const relatedEntities = extractFieldsFromQuery(
+        EXTENDED_SCHOOL_RECORD
+      );
+      defaultFields.push(...relatedEntities);
+    }
+    return defaultFields;
+  }
+
+  if (resourceName === "assessment") {
+    if (["GET_LIST", "GET_ONE", "DELETE", "DELETE_MANY"].includes(fetchType)) {
+      const relatedEntities = extractFieldsFromQuery(
+        EXTENDED_ASSESSMENT_RECORD
+      );
+      defaultFields.push(...relatedEntities);
+    }
+    return defaultFields;
+  }
+
   return type.fields.reduce((acc, field) => {
     const type = getFinalType(field.type);
     if (type.kind !== TypeKind.OBJECT && type.kind !== TypeKind.INTERFACE) {
