@@ -4,7 +4,7 @@ on:
   #   types: [published]
   push:
     branches:
-    - release/dev
+    - master
 jobs:
   deploy-to-production:
     environment: release-dev
