@@ -51,12 +51,8 @@ const TeacherList = () => {
   return (
     <ListDataGridWithPermissions dataGridProps={{ rowClick: "show" }}>
       <TextField source="id" />
-      <ReferenceField label="SCHOOL" source="school_id" reference="school">
-        <TextField source="name" />
-      </ReferenceField>
-      <ReferenceField label="UDISE" source="school_id" reference="school">
-        <TextField source="udise" />
-      </ReferenceField>
+      <TextField source="school.name" />
+      <TextField source="school.udise" />
       <TextField label="Mode of employment" source="employment" />
       <TextField label="Designation" source="designation" />
       <ColoredChipField label="Account Status" source="account_status" />

@@ -1,5 +1,5 @@
-import * as gqlTypes from 'graphql-ast-types-browser';
-import { IntrospectionField } from 'graphql';
+import * as gqlTypes from "graphql-ast-types-browser";
+import { IntrospectionField } from "graphql";
 import {
   GET_LIST,
   GET_MANY,
@@ -9,8 +9,8 @@ import {
   UPDATE,
   UPDATE_MANY,
   DELETE_MANY,
-} from '../helpers/fetchActions';
-import { buildFields, BuildFields } from './buildFields';
+} from "../helpers/fetchActions";
+import { customBuildFields, BuildFields } from "./buildFields";
 import {
   buildArgs,
   buildApolloArgs,
@@ -18,8 +18,8 @@ import {
   BuildArgs,
   BuildMetaArgs,
   BuildApolloArgs,
-} from './buildArgs';
-import { FetchType, IntrospectionResult } from '../types';
+} from "./buildArgs";
+import { FetchType, IntrospectionResult } from "../types";
 
 export type BuildGqlQuery = (
   introspectionResults: IntrospectionResult,
@@ -61,28 +61,28 @@ export const buildGqlQuery: BuildGqlQuery =
     ) {
       return gqlTypes.document([
         gqlTypes.operationDefinition(
-          'query',
+          "query",
           gqlTypes.selectionSet([
             gqlTypes.field(
               gqlTypes.name(queryType.name),
-              gqlTypes.name('items'),
+              gqlTypes.name("items"),
               args,
               null,
               gqlTypes.selectionSet(fields)
             ),
             gqlTypes.field(
               gqlTypes.name(aggregateFieldName(queryType.name)),
-              gqlTypes.name('total'),
+              gqlTypes.name("total"),
               metaArgs,
               null,
               gqlTypes.selectionSet([
                 gqlTypes.field(
-                  gqlTypes.name('aggregate'),
+                  gqlTypes.name("aggregate"),
                   null,
                   null,
                   null,
                   gqlTypes.selectionSet([
-                    gqlTypes.field(gqlTypes.name('count')),
+                    gqlTypes.field(gqlTypes.name("count")),
                   ])
                 ),
               ])
@@ -103,16 +103,16 @@ export const buildGqlQuery: BuildGqlQuery =
     ) {
       return gqlTypes.document([
         gqlTypes.operationDefinition(
-          'mutation',
+          "mutation",
           gqlTypes.selectionSet([
             gqlTypes.field(
               gqlTypes.name(queryType.name),
-              gqlTypes.name('data'),
+              gqlTypes.name("data"),
               args,
               null,
               gqlTypes.selectionSet([
                 gqlTypes.field(
-                  gqlTypes.name('returning'),
+                  gqlTypes.name("returning"),
                   null,
                   null,
                   null,
@@ -129,11 +129,11 @@ export const buildGqlQuery: BuildGqlQuery =
 
     return gqlTypes.document([
       gqlTypes.operationDefinition(
-        'query',
+        "query",
         gqlTypes.selectionSet([
           gqlTypes.field(
             gqlTypes.name(queryType.name),
-            gqlTypes.name('returning'),
+            gqlTypes.name("returning"),
             args,
             null,
             gqlTypes.selectionSet(fields)
@@ -148,7 +148,7 @@ export const buildGqlQuery: BuildGqlQuery =
 const buildGqlQueryFactory: BuildGqlQueryFactory = (introspectionResults) =>
   buildGqlQuery(
     introspectionResults,
-    buildFields,
+    customBuildFields,
     buildMetaArgs,
     buildArgs,
     buildApolloArgs,

@@ -20,12 +20,8 @@ const StudentForm = () => {
 
       <TextInput source="id" disabled />
       <TextInput source="name" />
-      <ReferenceInput source="school_id" reference="school">
-        <TextInput label={"SCHOOL"} source="name" />
-      </ReferenceInput>
-      <ReferenceInput source="school_id" reference="school">
-        <TextInput label={"UDISE"} source="udise" />
-      </ReferenceInput>
+      <TextInput source="school.name" />
+      <TextInput source="school.udise" />
       <TextInput source="father_name" />
       <TextInput source="mother_name" />
       <TextInput source="gender" />

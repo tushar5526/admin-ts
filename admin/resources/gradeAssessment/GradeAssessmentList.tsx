@@ -110,6 +110,7 @@ const GradeAssessmentList = () => {
   const Filters = [
     <TextInput label="ID" source="id" alwaysOn />,
     <TextInput label="Grade Number" source="grade_number" key={"search"} />,
+    <TextInput source="assessment#type" label="Assessment Type"/>
   ];
   return (
     <ListDataGridWithPermissions
@@ -121,24 +122,11 @@ const GradeAssessmentList = () => {
       <TextField source="grade_number" />
       <TextField source="section" />
       <TextField source="school_id" />
-      <ReferenceField label="Udise" source="school_id" reference="school">
-        <TextField source="udise" />
-      </ReferenceField>
-      <ReferenceField label="District" source="school_id" reference="school">
-        <ReferenceField source="location_id" reference="location">
-          <TextField source="district" />
-        </ReferenceField>
-      </ReferenceField>
-      <ReferenceField label="Block" source="school_id" reference="school">
-        <ReferenceField source="location_id" reference="location">
-          <TextField source="block" />
-        </ReferenceField>
-      </ReferenceField>
-      <ReferenceField label="Cluster" source="school_id" reference="school">
-        <ReferenceField source="location_id" reference="location">
-          <TextField source="cluster" />
-        </ReferenceField>
-      </ReferenceField>
+      <TextField source="assessment.type" label="Assessment Type"/>
+      <TextField source="school.udise" />
+      <TextField source="school.location.district" label="District"/>
+      <TextField source="school.location.block" />
+      <TextField source="school.location.cluster" />
       <TextField source="streams_id" />
       <DateField source="created" />
       <DateField source="updated" />
