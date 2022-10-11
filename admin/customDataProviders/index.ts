@@ -36,6 +36,6 @@ const getDataProvider = async (session: any = {}) => {
     cache: new InMemoryCache(),
     headers: hasuraHeaders,
   });
-  return buildHasuraProvider({ client: apolloClient });
+  return buildHasuraProvider({ client: apolloClient as any});
 };
 export default getDataProvider;
