@@ -85,50 +85,49 @@ const LocationList = () => {
     });
   }, [selectedBlock, districtData]);
 
-  const Filters = [
-    <TextInput label="ID" source="id" alwaysOn key={"search"} />,
-    <SelectInput
-      label="District"
-      key={"district"}
-      onChange={(e: any) => {
-        setSelectedDistrict(e.target.value);
-        setSelectedBlock(null);
-        setSelectedCluster(null);
-      }}
-      value={selectedDistrict}
-      source="district"
-      choices={districts}
-    />,
-    selectedDistrict ? (
-      <SelectInput
-        label="Block"
-        onChange={(e) => {
-          setSelectedBlock(e.target.value);
-          setSelectedCluster(null);
-        }}
-        value={selectedBlock}
-        source="block"
-        choices={blocks}
-      />
-    ) : (
-      <></>
-    ),
-    selectedBlock ? (
-      <SelectInput
-        label="Cluster"
-        onChange={(e) => setSelectedCluster(e.target.value)}
-        value={selectedCluster}
-        source="cluster"
-        choices={clusters}
-      />
-    ) : (
-      <></>
-    ),
-  ];
+  // const Filters = [
+  //   <TextInput label="ID" source="id" alwaysOn key={"search"} />,
+  //   <SelectInput
+  //     label="District"
+  //     key={"district"}
+  //     onChange={(e: any) => {
+  //       setSelectedDistrict(e.target.value);
+  //       setSelectedBlock(null);
+  //       setSelectedCluster(null);
+  //     }}
+  //     value={selectedDistrict}
+  //     source="district"
+  //     choices={districts}
+  //   />,
+  //   selectedDistrict ? (
+  //     <SelectInput
+  //       label="Block"
+  //       onChange={(e) => {
+  //         setSelectedBlock(e.target.value);
+  //         setSelectedCluster(null);
+  //       }}
+  //       value={selectedBlock}
+  //       source="block"
+  //       choices={blocks}
+  //     />
+  //   ) : (
+  //     <></>
+  //   ),
+  //   selectedBlock ? (
+  //     <SelectInput
+  //       label="Cluster"
+  //       onChange={(e) => setSelectedCluster(e.target.value)}
+  //       value={selectedCluster}
+  //       source="cluster"
+  //       choices={clusters}
+  //     />
+  //   ) : (
+  //     <></>
+  //   ),
+  // ];
   return (
     <ListDataGridWithPermissions
       dataGridProps={{ rowClick: "show" }}
-      listProps={{ filters: Filters }}
     >
       <TextField source="id" />
       <TextField source="district" />

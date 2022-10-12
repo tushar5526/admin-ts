@@ -8,6 +8,7 @@ import {
 import { WithMyDistricts } from "../../components/withAccesses";
 import { ListDataGridWithPermissions } from "../../components/lists";
 import { BooleanField } from "react-admin";
+import { getLocationDetails } from "../LocationDetailsHelper";
 
 const SchoolList = () => {
   const typeChoice = [
@@ -24,12 +25,17 @@ const SchoolList = () => {
     { id: true, name: true },
     { id: false, name: false },
   ];
+  const { districts, blocks, clusters } = getLocationDetails();
+
   const Filters = [
     <TextInput label="School Name" source="name" alwaysOn key={"search"} />,
     <TextInput label="Udise" source="udise" key={"search"} />,
     <SelectInput label="Type" source="type" choices={typeChoice} />,
     <SelectInput label="Session" source="session" choices={sessionChoices} />,
     <SelectInput label="Active" source="is_active" choices={activeChoices} />,
+    <SelectInput label="District" source="location#district" choices={districts} />,
+    <SelectInput label="Block" source="location#block" choices={blocks} />,
+    <SelectInput label="Cluster" source="location#cluster" choices={clusters} />,
   ];
   return (
     <WithMyDistricts>
