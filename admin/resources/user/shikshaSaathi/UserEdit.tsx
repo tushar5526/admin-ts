@@ -34,10 +34,12 @@ const displayRoles = (a: any) => {
     return (
       <span
         style={{
-          border: "1px solid rgba(224, 224, 224, 1)",
-          padding: "5px",
-          marginRight: "5px",
-          marginBottom: "5px",
+          padding: "7px 10px",
+          margin: "5px",
+          color: "white",
+          borderRadius: "25px",
+          backgroundColor: "#5a968b",
+          display: "inline-block",
         }}
         key={index}
       >
