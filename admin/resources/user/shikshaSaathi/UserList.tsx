@@ -129,11 +129,11 @@ const UserList = () => {
   }, [districtData]);
 
   const blocks = useMemo(() => {
-    if (!selectedDistrict || !districtData) {
+    if (!districtData) {
       return [];
     }
     return _.uniqBy(
-      districtData.filter((d) => d.district === selectedDistrict),
+      districtData,
       "block"
     ).map((a) => {
       return {
@@ -141,15 +141,14 @@ const UserList = () => {
         name: a.block,
       };
     });
-  }, [selectedDistrict, districtData]);
-  console.log(blocks, "block");
+  }, [districtData]);
 
   const clusters = useMemo(() => {
-    if (!selectedBlock || !districtData) {
+    if (!districtData) {
       return [];
     }
     return _.uniqBy(
-      districtData.filter((d) => d.block === selectedBlock),
+      districtData,
       "cluster"
     ).map((a) => {
       return {
@@ -157,7 +156,7 @@ const UserList = () => {
         name: a.cluster,
       };
     });
-  }, [selectedBlock, districtData]);
+  }, [districtData]);
 
   const Filters = [
     <TextInput label="Username" source="username" alwaysOn key={"search"} />,
