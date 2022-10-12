@@ -4,6 +4,7 @@ import {
   DateField,
   TextInput,
   useDataProvider,
+  SearchInput,
   FunctionField,
   SelectInput,
   ReferenceInput,
@@ -107,11 +108,13 @@ const GradeAssessmentList = () => {
       };
     });
   }, [selectUdise, schoolData]);
+
   const Filters = [
-    <TextInput label="ID" source="id" alwaysOn />,
+    <TextInput label="UDISE" resettable source="school#udise" alwaysOn />,
     <TextInput label="Grade Number" source="grade_number" key={"search"} />,
-    <TextInput source="assessment#type" label="Assessment Type"/>
+    <TextInput source="assessment#type" label="Assessment Type" />
   ];
+
   return (
     <ListDataGridWithPermissions
       dataGridProps={{ rowClick: "show" }}
@@ -122,9 +125,9 @@ const GradeAssessmentList = () => {
       <TextField source="grade_number" />
       <TextField source="section" />
       <TextField source="school_id" />
-      <TextField source="assessment.type" label="Assessment Type"/>
+      <TextField source="assessment.type" label="Assessment Type" />
       <TextField source="school.udise" />
-      <TextField source="school.location.district" label="District"/>
+      <TextField source="school.location.district" label="District" />
       <TextField source="school.location.block" />
       <TextField source="school.location.cluster" />
       <TextField source="streams_id" />
