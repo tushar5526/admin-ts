@@ -82,25 +82,21 @@ const StudentList = () => {
     if (!studentData) {
       return [];
     }
-    return _.uniqBy(
-      studentData,
-      "grade_number"
-    ).map((a) => {
-      return {
-        id: a.grade_number,
-        name: a.grade_number,
-      };
-    });
+    return _.uniqBy(studentData, "grade_number")
+      .map((a) => {
+        return {
+          id: a.grade_number,
+          name: a.grade_number,
+        };
+      })
+      .sort((a, b) => a.id - b.id);
   }, [selectedStatus, studentData]);
 
   const streams = useMemo(() => {
     if (!studentData) {
       return [];
     }
-    return _.uniqBy(
-      studentData,
-      "stream_tag"
-    ).map((a) => {
+    return _.uniqBy(studentData, "stream_tag").map((a) => {
       return {
         id: a.stream_tag,
         name: a.stream_tag,
@@ -112,10 +108,7 @@ const StudentList = () => {
     if (!studentData) {
       return [];
     }
-    return _.uniqBy(
-      studentData,
-      "category"
-    ).map((a) => {
+    return _.uniqBy(studentData, "category").map((a) => {
       return {
         id: a.category,
         name: a.category,
@@ -127,10 +120,7 @@ const StudentList = () => {
     if (!studentData) {
       return [];
     }
-    return _.uniqBy(
-      studentData,
-      "is_cwsn"
-    ).map((a) => {
+    return _.uniqBy(studentData, "is_cwsn").map((a) => {
       return {
         id: a.is_cwsn,
         name: a.is_cwsn,
@@ -142,10 +132,7 @@ const StudentList = () => {
     if (!studentData) {
       return [];
     }
-    return _.uniqBy(
-      studentData,
-      "gender"
-    ).map((a) => {
+    return _.uniqBy(studentData, "gender").map((a) => {
       return {
         id: a.gender,
         name: a.gender,
@@ -244,7 +231,7 @@ const StudentList = () => {
       source="gender"
       choices={gender}
       isRequired={true}
-    />
+    />,
   ];
   const StudentPagination = () => (
     <Pagination rowsPerPageOptions={[10, 50, 75, 100]} />
