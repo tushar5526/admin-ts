@@ -1,58 +1,58 @@
-export const streams = [
+export const streams_choices = [
     {
-        id : 1,
+        id : "first",
         name : "first"
     },
     {
-        id : 2,
+        id : "second",
         name : "second"
     },
     {
-        id : 3,
+        id : "third",
         name : "third"
     },
     {
-        id : 4,
+        id : "fourth",
         name : "fourth"
     },
     {
-        id : 5,
+        id : "fifth",
         name : "fifth"
     },
     {
-        id : 6,
+        id : "sixth",
         name : "sixth"
     },
     {
-        id : 7,
+        id : "seventh",
         name : "seventh"
     },
     {
-        id : 8,
+        id : "eighth",
         name : "eighth"
     },
     {
-        id : 9,
+        id : "ninth",
         name : "ninth"
     },
     {
-        id : 10,
+        id : "tenth",
         name : "tenth"
     },
     {
-        id : 11,
+        id : "Arts",
         name : "Arts"
     },
     {
-        id : 12,
+        id : "Commerce",
         name : "Commerce"
     },
     {
-        id : 13,
+        id : "Medical",
         name : "Medical"
     },
     {
-        id : 14,
+        id : "Non-Medical",
         name : "Non-Medical"
     }
 ]

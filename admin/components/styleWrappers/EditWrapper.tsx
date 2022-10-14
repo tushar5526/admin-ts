@@ -9,7 +9,7 @@ const EditToolbar = (props: any) => (
 const EditWrapper = (props: any) => {
   return (
     <div>
-      <Edit className="edit_wrapper" {...props}>
+      <Edit className="edit_wrapper" {...props} mutationMode={"pessimistic"}>
         <div className="edit_wrapper_layout">
           <SimpleForm toolbar={<EditToolbar/>}>
             {props.children}

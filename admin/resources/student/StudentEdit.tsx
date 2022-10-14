@@ -11,7 +11,7 @@ import {
   SelectInput
 } from "react-admin";
 import EditWrapper from "../../components/styleWrappers/EditWrapper";
-import { streams } from "./StudentStreams";
+import { streams_choices } from "./StudentStreams";
 const StudentForm = () => {
   const validateName = regex(/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/g, 'Please Enter a Valid Name ');
   const validateFatherName= regex(/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/g, 'Please Enter a Valid Name ');
@@ -35,9 +35,9 @@ const StudentForm = () => {
       <TextInput source="school.udise" />
       <TextInput source="father_name" />
       <TextInput source="mother_name" />
-      <SelectInput source="gender" choices={[{id : 1, name : "M"},{ id: 2, name: "F"}]}/>
+      <SelectInput source="gender" choices={[{id : "M", name : "M"},{ id: "F", name: "F"}]}/>
       <SelectInput source="grade_number" choices={grade()}/>
-      <TextInput source="stream_tag" />
+      <SelectInput source="stream_tag" choices={streams_choices}/>
       <TextInput source="category" />
       <BooleanInput source="is_cwsn" />
       <BooleanInput source="is_enabled" />

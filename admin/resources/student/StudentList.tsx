@@ -25,6 +25,7 @@ import * as _ from "lodash";
 import { isBoolean } from "lodash";
 import EditButtonWrapper from "../../components/styleWrappers/EditButtonWrapper";
 import { getLocationDetails } from "../LocationDetailsHelper";
+import { streams_choices } from "./StudentStreams";
 
 
 const StudentList = () => {
@@ -188,7 +189,7 @@ const StudentList = () => {
       }}
       value={selectedStream}
       source="stream_tag"
-      choices={streams}
+      choices={streams_choices}
       isRequired={true}
     />,
     <SelectInput
