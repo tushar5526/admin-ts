@@ -28,7 +28,7 @@ const DisplayRoles = (a: any) => {
     return <span>-</span>;
   }
   const { roles } = registration;
-  return roles.map((role: any, index: number) => {
+  return roles?.map((role: any, index: number) => {
     return (
       <span
         style={{
@@ -134,10 +134,7 @@ const UserList = () => {
     if (!districtData) {
       return [];
     }
-    return _.uniqBy(
-      districtData,
-      "block"
-    ).map((a) => {
+    return _.uniqBy(districtData, "block").map((a) => {
       return {
         id: a.block,
         name: a.block,
@@ -149,10 +146,7 @@ const UserList = () => {
     if (!districtData) {
       return [];
     }
-    return _.uniqBy(
-      districtData,
-      "cluster"
-    ).map((a) => {
+    return _.uniqBy(districtData, "cluster").map((a) => {
       return {
         id: a.cluster,
         name: a.cluster,
@@ -161,7 +155,6 @@ const UserList = () => {
   }, [districtData]);
 
   const Filters = [
-    <TextInput label="Username" source="username" alwaysOn key={"search"} />,
     <SelectInput
       label="Role"
       source="data.roleData.role"

@@ -153,7 +153,6 @@ const UserList = () => {
     // }, [selectedDistrict, districtData]);
   }, [districtData]);
 
-
   const clusters = useMemo(() => {
     if (!districtData) {
       return [];
@@ -172,7 +171,6 @@ const UserList = () => {
   }, [districtData]);
 
   const Filters = [
-    <TextInput label="Username" source="username" alwaysOn key={"search"} />,
     <SelectInput
       label="Role"
       source="data.roleData.role"
