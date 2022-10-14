@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   TextInput,
   useRecordContext,
   ReferenceInput,
   useDataProvider,
   SelectInput,
+  Edit
 } from "react-admin";
 import EditWrapper from "../../components/styleWrappers/EditWrapper";
 import { useLocation } from "react-router-dom";
@@ -51,13 +52,14 @@ const LocationForm = () => {
     }
     return _.uniqBy(districtData, "district").map((a) => {
       return {
-        id: a.id,
+        id: a.district,
         name: a.district,
       };
     });
   }, [districtData]);
-  console.log(districtData, "dist");
+
   const blocks = useMemo(() => {
+    console.log("sd -->", selectedDistrict)
     if (!selectedDistrict || !districtData) {
       return [];
     }
@@ -66,7 +68,7 @@ const LocationForm = () => {
       "block"
     ).map((a) => {
       return {
-        id: a.id,
+        id: a.block,
         name: a.block,
       };
     });
@@ -81,16 +83,19 @@ const LocationForm = () => {
       "cluster"
     ).map((a) => {
       return {
-        id: a.id,
+        id: a.cluster,
         name: a.cluster,
       };
     });
   }, [selectedBlock, districtData]);
 
+  useEffect(() => {
+    
+  }, [districtData])
+
   return (
     <>
       <span>Location Details</span>
-      <div>
         <ReferenceInput source="id" reference="location">
           <SelectInput disabled optionText={"id"} />
         </ReferenceInput>
@@ -98,11 +103,11 @@ const LocationForm = () => {
         <SelectInput
           label="District"
           onChange={(e) => {
-            const nam: any = districtData?.filter((item) => {
-              return e.target.value === item.id;
-            });
+            // const nam: any = districtData?.filter((item) => {
+            //   return e.target.value === item.district;
+            // });
 
-            setSelectedDistrict(nam[0].district);
+          setSelectedDistrict(e.target.value);
           }}
           value={selectedDistrict}
           source="district"
@@ -112,10 +117,10 @@ const LocationForm = () => {
         <SelectInput
           label="Block"
           onChange={(e) => {
-            const nam: any = districtData?.filter((item) => {
-              return e.target.value === item.id;
-            });
-            setSelectedBlock(nam[0]?.block);
+            // const nam: any = districtData?.filter((item) => {
+            //   return e.target.value === item.block;
+            // });
+            setSelectedBlock(e.target.value);
           }}
           value={selectedBlock}
           source="block"
@@ -123,12 +128,11 @@ const LocationForm = () => {
         />
         <SelectInput
           label="Cluster"
-          onChange={(e) => setSelectedCluster(e.target.name)}
+          onChange={(e) => setSelectedCluster(e.target.value)}
           value={selectedCluster}
           source="cluster"
           choices={clusters}
         />
-      </div>
     </>
   );
 };

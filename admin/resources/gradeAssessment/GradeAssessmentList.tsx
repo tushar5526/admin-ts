@@ -110,7 +110,7 @@ const GradeAssessmentList = () => {
   }, [selectUdise, schoolData]);
 
   const Filters = [
-    <TextInput label="UDISE" resettable source="school#udise" alwaysOn />,
+    <TextInput label="UDISE" source="school#udise" key={"search"} alwaysOn />,
     <TextInput label="Grade Number" source="grade_number" key={"search"} />,
     <TextInput source="assessment#type" label="Assessment Type" />
   ];
@@ -126,7 +126,7 @@ const GradeAssessmentList = () => {
       <TextField source="section" />
       <TextField source="school_id" />
       <TextField source="assessment.type" label="Assessment Type" />
-      <TextField source="school.udise" />
+      <TextField source="school.udise" label="UDISE"/>
       <TextField source="school.location.district" label="District" />
       <TextField source="school.location.block" />
       <TextField source="school.location.cluster" />

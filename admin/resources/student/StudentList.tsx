@@ -140,6 +140,8 @@ const StudentList = () => {
 
   const Filters = [
     <TextInput label="ID" source={"id"} alwaysOn key={"search"} />,
+    <TextInput label="UDISE" source="school#udise" key="search" />,
+    <TextInput label="School Name" source="school#name" key={"search"} />,
     <SelectInput
       label="Grade"
       onChange={(e) => {
