@@ -214,39 +214,11 @@ const SchoolMappingList = () => {
         <TextField source="id" />
         <TextField source="username" />
         <QuarterField label={"Year  /  Month1  /  Month2  /  Month3"} />
-
-        <ReferenceField label="District" source="school_id" reference="school">
-          <ReferenceField
-            label="District"
-            source="location_id"
-            reference="location"
-          >
-            <TextField source="district" />
-          </ReferenceField>
-        </ReferenceField>
-
-        <ReferenceField label="Block" source="school_id" reference="school">
-          <ReferenceField
-            label="Block"
-            source="location_id"
-            reference="location"
-          >
-            <TextField source="block" />
-          </ReferenceField>
-        </ReferenceField>
-
-        <ReferenceField label="Cluster" source="school_id" reference="school">
-          <ReferenceField
-            label="Cluster"
-            source="location_id"
-            reference="location"
-          >
-            <TextField source="cluster" />
-          </ReferenceField>
-        </ReferenceField>
-        <ReferenceField label="Udise" source="school_id" reference="school">
-          <TextField source="udise" />
-        </ReferenceField>
+        <TextField label="School" source="school.name" />
+        <TextField label="UDISE" source="school.udise" />
+        <TextField label="District" source="school.location.district" />
+        <TextField label="Block" source="school.location.block" />
+        <TextField label="Cluster" source="school.location.cluster" />
       </ListDataGridWithPermissions>
     </>
   );

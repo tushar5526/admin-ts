@@ -78,18 +78,16 @@ const StudentList = () => {
       };
     });
   }, [studentData]);
+
   const grade = useMemo(() => {
     if (!studentData) {
       return [];
     }
-    return _.uniqBy(studentData, "grade_number")
-      .map((a) => {
-        return {
-          id: a.grade_number,
-          name: a.grade_number,
-        };
-      })
-      .sort((a, b) => a.id - b.id);
+    let grades = [];
+    for(let i=1; i<=12; i++){
+      grades[i] = { id : i , name : i};
+    }
+    return grades;
   }, [selectedStatus, studentData]);
 
   const streams = useMemo(() => {

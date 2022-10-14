@@ -11,9 +11,6 @@ import {
 import EditWrapper from "../../components/styleWrappers/EditWrapper";
 
 const StudentForm = () => {
-  const record = useRecordContext();
-  const dataProvider = useDataProvider();
-  console.log(dataProvider);
   return (
     <>
       <span>Student Details</span>
