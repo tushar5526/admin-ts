@@ -7,22 +7,36 @@ import {
   BooleanInput,
   NumberInput,
   ReferenceInput,
+  regex,
+  SelectInput
 } from "react-admin";
 import EditWrapper from "../../components/styleWrappers/EditWrapper";
-
+import { streams } from "./StudentStreams";
 const StudentForm = () => {
+  const validateName = regex(/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/g, 'Please Enter a Valid Name ');
+  const validateFatherName= regex(/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/g, 'Please Enter a Valid Name ');
+  const validateMotherName= regex(/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/g, 'Please Enter a Valid Name ');
+
+  const grade = () => {
+    let grades = [];
+    for(let i=1; i<=12; i++){
+      grades[i] = { id : i , name : i};
+    }
+    return grades;
+  }
+
   return (
     <>
       <span>Student Details</span>
 
       <TextInput source="id" disabled />
       <TextInput source="name" />
-      <TextInput source="school.name" />
+      <TextInput source="school.name" disabled/>
       <TextInput source="school.udise" />
       <TextInput source="father_name" />
       <TextInput source="mother_name" />
-      <TextInput source="gender" />
-      <NumberInput source="grade_number" />
+      <SelectInput source="gender" choices={[{id : 1, name : "M"},{ id: 2, name: "F"}]}/>
+      <SelectInput source="grade_number" choices={grade()}/>
       <TextInput source="stream_tag" />
       <TextInput source="category" />
       <BooleanInput source="is_cwsn" />
