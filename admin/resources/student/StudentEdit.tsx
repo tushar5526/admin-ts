@@ -13,9 +13,9 @@ import {
 import EditWrapper from "../../components/styleWrappers/EditWrapper";
 import { streams_choices } from "./StudentStreams";
 const StudentForm = () => {
-  const validateName = regex(/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/g, 'Please Enter a Valid Name ');
-  const validateFatherName= regex(/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/g, 'Please Enter a Valid Name ');
-  const validateMotherName= regex(/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/g, 'Please Enter a Valid Name ');
+  const validateName = regex(/^[a-zA-Z\s]*$/, 'Please Enter a Valid Name ');
+  const validateFatherName= regex(/^[a-zA-Z\s]*$/, 'Please Enter a Valid Father Name ');
+  const validateMotherName= regex(/^[a-zA-Z\s]*$/, 'Please Enter a Valid Mother Name ');
 
   const grade = () => {
     let grades = [];
@@ -30,11 +30,11 @@ const StudentForm = () => {
       <span>Student Details</span>
 
       <TextInput source="id" disabled />
-      <TextInput source="name" />
+      <TextInput source="name" validate={validateName}/>
       <TextInput source="school.name" disabled/>
       <TextInput source="school.udise" />
-      <TextInput source="father_name" />
-      <TextInput source="mother_name" />
+      <TextInput source="father_name" validate={validateFatherName}/>
+      <TextInput source="mother_name" validate={validateMotherName}/>
       <SelectInput source="gender" choices={[{id : "M", name : "M"},{ id: "F", name: "F"}]}/>
       <SelectInput source="grade_number" choices={grade()}/>
       <SelectInput source="stream_tag" choices={streams_choices}/>
