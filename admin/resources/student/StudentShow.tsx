@@ -7,6 +7,7 @@ import {
 import ShowWrapper from "../../components/styleWrappers/ShowWrapper";
 import InputFlexWrapper from "../../components/styleWrappers/InputFlexWrapper";
 import CustomTextField from "../../components/styleWrappers/CustomTextField";
+import school from "../school";
 
 const StudentShow = () => {
   return (
@@ -29,32 +30,20 @@ const StudentShow = () => {
                 {" "}
                 <CustomTextField i={record?.id} label={"ID"} />
                 <CustomTextField i={record?.name} label={"Name"} />
-                <ReferenceField
-                  label={"Udise"}
-                  source="school_id"
-                  reference="school"
-                >
                   <FunctionField
                     render={(record: any) => {
                       return (
-                        <CustomTextField i={record?.name} label={"School"} />
+                        <CustomTextField i={record?.school.name} label={"School"} />
                       );
                     }}
                   />
-                </ReferenceField>
-                <ReferenceField
-                  label={"Udise"}
-                  source="school_id"
-                  reference="school"
-                >
                   <FunctionField
                     render={(record: any) => {
                       return (
-                        <CustomTextField i={record?.udise} label={"Udise"} />
+                        <CustomTextField i={record?.school.udise} label={"Udise"} />
                       );
                     }}
                   />
-                </ReferenceField>
                 <CustomTextField i={record?.father_name} label={"Father"} />
                 <CustomTextField i={record?.mother_name} label={"Mother"} />
                 <CustomTextField i={record?.gender} label={"Gender"} />

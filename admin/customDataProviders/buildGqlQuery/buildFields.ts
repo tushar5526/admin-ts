@@ -35,7 +35,7 @@ export const customBuildFields: BuildFields = (type, fetchType: any) => {
   }
 
   if (resourceName === "student" || resourceName === "teacher") {
-    if (["GET_LIST", "GET_ONE", "DELETE", "DELETE_MANY"].includes(fetchType)) {
+    if (["GET_LIST", "GET_ONE", "DELETE", "DELETE_MANY", "UPDATE"].includes(fetchType)) {
       const relatedEntities = extractFieldsFromQuery(
         EXTENDED_STUDENT_RECORD
       );
@@ -45,7 +45,7 @@ export const customBuildFields: BuildFields = (type, fetchType: any) => {
   }
 
   if (resourceName === "school") {
-    if (["GET_LIST", "GET_ONE", "DELETE", "DELETE_MANY"].includes(fetchType)) {
+    if (["GET_LIST", "GET_ONE", "DELETE", "DELETE_MANY", "UPDATE"].includes(fetchType)) {
       const relatedEntities = extractFieldsFromQuery(
         EXTENDED_SCHOOL_RECORD
       );

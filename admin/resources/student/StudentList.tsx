@@ -24,6 +24,9 @@ import { useQuery } from "react-query";
 import * as _ from "lodash";
 import { isBoolean } from "lodash";
 import EditButtonWrapper from "../../components/styleWrappers/EditButtonWrapper";
+import { getLocationDetails } from "../LocationDetailsHelper";
+import { streams_choices } from "./StudentStreams";
+
 
 const StudentList = () => {
   const location = useLocation();
@@ -138,8 +141,10 @@ const StudentList = () => {
     });
   }, [selectedCwsn, studentData]);
 
+  const { districts, blocks, clusters } = getLocationDetails();
+
   const Filters = [
-    <TextInput label="ID" source={"id"} alwaysOn key={"search"} />,
+    <NumberInput label="ID" source="id" alwaysOn />,
     <TextInput label="UDISE" source="school#udise" key="search" />,
     <TextInput label="School Name" source="school#name" key={"search"} />,
     <SelectInput
@@ -184,7 +189,7 @@ const StudentList = () => {
       }}
       value={selectedStream}
       source="stream_tag"
-      choices={streams}
+      choices={streams_choices}
       isRequired={true}
     />,
     <SelectInput
@@ -232,24 +237,28 @@ const StudentList = () => {
       choices={gender}
       isRequired={true}
     />,
+    <SelectInput label="District" source="school#location#district" choices={districts} />,
+    <SelectInput label="Block" source="school#location#block" choices={blocks} />,
+    <SelectInput label="Cluster" source="school#location#cluster" choices={clusters} />,
   ];
   const StudentPagination = () => (
     <Pagination rowsPerPageOptions={[10, 50, 75, 100]} />
   );
   return (
     <List filters={Filters} pagination={<StudentPagination />}>
-      <Datagrid rowClick="show" bulkActionButtons={false}>
+      <Datagrid bulkActionButtons={false}>
         <TextField source="id" />
         <TextField source="name" />
+        <TextField source="father_name" />
         <TextField source="school.name" label="School" />
         <TextField source="school.udise" label="UDISE" />
-        <TextField source="father_name" />
-        <TextField source="mother_name" />
-        <TextField source="gender" />
         <NumberField source="grade_number" />
         <TextField source="stream_tag" />
-        <TextField source="category" />
         <BooleanField source="is_cwsn" label={"CWSN"} />
+        <TextField source="gender" label={"Gender"} />
+        <TextField source="school.location.district" label="District" />
+        <TextField source="school.location.block" label="Block" />
+        <TextField source="school.location.cluster" label="Cluster" />
         <BooleanField source="is_enabled" label={"Enabled"} />
         <EditButtonWrapper />
       </Datagrid>
