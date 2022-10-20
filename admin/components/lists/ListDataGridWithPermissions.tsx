@@ -33,7 +33,7 @@ const ListDataGridWithPermissions = ({
   }
 
   return (
-    <List {...(listProps || {})}>
+    <List {...(listProps || {})} empty={false}>
       <Datagrid
         bulkActionButtons={withDelete} {...(_dataGridProps || {})}>
         {children}

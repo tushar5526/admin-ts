@@ -11,6 +11,15 @@ import {
   useRedirect,
   useRefresh,
   useGetList,
+  required,
+  number,
+  regex,
+  minLength,
+  maxLength,
+  SelectArrayInput,
+  SelectInput,
+  NumberInput,
+  ReferenceInput
 } from "react-admin";
 import { designationESamwaad, designationLevels } from "./designation";
 import { useEffect, useMemo, useState } from "react";
@@ -71,8 +80,8 @@ export const SchoolUDISEInput = () => {
         {data?.data?.name
           ? `School: ${data?.data?.name}`
           : isLoading
-          ? "Loading..."
-          : "No School"}
+            ? "Loading..."
+            : "No School"}
       </Typography>
       <TextInput
         source={"data.udise"}
@@ -84,26 +93,49 @@ export const SchoolUDISEInput = () => {
     </div>
   );
 };
-const SchoolModeUserForm = ({ record }: any) => {
-  return (
-    <>
-      <TextInput source="username" disabled={true} />
-      <TextInput source="firstName" label="Full Name" />
-      <TextInput source="mobilePhone" label="Mobile Phone" />
-      <Labeled label="Roles">
-        <FunctionField
-          label="Role"
-          render={(record: any) => {
-            return DisplayRoles(record);
-          }}
-        />
-      </Labeled>
 
-      <SchoolUDISEInput />
-      <ChangePasswordButton record={record} />
-    </>
-  );
-};
+// Input dropdown choices
+const inputChoices = {
+  designations: designationESamwaad.map(el => { return { id: el.designation, name: el.designation } }),
+  accountStatuses: ["ACTIVE", "DEACTIVATED", "PENDING", "REJECTED"].map(el => { return { id: el, name: el } }),
+  roles: ["Teacher", "Principal", "school"].map(el => { return { id: el, name: el } }),
+  employment: ["Permanent", "Contractual"].map(el => { return { id: el, name: el } })
+}
+
+
+// Input Constraints
+const inputConstraints = {
+  userName: [required("Please provide username"), number("The username must be numeric")],
+  udise: [required("Please provide UDISE"), number("The UDISE must be numeric")],
+  fullName: [required("Please provide fullname"), regex(/^[a-zA-Z0-9 ]*$/, "Name can only contain alphabets, numbers and spaces")],
+  mobile: [required("Please provide mobile number"), number("Mobile must be numeric"), minLength(10), maxLength(10)],
+  role: required("Please select a role"),
+  designation: required("Please select a designation"),
+  accountStatus: required("Please select account status"),
+  modeOfEmployment: required("Please select mode of employment")
+}
+
+// const SchoolModeUserForm = ({ record }: any) => {
+//   return (
+//     <>
+//       <TextInput source="username" disabled={true} />
+//       <TextInput source="firstName" label="Full Name" validate={inputConstraints.fullName} />
+//       <TextInput source="mobilePhone" label="Mobile Phone" validate={inputConstraints.mobile} />
+//       <SelectArrayInput source="roles" label="Roles" choices={inputChoices.roles} />
+//       {/* <Labeled label="Roles">
+//         <FunctionField
+//           label="Role"
+//           render={(record: any) => {
+//             return DisplayRoles(record);
+//           }}
+//         />
+//       </Labeled> */}
+
+//       <SchoolUDISEInput />
+//       <ChangePasswordButton record={record} />
+//     </>
+//   );
+// };
 
 export const GQLForm = () => {
   const record = useRecordContext();
@@ -194,46 +226,126 @@ export const GQLForm = () => {
     </div>
   );
 };
-const NonSchoolModeUserForm = (record: any) => {
-  return (
-    <>
-      <TextInput source="username" disabled={true} />
-      <TextInput source="firstName" label="Full Name" />
-      <TextInput source="mobilePhone" label="Mobile Phone" />
-      <Labeled label="Roles">
-        <FunctionField
-          label="Role"
-          render={(record: any) => DisplayRoles(record)}
-        />
-      </Labeled>
-      <GQLForm />
-      <SchoolUDISEInput />
-      <ChangePasswordButton record={record} />
-    </>
-  );
-};
+// const NonSchoolModeUserForm = (record: any) => {
+//   return (
+//     <>
+//       <TextInput source="username" disabled={true} />
+//       <TextInput source="firstName" label="Full Name" />
+//       <SelectArrayInput source="roles" label="Roles" choices={inputChoices.roles} />
+//       <TextInput source="mobilePhone" label="Mobile Phone" />
+//       {/* <Labeled label="Roles">
+//         <FunctionField
+//           label="Role"
+//           render={(record: any) => DisplayRoles(record)}
+//         />
+//       </Labeled> */}
+//       <GQLForm />
+//       <SchoolUDISEInput />
+//       <ChangePasswordButton record={record} />
+//     </>
+//   );
+// };
 const UserForm = () => {
   const record = useRecordContext();
-  console.log(record, "this is record");
-  const roles = useMemo(() => {
-    if (record?.registrations) {
-      const registration = record.registrations?.find(
-        (r: any) => r.applicationId === ApplicationId
-      );
-      return registration?.roles;
-    }
-    return null;
-  }, [record]);
-  const schoolMode = useMemo(() => {
-    if (roles?.length === 1) {
-      return !!roles
-        ?.map((r: string) => r.toLowerCase())
-        .find((r: string) => r === "school");
-    }
-    return false;
-  }, [roles]);
-  if (schoolMode) return <SchoolModeUserForm record={record} />;
-  return <NonSchoolModeUserForm record={record} />;
+  console.log(record)
+  const [state, setState] = useState<any>({
+    roles: record?.registrations?.[0]?.roles
+  });
+  return (
+    <>
+      <TextInput
+        onChange={(e) => setState({ ...state, userName: e.target.value })}
+        source="username"
+        label="User Name"
+        validate={inputConstraints.userName}
+      />
+      <TextInput
+        onChange={(e) => setState({ ...state, fullName: e.target.value })}
+        source="fullName"
+        label="Name"
+        validate={inputConstraints.fullName}
+      />
+      <NumberInput
+        onChange={(e) => setState({ ...state, mobile: e.target.value })}
+        source="mobilePhone"
+        label="Mobile Phone"
+        validate={inputConstraints.mobile}
+      />
+
+      <SelectArrayInput
+        onChange={(e) => setState({ ...state, roles: e.target.value })}
+        source="roles"
+        defaultValue={record?.registrations?.[0].roles}
+        choices={inputChoices.roles}
+        label="Roles"
+        validate={inputConstraints.role}
+      />
+
+
+      {state.roles && (state.roles.includes("Principal") || state.roles.includes("Teacher")) &&
+        <>
+          <SelectInput
+            value={state.designation}
+            onChange={(e: any) =>
+              setState({ ...state, designation: e.target.value })
+            }
+            source="designation"
+            label="Designation"
+            choices={inputChoices.designations}
+            validate={inputConstraints.designation}
+          />
+          <SelectInput
+            value={state.accountStatus}
+            onChange={(e: any) =>
+              setState({ ...state, accountStatus: e.target.value })
+            }
+            source="account_status"
+            label="Account Status"
+            choices={inputChoices.accountStatuses}
+            validate={inputConstraints.accountStatus}
+            defaultValue={record?.usernameStatus}
+          />
+          <SelectInput
+            value={state.modeOfEmployment}
+            onChange={(e: any) =>
+              setState({ ...state, modeOfEmployment: e.target.value })
+            }
+            source="mode_of_employment"
+            label="Mode of employment"
+            validate={inputConstraints.modeOfEmployment}
+            choices={inputChoices.employment}
+          />
+        </>}
+      <ReferenceInput source="school_id" reference="school">
+        <TextInput
+          onChange={(e) => setState({ ...state, udise: e.target.value })}
+          source="udise"
+          label="School UDISE"
+          validate={inputConstraints.udise}
+          defaultValue={record?.data?.udise}
+        />
+      </ReferenceInput>
+    </>
+  )
+  // const roles = useMemo(() => {
+  //   if (record?.registrations) {
+  //     const registration = record.registrations?.find(
+  //       (r: any) => r.applicationId === ApplicationId
+  //     );
+  //     return registration?.roles;
+  //   }
+  //   return null;
+  // }, [record]);
+  // const schoolMode = useMemo(() => {
+  //   if (roles?.length === 1) {
+  //     return !!roles
+  //       ?.map((r: string) => r.toLowerCase())
+  //       .find((r: string) => r === "school");
+  //   }
+  //   return false;
+  // }, [roles]);
+  // if (schoolMode) return <SchoolModeUserForm record={record} />;
+  // return <NonSchoolModeUserForm record={record} />;
 };
 
 const UserEdit = () => {
@@ -241,10 +353,8 @@ const UserEdit = () => {
   const resource = useResourceContext();
   const dataProvider = useDataProvider();
   const redirect = useRedirect();
-
   const params = useParams();
   const refresh = useRefresh();
-
   const { mutate, isLoading } = useMutation(
     ["updateUser", params.id],
     (value) => dataProvider.updateUser(resource, value),
@@ -258,6 +368,7 @@ const UserEdit = () => {
       },
     }
   );
+
   return (
     <Edit>
       <SimpleForm

@@ -5,7 +5,7 @@ import {
   SelectInput,
 } from "react-admin";
 import EditWrapper from "../../components/styleWrappers/EditWrapper";
-import { getLocationDetails } from "../LocationDetailsHelper";
+import { getLocationDetails } from "../../utils/LocationDetailsHelper";
 
 const GradeAssessmentEdit = () => {
   const { districts, clusters, blocks } = getLocationDetails();

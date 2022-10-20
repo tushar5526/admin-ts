@@ -171,6 +171,7 @@ const UserList = () => {
   }, [districtData]);
 
   const Filters = [
+    <TextInput label="Username" source="username" alwaysOn key={"search"} />,
     <SelectInput
       label="Role"
       source="data.roleData.role"

@@ -67,14 +67,14 @@ const MenuOptions: any[] = [
     icon: "SchoolIcon",
 
   },
-  {
-    name: "Assessment",
-    resource: "assessment",
-    props: assessment,
+  // {
+  //   name: "Assessment",
+  //   resource: "assessment",
+  //   props: assessment,
 
-    icon: "SchoolIcon",
+  //   icon: "SchoolIcon",
 
-  },
+  // },
   {
     name: "School Mapping For Monitoring",
     resource: "ss_school_allocation_data",
