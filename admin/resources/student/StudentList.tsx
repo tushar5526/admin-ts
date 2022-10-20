@@ -24,7 +24,7 @@ import { useQuery } from "react-query";
 import * as _ from "lodash";
 import { isBoolean } from "lodash";
 import EditButtonWrapper from "../../components/styleWrappers/EditButtonWrapper";
-import { getLocationDetails } from "../LocationDetailsHelper";
+import { getLocationDetails } from "../../utils/LocationDetailsHelper";
 import { streams_choices } from "./StudentStreams";
 
 

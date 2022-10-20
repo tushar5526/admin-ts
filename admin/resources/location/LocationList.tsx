@@ -11,7 +11,6 @@ import { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import * as _ from "lodash";
 import { ListDataGridWithPermissions } from "../../components/lists";
-import { getLocationDetails } from "../LocationDetailsHelper";
 
 const LocationList = () => {
   const location = useLocation();
