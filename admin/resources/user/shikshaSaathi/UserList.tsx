@@ -155,6 +155,7 @@ const UserList = () => {
   }, [districtData]);
 
   const Filters = [
+    <TextInput source="username" alwaysOn key={"search"}/>,
     <SelectInput
       label="Role"
       source="data.roleData.role"
@@ -197,7 +198,6 @@ const UserList = () => {
   return (
     <ListDataGridWithPermissions
       listProps={{ filters: Filters }}
-      dataGridProps={{ rowClick: "show" }}
     >
       <TextField source="username" />
       <TextField source="fullName" />

@@ -107,7 +107,7 @@ const StudentForm = (record: any) => {
             }
           })
           return (
-            <TextInput source="school.udise" onChange={e => {
+            <TextInput source="school.udise" label="UDISE" onChange={e => {
               setUdise(Number(e.target.value));
             }} />
           )

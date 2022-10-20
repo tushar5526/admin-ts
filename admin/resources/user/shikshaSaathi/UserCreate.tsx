@@ -6,6 +6,10 @@ import {
   NumberInput,
   SelectInput,
   Button,
+  minLength,
+  maxLength,
+  required,
+  number,
 } from "react-admin";
 import { useLogin } from "../hooks";
 import { getClusters } from "../designation";
@@ -32,7 +36,6 @@ const UserCreate = (props: any) => {
     district: "",
     block: "",
     cluster: "",
-    roles: ["school"],
     password: "1234abcd",
   });
   // to be called when submitted
@@ -42,7 +45,6 @@ const UserCreate = (props: any) => {
     const body = {
       registration: {
         applicationId: "1ae074db-32f3-4714-a150-cc8a370eafd1",
-        roles: state.roles,
         username: state.userName,
       },
       user: {
@@ -78,7 +80,8 @@ const UserCreate = (props: any) => {
   const districtChoices = getAllDistricts("", _loggedInUser);
   const blockChoices = getBlocks(state.district, "", _loggedInUser);
   const clusterChoices = getClusters(state.block, "", _loggedInUser);
-
+  
+  const validatePhoneNumber = [required(),number(),minLength(10,"Phone Number must be of 10 digit"),maxLength(10,"Phone Number must be of 10 digit")];
   return userCreated ? (
     <>
       <p>User Successfully Created</p>
@@ -91,26 +94,21 @@ const UserCreate = (props: any) => {
           onChange={(e) => setState({ ...state, userName: e.target.value })}
           source="username"
           label="User Name"
+          validate={[required()]}
         />
         <TextInput
           onChange={(e) => setState({ ...state, fullName: e.target.value })}
           source="fullName"
           label="Name"
+          validate={[required()]}
         />
-        <NumberInput
+        <TextInput
           onChange={(e) => setState({ ...state, mobile: e.target.value })}
           source="mobilePhone"
           label="Mobile Phone"
+          validate={validatePhoneNumber}
         />
 
-        <TextInput
-          onChange={(e) =>
-            setState({ ...state, geographicLevel: e.target.value })
-          }
-          disabled
-          source="geographic_level"
-          label="GeoGraphic Level"
-        />
         <SelectInput
           value={state.designation}
           onChange={(e) => {

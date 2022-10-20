@@ -13,7 +13,6 @@ import { useQuery } from "react-query";
 import * as _ from "lodash";
 
 const LocationForm = () => {
-  const record = useRecordContext();
   const location = useLocation();
   const params: any = new Proxy(new URLSearchParams(location.search), {
     get: (searchParams, prop) => searchParams.get(prop as string),
@@ -57,11 +56,20 @@ const LocationForm = () => {
       };
     });
   }, [districtData]);
-
   const blocks = useMemo(() => {
-    console.log("sd -->", selectedDistrict)
-    if (!selectedDistrict || !districtData) {
+    if (!districtData) {
       return [];
+    }
+    if(!selectedDistrict){
+      return _.uniqBy(
+        districtData,
+        "block"
+      ).map((a) => {
+        return {
+          id: a.block,
+          name: a.block,
+        };
+      });
     }
     return _.uniqBy(
       districtData.filter((d) => d.district === selectedDistrict),
@@ -75,8 +83,19 @@ const LocationForm = () => {
   }, [selectedDistrict, districtData]);
 
   const clusters = useMemo(() => {
-    if (!selectedBlock || !districtData) {
+    if (!districtData) {
       return [];
+    }
+    if(!selectedBlock){
+      return _.uniqBy(
+        districtData,
+        "cluster"
+      ).map((a) => {
+        return {
+          id: a.cluster,
+          name: a.cluster,
+        };
+      });
     }
     return _.uniqBy(
       districtData.filter((d) => d.block === selectedBlock),
@@ -88,10 +107,6 @@ const LocationForm = () => {
       };
     });
   }, [selectedBlock, districtData]);
-
-  useEffect(() => {
-    
-  }, [districtData])
 
   return (
     <>
@@ -113,26 +128,8 @@ const LocationForm = () => {
           source="district"
           choices={districts}
         />
-
-        <SelectInput
-          label="Block"
-          onChange={(e) => {
-            // const nam: any = districtData?.filter((item) => {
-            //   return e.target.value === item.block;
-            // });
-            setSelectedBlock(e.target.value);
-          }}
-          value={selectedBlock}
-          source="block"
-          choices={blocks}
-        />
-        <SelectInput
-          label="Cluster"
-          onChange={(e) => setSelectedCluster(e.target.value)}
-          value={selectedCluster}
-          source="cluster"
-          choices={clusters}
-        />
+        <TextInput source="block" />
+        <TextInput source="cluster" />
     </>
   );
 };

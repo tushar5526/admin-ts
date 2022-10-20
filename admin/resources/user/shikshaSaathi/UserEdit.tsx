@@ -8,6 +8,9 @@ import {
   TextInput,
   useRecordContext,
   useDataProvider,
+  regex,
+  maxLength,
+  minLength,
 } from "react-admin";
 import {
   getAllDistricts,
@@ -20,6 +23,7 @@ import { useLogin } from "../hooks";
 import { getClusters } from "../designation";
 import { ChangePasswordButton } from "../ChangePasswordButton";
 import { designationLevels } from "../esamwaad/designation";
+import EditWrapper from "../../../components/styleWrappers/EditWrapper";
 const ApplicationId = "1ae074db-32f3-4714-a150-cc8a370eafd1";
 
 const displayRoles = (a: any) => {
@@ -68,13 +72,15 @@ const UserForm = () => {
   const blockChoices = getBlocks(state.district, "", _loggedInUser);
   const clusterChoices = getClusters(state.block, "", _loggedInUser);
 
+  const validatePhoneNumber = [minLength(10, "Phone Number must be 10 digit long"), maxLength(10, "Phone Number must be 10 digit long")];
+
   return (
     <>
       <span>User Details</span>
 
       <TextInput source="username" disabled={true} />
-      <TextInput source="fullName" label="Full Name" />
-      <TextInput source="mobilePhone" label="Mobile Phone" />
+      <TextInput source="fullName" label="Full Name"  />
+      <TextInput source="mobilePhone" label="Mobile Phone" validate={validatePhoneNumber} />
       <SelectInput
         value={state.designation}
         onChange={(e) => {
@@ -143,15 +149,8 @@ const UserForm = () => {
   );
 };
 const UserEdit = () => (
-  <Edit>
-    <SimpleForm
-      onSubmit={(values) => {
-        // We will get Form Values on submission
-        console.log(values);
-      }}
-    >
-      <UserForm />
-    </SimpleForm>
-  </Edit>
+  <EditWrapper>
+    <UserForm />
+  </EditWrapper>
 );
 export default UserEdit;
