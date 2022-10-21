@@ -175,7 +175,7 @@ const UserList = () => {
     <SelectInput
       label="Role"
       source="data.roleData.role"
-      choices={districts}
+      choices={["Teacher", "Principal", "school"].map(el => { return { id: el, name: el } })}
       key={"role"}
     />,
     <SelectInput
