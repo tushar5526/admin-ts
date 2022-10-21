@@ -18,6 +18,8 @@ import { useMemo, useState } from "react";
 import * as _ from "lodash";
 import { ListDataGridWithPermissions } from "../../../components/lists";
 import { ChangePasswordButton } from "../ChangePasswordButton";
+import { getLowerDesignationsChoices } from "../designation";
+import { designationLevels } from "../esamwaad/designation";
 
 const ApplicationId = "1ae074db-32f3-4714-a150-cc8a370eafd1";
 const DisplayRoles = (a: any) => {
@@ -153,13 +155,13 @@ const UserList = () => {
       };
     });
   }, [districtData]);
-
+  const rolesChoices: any = designationLevels;
   const Filters = [
     // <TextInput source="username" alwaysOn key={"search"}/>,
     <SelectInput
       label="Role"
       source="data.roleData.role"
-      choices={districts}
+      choices={rolesChoices}
       key={"role"}
     />,
     <SelectInput
