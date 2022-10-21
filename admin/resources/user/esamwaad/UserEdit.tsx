@@ -19,9 +19,7 @@ import {
   SelectArrayInput,
   SelectInput,
   NumberInput,
-  ReferenceInput,
-  Toolbar,
-  SaveButton
+  ReferenceInput
 } from "react-admin";
 import { designationESamwaad, designationLevels } from "./designation";
 import { useEffect, useMemo, useState } from "react";
@@ -327,11 +325,6 @@ const UserForm = () => {
           defaultValue={record?.data?.udise}
         />
       </ReferenceInput>
-
-      <ChangePasswordButton record={record}></ChangePasswordButton>
-      <br></br>
-      <br></br>
-
     </>
   )
   // const roles = useMemo(() => {
@@ -354,12 +347,6 @@ const UserForm = () => {
   // if (schoolMode) return <SchoolModeUserForm record={record} />;
   // return <NonSchoolModeUserForm record={record} />;
 };
-
-const UserEditToolbar = (props: any) => (
-  <Toolbar {...props} >
-    <SaveButton />
-  </Toolbar>
-);
 
 const UserEdit = () => {
   const notify = useNotify();
@@ -385,7 +372,6 @@ const UserEdit = () => {
   return (
     <Edit>
       <SimpleForm
-        toolbar={<UserEditToolbar />}
         onSubmit={(values) => {
           const _v: any = {
             mobilePhone: values["mobilePhone"],

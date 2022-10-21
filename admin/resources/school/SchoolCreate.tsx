@@ -34,9 +34,9 @@ const SchoolCreate = () => {
       <SimpleForm>
         <TextInput source="name" validate={inputConstraints.fullName} />
         <NumberInput source="udise" validate={required("Please enter a valid UDISE")} />
-        <SelectInput label="District" source="location.data.district" choices={districts} validate={inputConstraints.district} />
-        <SelectInput label="Block" source="location.data.block" choices={blocks} validate={inputConstraints.block} />
-        <SelectInput label="Cluster" source="location.data.cluster" choices={clusters} validate={inputConstraints.cluster} />
+        <SelectInput source="location.districts" label="District" choices={districts} validate={inputConstraints.district} />
+        <SelectInput source="location.block" label="Block" choices={blocks} validate={inputConstraints.district} />
+        <SelectInput source="location.cluster" label="Cluster" choices={clusters} validate={inputConstraints.district} />
         <SelectInput source="session" label="Session" choices={["S", "W"].map(el => { return { id: el, name: el } })} validate={inputConstraints.session} />
         <SelectInput source="type" label="Type" choices={["GPS", "GMS", "GHS", "GSSS"].map(el => { return { id: el, name: el } })} validate={inputConstraints.type} />
         <BooleanInput source="is_active" />
