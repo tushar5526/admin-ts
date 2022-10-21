@@ -12,7 +12,8 @@ import {
   maxLength,
   minLength,
   regex,
-  SelectArrayInput
+  SelectArrayInput,
+  useNotify
 } from "react-admin";
 import { useLogin } from "../hooks";
 import { getLowerDesignationsChoices } from "../designation";
@@ -36,6 +37,7 @@ const UserCreate = (props: any) => {
     accountStatus: "",
     modeOfEmployment: ""
   });
+  const notify = useNotify();
 
   useEffect(() => {
     fetchSchool(state.udise);
@@ -68,7 +70,16 @@ const UserCreate = (props: any) => {
     res.then((data) => {
       if (data?.data?.responseCode === "OK") {
         setUserCreated(true);
+      } else if (data?.data?.status != 200) {
+        const errorStrings: String[] = [];
+        const errors = data?.data?.exception?.fieldErrors;
+        Object.keys(errors).forEach(key => {
+          errorStrings.push(errors[key]?.[0]?.message);
+        })
+        notify(errorStrings.join(""), { type: 'warning' });
       }
+    }).catch(err => {
+      notify("An internal server error occured", { type: 'warning' });
     });
   };
 
