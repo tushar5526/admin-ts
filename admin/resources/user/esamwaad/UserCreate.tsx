@@ -11,7 +11,8 @@ import {
   number,
   maxLength,
   minLength,
-  regex
+  regex,
+  SelectArrayInput
 } from "react-admin";
 import { useLogin } from "../hooks";
 import { getLowerDesignationsChoices } from "../designation";
@@ -125,10 +126,9 @@ const UserCreate = (props: any) => {
           label="Mobile Phone"
           validate={inputConstraints.mobile}
         />
-        <SelectInput
+        <SelectArrayInput
           onChange={(e) => setState({ ...state, roles: e.target.value })}
           source="roles"
-          value={state.roles}
           choices={inputChoices.roles}
           label="Roles"
           validate={inputConstraints.role}
