@@ -18,23 +18,37 @@ const dataProvider = {
     resource: any,
     { pagination: { page, perPage }, filter }: any
   ): Promise<any> => {
-    const queryString = [
-      `registrations.applicationId:${Applications[resource]}`,
-    ];
+    let queryString = [`registrations.applicationId:${Applications[resource]}`];
+    console.log({ filter });
     if (filter?.udise) {
       queryString.push(`${filter?.udise}`);
     }
 
-    if (filter?.role) {
-      queryString.push(`registrations.roles :${filter?.role}`);
+    if (filter?.data?.roleData?.role) {
+      queryString = [];
+      queryString.push(`data.roleData.role:${filter?.data?.roleData?.role}`);
+    }
+    if (filter?.data?.roleData?.district) {
+      queryString = [];
+      queryString.push(
+        `data.roleData.district:${filter?.data?.roleData?.district}`
+      );
+    }
+    if (filter?.block) {
+      queryString = [];
+      queryString.push(
+        `data.roleData.block:${filter?.block}`
+      );
     }
     if (filter?.username) {
-      queryString.push(`,username=${filter?.username}`);
+      queryString = [];
+      queryString.push(`username:${filter?.username}`);
+      queryString.push(`username:*${filter?.username}*`);
     }
     const params = {
       startRow: (page - 1) * perPage,
       numberOfResults: perPage,
-      queryString: `(${queryString.join(") AND (")})`,
+      queryString: `(${queryString.join(") OR (")})`,
       applicationId: Applications[resource],
     };
     const response = await client.get("/admin/searchUser", { params });

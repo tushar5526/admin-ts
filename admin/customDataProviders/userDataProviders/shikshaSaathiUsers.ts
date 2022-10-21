@@ -16,8 +16,7 @@ const dataProvider: DataProvider = {
   updateMany: async (...params: any): Promise<any> => {
     const response = await client.get("/admin/searchUser");
   },
-  create: async (...params: any): Promise<any> => {
-    console.log(params);
+  create: async (...params: any): Promise<any> => {    
     const response = await client.get("/admin/searchUser");
   },
   delete: async (...params: any): Promise<any> => {

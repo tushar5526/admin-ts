@@ -111,7 +111,7 @@ client.get = function (endpoint: string, customConfig: any = {}) {
   let params = [];
   if (customConfig.params) {
     for (let p in customConfig.params) {
-      params.push(`${p}=${encodeURIComponent(customConfig.params[p])}`);
+      params.push(`${p}=${decodeURIComponent(customConfig.params[p])}`);
     }
   }
 

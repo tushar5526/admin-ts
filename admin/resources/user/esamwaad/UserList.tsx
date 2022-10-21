@@ -51,8 +51,7 @@ const getTeacherDataByRecord = (id: any) => {
   return teacher;
 };
 const getCorrespondingTeacherDistrict = (record: any) => {
-  const teacher = getTeacherDataByRecord(record?.id);
-  console.log(teacher, "teacher");
+  const teacher = getTeacherDataByRecord(record?.id);  
 
   if (!teacher) return <LinearProgress />;
 
@@ -171,7 +170,7 @@ const UserList = () => {
   }, [districtData]);
 
   const Filters = [
-    // <TextInput label="Username" source="username" alwaysOn key={"search"} />,
+    <TextInput label="Username" source="username" alwaysOn key={"search"} />,
     <SelectInput
       label="Role"
       source="data.roleData.role"

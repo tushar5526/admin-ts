@@ -248,8 +248,7 @@ export const GQLForm = () => {
 //   );
 // };
 const UserForm = () => {
-  const record = useRecordContext();
-  console.log(record)
+  const record = useRecordContext();  
   const [state, setState] = useState<any>({
     roles: record?.registrations?.[0]?.roles
   });

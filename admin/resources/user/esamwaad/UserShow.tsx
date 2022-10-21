@@ -18,8 +18,7 @@ const UserShow = () => {
     if (!registration) {
       return <span>-</span>;
     }
-    const { roles } = registration;
-    console.log(roles, "roles");
+    const { roles } = registration;    
     return roles.map((role: any, index: number) => {
       return (
         <span

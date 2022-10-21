@@ -157,7 +157,7 @@ const UserList = () => {
   }, [districtData]);
   const rolesChoices: any = designationLevels;
   const Filters = [
-    // <TextInput source="username" alwaysOn key={"search"}/>,
+    <TextInput source="username" alwaysOn key={"search"}/>,
     <SelectInput
       label="Role"
       source="data.roleData.role"
