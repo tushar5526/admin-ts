@@ -31,25 +31,25 @@ const dataProvider: DataProvider = {
     };
   },
   getMany: async (...params: any): Promise<any> => {
-    const response = await client.get("admin/searchUser");
+    const response = await client.get("/admin/searchUser");
   },
   getManyReference: async (...params: any): Promise<any> => {
-    const response = await client.get("admin/searchUser");
+    const response = await client.get("/admin/searchUser");
   },
   update: async (...params: any): Promise<any> => {
-    const response = await client.get("admin/searchUser");
+    const response = await client.get("/admin/searchUser");
   },
   updateMany: async (...params: any): Promise<any> => {
-    const response = await client.get("admin/searchUser");
+    const response = await client.get("/admin/searchUser");
   },
   create: async (...params: any): Promise<any> => {
-    const response = await client.get("admin/searchUser");
+    const response = await client.get("/admin/searchUser");
   },
   delete: async (...params: any): Promise<any> => {
-    const response = await client.get("admin/searchUser");
+    const response = await client.get("/admin/searchUser");
   },
   deleteMany: async (...params: any): Promise<any> => {
-    const response = await client.get("admin/searchUser");
+    const response = await client.get("/admin/searchUser");
   },
 };
 export default dataProvider;
