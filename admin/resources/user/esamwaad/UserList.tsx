@@ -134,14 +134,23 @@ const UserList = () => {
       };
     });
   }, [districtData]);
-
   const blocks = useMemo(() => {
     if (!districtData) {
       return [];
     }
+    if(!selectedDistrict){
+      return _.uniqBy(
+        districtData,
+        "block"
+      ).map((a) => {
+        return {
+          id: a.block,
+          name: a.block,
+        };
+      });
+    }
     return _.uniqBy(
-      // districtData.filter((d) => d.district === selectedDistrict),
-      districtData,
+      districtData.filter((d) => d.district === selectedDistrict),
       "block"
     ).map((a) => {
       return {
@@ -149,16 +158,25 @@ const UserList = () => {
         name: a.block,
       };
     });
-    // }, [selectedDistrict, districtData]);
-  }, [districtData]);
+  }, [selectedDistrict, districtData]);
 
   const clusters = useMemo(() => {
     if (!districtData) {
       return [];
     }
+    if(!selectedBlock){
+      return _.uniqBy(
+        districtData,
+        "cluster"
+      ).map((a) => {
+        return {
+          id: a.cluster,
+          name: a.cluster,
+        };
+      });
+    }
     return _.uniqBy(
-      districtData,
-      // districtData.filter((d) => d.block === selectedBlock),
+      districtData.filter((d) => d.block === selectedBlock),
       "cluster"
     ).map((a) => {
       return {
@@ -166,8 +184,7 @@ const UserList = () => {
         name: a.cluster,
       };
     });
-    // }, [selectedBlock, districtData]);
-  }, [districtData]);
+  }, [selectedBlock, districtData]);
 
   const Filters = [
     <TextInput label="Username" source="username" alwaysOn key={"search"} />,
@@ -228,7 +245,11 @@ const UserList = () => {
           return DisplayRoles(record);
         }}
       />
-      <FunctionField
+      <TextField source="data.roleData.district" />
+      <TextField source="data.roleData.block" />
+      <TextField source="data.roleData.cluster" />
+      
+      {/* <FunctionField
         label="District"
         render={(record: any) => getCorrespondingTeacherDistrict(record)}
       />{" "}
@@ -239,7 +260,7 @@ const UserList = () => {
       <FunctionField
         label="Cluster"
         render={(record: any) => getCorrespondingTeacherCluster(record)}
-      />
+      /> */}
     </ListDataGridWithPermissions>
   );
 };

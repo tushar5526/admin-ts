@@ -40,6 +40,12 @@ const dataProvider = {
         `data.roleData.block:${filter?.block}`
       );
     }
+    if (filter?.cluster) {
+      queryString = [];
+      queryString.push(
+        `data.roleData.cluster:${filter?.cluster}`
+      );
+    }
     if (filter?.username) {
       queryString = [];
       queryString.push(`username:${filter?.username}`);

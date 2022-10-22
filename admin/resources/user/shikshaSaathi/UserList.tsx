@@ -131,30 +131,57 @@ const UserList = () => {
       };
     });
   }, [districtData]);
-
   const blocks = useMemo(() => {
     if (!districtData) {
       return [];
     }
-    return _.uniqBy(districtData, "block").map((a) => {
+    if(!selectedDistrict){
+      return _.uniqBy(
+        districtData,
+        "block"
+      ).map((a) => {
+        return {
+          id: a.block,
+          name: a.block,
+        };
+      });
+    }
+    return _.uniqBy(
+      districtData.filter((d) => d.district === selectedDistrict),
+      "block"
+    ).map((a) => {
       return {
         id: a.block,
         name: a.block,
       };
     });
-  }, [districtData]);
+  }, [selectedDistrict, districtData]);
 
   const clusters = useMemo(() => {
     if (!districtData) {
       return [];
     }
-    return _.uniqBy(districtData, "cluster").map((a) => {
+    if(!selectedBlock){
+      return _.uniqBy(
+        districtData,
+        "cluster"
+      ).map((a) => {
+        return {
+          id: a.cluster,
+          name: a.cluster,
+        };
+      });
+    }
+    return _.uniqBy(
+      districtData.filter((d) => d.block === selectedBlock),
+      "cluster"
+    ).map((a) => {
       return {
         id: a.cluster,
         name: a.cluster,
       };
     });
-  }, [districtData]);
+  }, [selectedBlock, districtData]);
   const rolesChoices: any = designationLevels;
   const Filters = [
     <TextInput source="username" alwaysOn key={"search"}/>,
