@@ -188,12 +188,12 @@ const UserList = () => {
 
   const Filters = [
     <TextInput label="Username" source="username" alwaysOn key={"search"} />,
-    <SelectInput
-      label="Role"
-      source="data.roleData.role"
-      choices={["Teacher", "Principal", "school"].map(el => { return { id: el, name: el } })}
-      key={"role"}
-    />,
+    // <SelectInput
+    //   label="Role"
+    //   source="data.roleData.role"
+    //   choices={["Teacher", "Principal", "school"].map(el => { return { id: el, name: el } })}
+    //   key={"role"}
+    // />,
     <SelectInput
       label="District"
       key={"district"}
@@ -245,9 +245,9 @@ const UserList = () => {
           return DisplayRoles(record);
         }}
       />
-      <TextField source="data.roleData.district" />
-      <TextField source="data.roleData.block" />
-      <TextField source="data.roleData.cluster" />
+      <TextField source="data.roleData.district" label="District" />
+      <TextField source="data.roleData.block" label="Block" />
+      <TextField source="data.roleData.cluster" label="Cluster" />
       
       {/* <FunctionField
         label="District"
