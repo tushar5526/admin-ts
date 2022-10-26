@@ -21,7 +21,7 @@ import {
   NumberInput,
   ReferenceInput,
   Toolbar,
-  SaveButton
+  SaveButton,
 } from "react-admin";
 import { designationESamwaad, designationLevels } from "./designation";
 import { useEffect, useMemo, useState } from "react";
@@ -82,8 +82,8 @@ export const SchoolUDISEInput = () => {
         {data?.data?.name
           ? `School: ${data?.data?.name}`
           : isLoading
-            ? "Loading..."
-            : "No School"}
+          ? "Loading..."
+          : "No School"}
       </Typography>
       <TextInput
         source={"data.udise"}
@@ -98,24 +98,50 @@ export const SchoolUDISEInput = () => {
 
 // Input dropdown choices
 const inputChoices = {
-  designations: designationESamwaad.map(el => { return { id: el.designation, name: el.designation } }),
-  accountStatuses: ["ACTIVE", "DEACTIVATED", "PENDING", "REJECTED"].map(el => { return { id: el, name: el } }),
-  roles: ["Teacher", "Principal", "school"].map(el => { return { id: el, name: el } }),
-  employment: ["Permanent", "Contractual"].map(el => { return { id: el, name: el } })
-}
-
+  designations: designationESamwaad.map((el) => {
+    return { id: el.designation, name: el.designation };
+  }),
+  accountStatuses: ["ACTIVE", "DEACTIVATED", "PENDING", "REJECTED"].map(
+    (el) => {
+      return { id: el, name: el };
+    }
+  ),
+  roles: ["Teacher", "Principal", "school"].map((el) => {
+    return { id: el, name: el };
+  }),
+  employment: ["Permanent", "Contractual"].map((el) => {
+    return { id: el, name: el };
+  }),
+};
 
 // Input Constraints
 const inputConstraints = {
-  userName: [required("Please provide username"), number("The username must be numeric")],
-  udise: [required("Please provide UDISE"), number("The UDISE must be numeric")],
-  fullName: [required("Please provide fullname"), regex(/^[a-zA-Z0-9 ]*$/, "Name can only contain alphabets, numbers and spaces")],
-  mobile: [required("Please provide mobile number"), number("Mobile must be numeric"), minLength(10), maxLength(10)],
+  userName: [
+    required("Please provide username"),
+    number("The username must be numeric"),
+  ],
+  udise: [
+    required("Please provide UDISE"),
+    number("The UDISE must be numeric"),
+  ],
+  fullName: [
+    required("Please provide fullname"),
+    regex(
+      /^[a-zA-Z0-9 ]*$/,
+      "Name can only contain alphabets, numbers and spaces"
+    ),
+  ],
+  mobile: [
+    required("Please provide mobile number"),
+    number("Mobile must be numeric"),
+    minLength(10),
+    maxLength(10),
+  ],
   role: required("Please select a role"),
   designation: required("Please select a designation"),
   accountStatus: required("Please select account status"),
-  modeOfEmployment: required("Please select mode of employment")
-}
+  modeOfEmployment: required("Please select mode of employment"),
+};
 
 // const SchoolModeUserForm = ({ record }: any) => {
 //   return (
@@ -145,11 +171,13 @@ export const GQLForm = () => {
   const { data, isLoading, error, refetch } = useGetList("teacher", {
     filter: { user_id: record.id },
   });
+  console.log({ data });
   const [designation, setDesignation] = useState("");
   const [accountStatus, setAccountStatus] = useState("");
   const [employment, setEmployment] = useState("");
   useEffect(() => {
     if (data?.length) {
+      console.log({ data });
       setDesignation(data?.[0]?.designation);
       setAccountStatus(data?.[0]?.account_status);
       setEmployment(data?.[0]?.employment);
@@ -248,9 +276,9 @@ export const GQLForm = () => {
 //   );
 // };
 const UserForm = () => {
-  const record = useRecordContext();  
+  const record = useRecordContext();
   const [state, setState] = useState<any>({
-    roles: record?.registrations?.[0]?.roles
+    roles: record?.registrations?.[0]?.roles,
   });
   return (
     <>
@@ -258,6 +286,7 @@ const UserForm = () => {
         onChange={(e) => setState({ ...state, userName: e.target.value })}
         source="username"
         label="User Name"
+        disabled
         validate={inputConstraints.userName}
       />
       <TextInput
@@ -282,41 +311,44 @@ const UserForm = () => {
         validate={inputConstraints.role}
       />
 
-
-      {state.roles && (state.roles.includes("Principal") || state.roles.includes("Teacher")) &&
-        <>
-          <SelectInput
-            value={state.designation}
-            onChange={(e: any) =>
-              setState({ ...state, designation: e.target.value })
-            }
-            source="designation"
-            label="Designation"
-            choices={inputChoices.designations}
-            validate={inputConstraints.designation}
-          />
-          <SelectInput
-            value={state.accountStatus}
-            onChange={(e: any) =>
-              setState({ ...state, accountStatus: e.target.value })
-            }
-            source="account_status"
-            label="Account Status"
-            choices={inputChoices.accountStatuses}
-            validate={inputConstraints.accountStatus}
-            defaultValue={record?.usernameStatus}
-          />
-          <SelectInput
-            value={state.modeOfEmployment}
-            onChange={(e: any) =>
-              setState({ ...state, modeOfEmployment: e.target.value })
-            }
-            source="mode_of_employment"
-            label="Mode of employment"
-            validate={inputConstraints.modeOfEmployment}
-            choices={inputChoices.employment}
-          />
-        </>}
+      {console.log({ state })}
+      {state.roles &&
+        (state.roles.includes("Principal") ||
+          state.roles.includes("Teacher")) && (
+          <>
+            <SelectInput
+              value={state.designation}
+              onChange={(e: any) =>
+                setState({ ...state, designation: e.target.value })
+              }
+              source="designation"
+              label="Designation"
+              choices={inputChoices.designations}
+              validate={inputConstraints.designation}
+            />
+            <SelectInput
+              value={state.accountStatus}
+              onChange={(e: any) =>
+                setState({ ...state, accountStatus: e.target.value })
+              }
+              source="account_status"
+              label="Account Status"
+              choices={inputChoices.accountStatuses}
+              validate={inputConstraints.accountStatus}
+              defaultValue={record?.usernameStatus}
+            />
+            <SelectInput
+              value={state.modeOfEmployment}
+              onChange={(e: any) =>
+                setState({ ...state, modeOfEmployment: e.target.value })
+              }
+              source="mode_of_employment"
+              label="Mode of employment"
+              validate={inputConstraints.modeOfEmployment}
+              choices={inputChoices.employment}
+            />
+          </>
+        )}
       <ReferenceInput source="school_id" reference="school">
         <TextInput
           onChange={(e) => setState({ ...state, udise: e.target.value })}
@@ -330,9 +362,8 @@ const UserForm = () => {
       <ChangePasswordButton record={record}></ChangePasswordButton>
       <br></br>
       <br></br>
-
     </>
-  )
+  );
   // const roles = useMemo(() => {
   //   if (record?.registrations) {
   //     const registration = record.registrations?.find(
@@ -355,7 +386,7 @@ const UserForm = () => {
 };
 
 const UserEditToolbar = (props: any) => (
-  <Toolbar {...props} >
+  <Toolbar {...props}>
     <SaveButton />
   </Toolbar>
 );
