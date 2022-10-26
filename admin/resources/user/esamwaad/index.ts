@@ -9,7 +9,6 @@ export default {
   list: UserList,
   edit: UserEdit,
   create: UserCreate,
-  show: UserShow,
   permissions: {
     canEdit: ["Admin"],
     canDelete: ["Admin"],

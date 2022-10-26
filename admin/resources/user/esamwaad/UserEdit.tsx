@@ -61,9 +61,9 @@ export const DisplayRoles = (a: any) => {
 };
 
 export const SchoolUDISEInput = () => {
+  const dataProvider = useDataProvider();
   const record = useRecordContext();
   const [value, setValue] = useState(record?.data?.udise);
-  const dataProvider = useDataProvider();
   const resource = useResourceContext();
   const { data, isLoading, refetch } = useQuery(
     ["getSchoolByUDISE", record.id],
@@ -82,8 +82,8 @@ export const SchoolUDISEInput = () => {
         {data?.data?.name
           ? `School: ${data?.data?.name}`
           : isLoading
-          ? "Loading..."
-          : "No School"}
+            ? "Loading..."
+            : "No School"}
       </Typography>
       <TextInput
         source={"data.udise"}
@@ -114,35 +114,6 @@ const inputChoices = {
   }),
 };
 
-// Input Constraints
-const inputConstraints = {
-  userName: [
-    required("Please provide username"),
-    number("The username must be numeric"),
-  ],
-  udise: [
-    required("Please provide UDISE"),
-    number("The UDISE must be numeric"),
-  ],
-  fullName: [
-    required("Please provide fullname"),
-    regex(
-      /^[a-zA-Z0-9 ]*$/,
-      "Name can only contain alphabets, numbers and spaces"
-    ),
-  ],
-  mobile: [
-    required("Please provide mobile number"),
-    number("Mobile must be numeric"),
-    minLength(10),
-    maxLength(10),
-  ],
-  role: required("Please select a role"),
-  designation: required("Please select a designation"),
-  accountStatus: required("Please select account status"),
-  modeOfEmployment: required("Please select mode of employment"),
-};
-
 // const SchoolModeUserForm = ({ record }: any) => {
 //   return (
 //     <>
@@ -165,97 +136,97 @@ const inputConstraints = {
 //   );
 // };
 
-export const GQLForm = () => {
-  const record = useRecordContext();
-  const dataProvider = useDataProvider();
-  const { data, isLoading, error, refetch } = useGetList("teacher", {
-    filter: { user_id: record.id },
-  });
-  console.log({ data });
-  const [designation, setDesignation] = useState("");
-  const [accountStatus, setAccountStatus] = useState("");
-  const [employment, setEmployment] = useState("");
-  useEffect(() => {
-    if (data?.length) {
-      console.log({ data });
-      setDesignation(data?.[0]?.designation);
-      setAccountStatus(data?.[0]?.account_status);
-      setEmployment(data?.[0]?.employment);
-      designationInput.field.onChange(data?.[0]?.designation);
-      accountStatusInput.field.onChange(data?.[0]?.account_status);
-      employmentStatusInput.field.onChange(data?.[0]?.employment);
-    }
-  }, [data]);
-  const designationInput = useController({ name: "designation" });
-  const accountStatusInput = useController({ name: "account_status" });
-  const employmentStatusInput = useController({ name: "employment" });
-  return (
-    <div>
-      <div style={{ marginTop: "20px", minWidth: "300px" }}>
-        <Labeled label={"Designation"}>
-          <Select
-            value={designation}
-            style={{ minWidth: "300px" }}
-            onChange={(e) => {
-              setDesignation(e.target.value);
-              designationInput.field.onChange(e.target.value);
-            }}
-          >
-            {designationESamwaad.map((d, index) => {
-              return (
-                <MenuItem value={d.designation} key={index}>
-                  {d.designation}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </Labeled>
-      </div>
-      <div style={{ marginTop: "20px", minWidth: "300px" }}>
-        <Labeled label={"Mode of Employment"}>
-          <Select
-            value={employment}
-            style={{ minWidth: "300px" }}
-            onChange={(e) => {
-              setEmployment(e.target.value);
-              employmentStatusInput.field.onChange(e.target.value);
-            }}
-          >
-            {["Permanent", "Contractual"].map((d, index) => {
-              return (
-                <MenuItem value={d} key={index}>
-                  {d}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </Labeled>
-      </div>
-      <div style={{ marginTop: "20px", minWidth: "300px" }}>
-        <Labeled label={"Account Status"}>
-          <Select
-            value={accountStatus}
-            style={{ minWidth: "300px" }}
-            onChange={(e) => {
-              setAccountStatus(e.target.value);
-              accountStatusInput.field.onChange(e.target.value);
-            }}
-          >
-            {["ACTIVE", "DEACTIVATED", "PENDING", "REJECTED"].map(
-              (d, index) => {
-                return (
-                  <MenuItem value={d} key={index}>
-                    {d}
-                  </MenuItem>
-                );
-              }
-            )}
-          </Select>
-        </Labeled>
-      </div>
-    </div>
-  );
-};
+// export const GQLForm = () => {
+//   const record = useRecordContext();
+//   const { data, isLoading, error, refetch } = useGetList("teacher", {
+//     filter: { user_id: record.id },
+//   });
+//   console.log({ data });
+//   const [designation, setDesignation] = useState("");
+//   const [accountStatus, setAccountStatus] = useState("");
+//   const [employment, setEmployment] = useState("");
+//   useEffect(() => {
+//     if (data?.length) {
+//       console.log({ data });
+//       setDesignation(data?.[0]?.designation);
+//       setAccountStatus(data?.[0]?.account_status);
+//       setEmployment(data?.[0]?.employment);
+//       designationInput.field.onChange(data?.[0]?.designation);
+//       accountStatusInput.field.onChange(data?.[0]?.account_status);
+//       employmentStatusInput.field.onChange(data?.[0]?.employment);
+//     }
+//   }, [data]);
+//   const designationInput = useController({ name: "designation" });
+//   const accountStatusInput = useController({ name: "account_status" });
+//   const employmentStatusInput = useController({ name: "employment" });
+
+//   return (
+//     <div>
+//       <div style={{ marginTop: "20px", minWidth: "300px" }}>
+//         <Labeled label={"Designation"}>
+//           <Select
+//             value={designation}
+//             style={{ minWidth: "300px" }}
+//             onChange={(e) => {
+//               setDesignation(e.target.value);
+//               designationInput.field.onChange(e.target.value);
+//             }}
+//           >
+//             {designationESamwaad.map((d, index) => {
+//               return (
+//                 <MenuItem value={d.designation} key={index}>
+//                   {d.designation}
+//                 </MenuItem>
+//               );
+//             })}
+//           </Select>
+//         </Labeled>
+//       </div>
+//       <div style={{ marginTop: "20px", minWidth: "300px" }}>
+//         <Labeled label={"Mode of Employment"}>
+//           <Select
+//             value={employment}
+//             style={{ minWidth: "300px" }}
+//             onChange={(e) => {
+//               setEmployment(e.target.value);
+//               employmentStatusInput.field.onChange(e.target.value);
+//             }}
+//           >
+//             {["Permanent", "Contractual"].map((d, index) => {
+//               return (
+//                 <MenuItem value={d} key={index}>
+//                   {d}
+//                 </MenuItem>
+//               );
+//             })}
+//           </Select>
+//         </Labeled>
+//       </div>
+//       <div style={{ marginTop: "20px", minWidth: "300px" }}>
+//         <Labeled label={"Account Status"}>
+//           <Select
+//             value={accountStatus}
+//             style={{ minWidth: "300px" }}
+//             onChange={(e) => {
+//               setAccountStatus(e.target.value);
+//               accountStatusInput.field.onChange(e.target.value);
+//             }}
+//           >
+//             {["ACTIVE", "DEACTIVATED", "PENDING", "REJECTED"].map(
+//               (d, index) => {
+//                 return (
+//                   <MenuItem value={d} key={index}>
+//                     {d}
+//                   </MenuItem>
+//                 );
+//               }
+//             )}
+//           </Select>
+//         </Labeled>
+//       </div>
+//     </div>
+//   );
+// };
 // const NonSchoolModeUserForm = (record: any) => {
 //   return (
 //     <>
@@ -280,6 +251,49 @@ const UserForm = () => {
   const [state, setState] = useState<any>({
     roles: record?.registrations?.[0]?.roles,
   });
+  const dataProvider = useDataProvider();
+
+  const udiseValidation = async (value: any) => {
+    const res = await dataProvider.getList('school', {
+      pagination: { perPage: 1, page: 1 },
+      sort: { field: 'id', order: 'asc' },
+      filter: { udise: value }
+    });
+    if (res?.data?.length == 0)
+      return "Please enter a valid UDISE"
+    return undefined;
+  };
+
+
+  // Input Constraints
+  const inputConstraints = {
+    userName: [
+      required("Please provide username"),
+      number("The username must be numeric"),
+    ],
+    udise: [
+      required("Please provide UDISE"),
+      number("The UDISE must be numeric"),
+      udiseValidation
+    ],
+    fullName: [
+      required("Please provide fullname"),
+      regex(
+        /^[a-zA-Z0-9 ]*$/,
+        "Name can only contain alphabets, numbers and spaces"
+      ),
+    ],
+    mobile: [
+      required("Please provide mobile number"),
+      regex(/^\d+$/, "The phone number must be numeric"),
+      minLength(10, "Mobile cannot be less than 10 digits"),
+      maxLength(10, "Mobile cannot be more than 10 digits")
+    ],
+    role: required("Please select a role"),
+    designation: required("Please select a designation"),
+    accountStatus: required("Please select account status"),
+    modeOfEmployment: required("Please select mode of employment"),
+  };
   return (
     <>
       <TextInput
@@ -291,11 +305,11 @@ const UserForm = () => {
       />
       <TextInput
         onChange={(e) => setState({ ...state, fullName: e.target.value })}
-        source="fullName"
+        source="firstName"
         label="Name"
         validate={inputConstraints.fullName}
       />
-      <NumberInput
+      <TextInput
         onChange={(e) => setState({ ...state, mobile: e.target.value })}
         source="mobilePhone"
         label="Mobile Phone"

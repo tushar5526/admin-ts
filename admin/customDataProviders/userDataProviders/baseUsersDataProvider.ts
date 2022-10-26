@@ -27,6 +27,11 @@ const dataProvider = {
     if (filter?.data?.roleData?.role) {
       queryString = [];
       queryString.push(`data.roleData.role:${filter?.data?.roleData?.role}`);
+      queryString.push(`registrations.roles:${filter?.data?.roleData?.role}`);
+    }
+    if (filter?.esamwadRoles) {
+      queryString = [];
+      queryString.push(`registrations.roles:${filter?.esamwadRoles}`);
     }
     if (filter?.data?.roleData?.district) {
       queryString = [];
@@ -110,7 +115,7 @@ const dataProvider = {
           data: response?.data?.result,
         };
       }
-    } catch (e) {}
+    } catch (e) { }
     throw new Error("Unable to update");
   },
 };

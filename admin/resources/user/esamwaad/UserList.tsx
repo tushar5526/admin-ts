@@ -9,12 +9,14 @@ import {
   SelectInput,
   TextInput,
   useDataProvider,
+  useRecordContext,
 } from "react-admin";
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { useMemo, useState } from "react";
 import * as _ from "lodash";
 import { ListDataGridWithPermissions } from "../../../components/lists";
+import { Chip } from "@mui/material";
 
 const ApplicationId = "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da";
 const DisplayRoles = (a: any) => {
@@ -51,7 +53,7 @@ const getTeacherDataByRecord = (id: any) => {
   return teacher;
 };
 const getCorrespondingTeacherDistrict = (record: any) => {
-  const teacher = getTeacherDataByRecord(record?.id);  
+  const teacher = getTeacherDataByRecord(record?.id);
 
   if (!teacher) return <LinearProgress />;
 
@@ -138,7 +140,7 @@ const UserList = () => {
     if (!districtData) {
       return [];
     }
-    if(!selectedDistrict){
+    if (!selectedDistrict) {
       return _.uniqBy(
         districtData,
         "block"
@@ -164,7 +166,7 @@ const UserList = () => {
     if (!districtData) {
       return [];
     }
-    if(!selectedBlock){
+    if (!selectedBlock) {
       return _.uniqBy(
         districtData,
         "cluster"
@@ -188,12 +190,12 @@ const UserList = () => {
 
   const Filters = [
     <TextInput label="Username" source="username" alwaysOn key={"search"} />,
-    // <SelectInput
-    //   label="Role"
-    //   source="data.roleData.role"
-    //   choices={["Teacher", "Principal", "school"].map(el => { return { id: el, name: el } })}
-    //   key={"role"}
-    // />,
+    <SelectInput
+      label="Role"
+      source="esamwadRoles"
+      choices={["Teacher", "Principal", "school"].map(el => { return { id: el, name: el } })}
+      key={"role"}
+    />,
     <SelectInput
       label="District"
       key={"district"}
@@ -226,12 +228,60 @@ const UserList = () => {
       key="cluster"
     />,
   ];
+
+  const statusChoices = [
+    {
+      id: "PENDING",
+      name: "Pending",
+      icon: "warning",
+      color: "#FEC400",
+    },
+    {
+      id: "REJECTED",
+      name: "Rejected",
+      icon: "pending_actions",
+      color: "#F12B2C",
+      templateId: "1007409368881000345",
+      template:
+        "Your registration request for e-Samvad has been rejected. Please contact your school head regarding this matter.\n\nSamagra Shiksha, Himachal Pradesh",
+    },
+    {
+      id: "ACTIVE",
+      name: "Active",
+      icon: "inventory",
+      color: "#29CC97",
+      templateId: "1007578130357765332",
+      template:
+        "Your registration on e-Samvad has been approved. You can login to the app to access all the features.\n\nSamagra Shiksha, Himachal Pradesh",
+    },
+    {
+      id: "DEACTIVATED",
+      name: "Deactivated",
+      icon: "real_estate_agent",
+      color: "#cbcbcb",
+    },
+  ];
+
+  const ColoredChipField = (props: any) => {
+    const record = useRecordContext();
+
+    let data = statusChoices.find((elem) => elem.id === record[props.source]);
+    return (
+      <Chip
+        style={{ backgroundColor: data?.color, color: "#FFF" }}
+        label={data?.name}
+      />
+    );
+  };
+
   return (
     <ListDataGridWithPermissions
       dataGridProps={{ rowClick: "show" }}
       listProps={{ filters: Filters }}
     >
       <TextField source="username" />
+      <NumberField source="data.udise" label="UDISE" />
+      <ColoredChipField label="Account Status" source="usernameStatus" />
       <FunctionField
         label="Full Name"
         render={(record: any) => `${record.firstName} ${record.lastName}`}
@@ -242,13 +292,14 @@ const UserList = () => {
       <FunctionField
         label="Role"
         render={(record: any) => {
+          console.log(record);
           return DisplayRoles(record);
         }}
       />
       <TextField source="data.roleData.district" label="District" />
       <TextField source="data.roleData.block" label="Block" />
       <TextField source="data.roleData.cluster" label="Cluster" />
-      
+
       {/* <FunctionField
         label="District"
         render={(record: any) => getCorrespondingTeacherDistrict(record)}

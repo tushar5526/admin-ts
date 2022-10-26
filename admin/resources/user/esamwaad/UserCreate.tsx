@@ -13,7 +13,8 @@ import {
   minLength,
   regex,
   SelectArrayInput,
-  useNotify
+  useNotify,
+  useDataProvider
 } from "react-admin";
 import { useLogin } from "../hooks";
 import { getLowerDesignationsChoices } from "../designation";
@@ -26,6 +27,7 @@ const UserCreate = (props: any) => {
   const { user: _loggedInUser } = useLogin();
   const [userCreated, setUserCreated] = useState(false);
   const { school, refresh: fetchSchool } = useSearchSchoolByUDISE();
+  const dataProvider = useDataProvider();
   const [state, setState] = useState({
     userName: "",
     fullName: "",
@@ -92,19 +94,26 @@ const UserCreate = (props: any) => {
   }
 
 
-  const udiseSchoolCheck = (value: any) => {
-    if (value == school?.udise && state.roles.includes("school")) {
-      return 'Cannot register more than one school for this UDISE';
-    }
+
+  const udiseValidation = async (value: any) => {
+    const res = await dataProvider.getList('school', {
+      pagination: { perPage: 1, page: 1 },
+      sort: { field: 'id', order: 'asc' },
+      filter: { udise: value }
+    });
+    if (res?.data?.length == 0)
+      return "Please enter a valid UDISE"
+    if (state.roles.includes("school"))
+      return "Cannot register more than one school for the same UDISE";
     return undefined;
   };
 
   // Input Constraints
   const inputConstraints = {
     userName: [required("Please provide username"), number("The username must be numeric")],
-    udise: [required("Please provide UDISE"), number("The UDISE must be numeric"), udiseSchoolCheck],
-    fullName: [required("Please provide fullname"), regex(/^[a-zA-Z0-9 ]*$/, "Name can only contain alphabets, numbers and spaces")],
-    mobile: [required("Please provide mobile number"), number("Mobile must be numeric"), minLength(10), maxLength(10)],
+    udise: [required("Please provide UDISE"), number("The UDISE must be numeric"), udiseValidation],
+    fullName: [required("Please provide fullname"), number("Mobile number must be numeric"), regex(/^[a-zA-Z0-9 ]*$/, "Name can only contain alphabets, numbers and spaces")],
+    mobile: [required("Please provide mobile number"), regex(/^\d+$/, "The phone number must be numeric"), minLength(10, "Mobile cannot be less than 10 digits"), maxLength(10, "Mobile cannot be more than 10 digits")],
     role: required("Please select a role"),
     designation: required("Please select a designation"),
     accountStatus: required("Please select account status"),
@@ -131,7 +140,7 @@ const UserCreate = (props: any) => {
           label="Name"
           validate={inputConstraints.fullName}
         />
-        <NumberInput
+        <TextInput
           onChange={(e) => setState({ ...state, mobile: e.target.value })}
           source="mobilePhone"
           label="Mobile Phone"
