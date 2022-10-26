@@ -1,18 +1,16 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   useResourceContext,
   useNotify,
   useRefresh,
   useRedirect,
   Edit,
-  Labeled,
   FunctionField,
   SelectInput,
   SimpleForm,
   TextInput,
   useRecordContext,
   useDataProvider,
-  regex,
   maxLength,
   minLength,
   Toolbar,
@@ -23,26 +21,14 @@ import { useMutation, useQuery } from "react-query";
 import {
   getAllDistricts,
   getBlocks,
-  getLowerDesignations,
   getLowerDesignationsChoices,
-  getVisibility,
 } from "../designation";
 import { useLogin } from "../hooks";
 import { getClusters } from "../designation";
 import { ChangePasswordButton } from "../ChangePasswordButton";
-import { designationLevels } from "../esamwaad/designation";
-import EditWrapper from "../../../components/styleWrappers/EditWrapper";
-const ApplicationId = "1ae074db-32f3-4714-a150-cc8a370eafd1";
+import { designationLevels } from "../esamwaad/designation";  
 
 const displayRoles = (a: any) => {
-  const registration = a.registrations?.find(
-    (r: any) => r.applicationId === ApplicationId
-  );
-  if (!registration) {
-    return <span>-</span>;
-  }
-  const { roles } = registration;
-  return roles.map((role: any, index: number) => {
     return (
       <span
         style={{
@@ -53,12 +39,10 @@ const displayRoles = (a: any) => {
           backgroundColor: "#5a968b",
           display: "inline-block",
         }}
-        key={index}
       >
-        {role}
+        {a}
       </span>
     );
-  });
 };
 const UserEditToolbar = (props: any) => (
   <Toolbar {...props} >
@@ -77,7 +61,7 @@ const UserForm = () => {
     district: "",
     block: "",
     cluster: "",
-    roles: ["school"],
+    roles: [""],
     password: "1234abcd",
   });
   const designationChoices = getLowerDesignationsChoices(_loggedInUser);
@@ -86,16 +70,35 @@ const UserForm = () => {
   const clusterChoices = getClusters(state.block, "", _loggedInUser);
 
   const validatePhoneNumber = [minLength(10, "Phone Number must be 10 digit long"), maxLength(10, "Phone Number must be 10 digit long")];
-
+  const record = useRecordContext();
+  const firstRender = useRef(true);
+  const [designationName, setDesignationName] = useState("");
+  useEffect(() => {
+    if(firstRender.current){
+      setDesignationName(record?.registrations?.[0].roles);
+      firstRender.current = false;
+      return;
+    }   
+  },[designationName]);
   return (
     <>
       <span>User Details</span>
 
-      <TextInput source="username" disabled={true} />
-      <TextInput source="fullName" label="Full Name" />
-      <TextInput source="mobilePhone" label="Mobile Phone" validate={validatePhoneNumber} />
+      <TextInput
+        onChange={e => setState({ ...state, userName: e.target.value })}
+        source="username"
+        disabled={true} />
+      <TextInput
+        onChange={e => setState({ ...state, fullName: e.target.value })}
+        source="fullName"
+        label="Full Name" />
+      <TextInput
+        onChange={e => setState({ ...state, mobile: e.target.value })}
+        source="mobilePhone"
+        label="Mobile Phone"
+        validate={validatePhoneNumber} />
       <SelectInput
-        value={state.designation}
+        defaultValue={record?.registrations?.[0].roles}
         onChange={(e) => {
           const des = e.target.value;
           setState({ ...state, designation: des });
@@ -104,6 +107,7 @@ const UserForm = () => {
               return s.scope;
             }
           });
+          setDesignationName(e.target.value);
           setScope(scopeData[0].scope);
         }}
         source="designation"
@@ -148,7 +152,7 @@ const UserForm = () => {
         render={(record: any) => {
           return (
             <>
-              {displayRoles(record)}
+              {displayRoles(designationName)}
               <br />
               <br />
               <ChangePasswordButton record={record} />
