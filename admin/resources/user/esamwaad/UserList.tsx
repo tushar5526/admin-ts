@@ -302,15 +302,24 @@ const UserList = () => {
 
       {/* <FunctionField
         label="District"
-        render={(record: any) => getCorrespondingTeacherDistrict(record)}
-      />{" "}
+        render={(record: any) => {
+          console.log(record);
+          return getCorrespondingTeacherDistrict(record)
+        }}
+      />
       <FunctionField
         label="Block"
-        render={(record: any) => getCorrespondingTeacherBlock(record)}
-      />{" "}
+        render={(record: any) => {
+          console.log(record);
+          return getCorrespondingTeacherBlock(record)
+        }}
+      />
       <FunctionField
         label="Cluster"
-        render={(record: any) => getCorrespondingTeacherCluster(record)}
+        render={(record: any) => {
+          console.log(record);
+          return getCorrespondingTeacherCluster(record)
+        }}
       /> */}
     </ListDataGridWithPermissions>
   );

@@ -240,19 +240,6 @@ const UserList = () => {
       <TextField source="data.roleData.district" label="District" />
       <TextField source="data.roleData.block" label="Block" />
       <TextField source="data.roleData.cluster" label="Cluster" />
-
-      {/* <FunctionField
-        label="District"
-        render={(record: any) => getCorrespondingTeacherDistrict(record)}
-      />{" "}
-      <FunctionField
-        label="Block"
-        render={(record: any) => getCorrespondingTeacherBlock(record)}
-      />{" "}
-      <FunctionField
-        label="Cluster"
-        render={(record: any) => getCorrespondingTeacherCluster(record)}
-      /> */}
     </ListDataGridWithPermissions>
   );
 };

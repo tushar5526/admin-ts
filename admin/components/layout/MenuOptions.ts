@@ -33,13 +33,13 @@ const MenuOptions: any[] = [
 
     icon: "SchoolIcon",
 
-    permissions: ["Admin"],
+    permissions: ["Admin","school"],
   },
   {
     name: "Shiksha Saathi Users",
     resource: "shiksha_saathi_user",
     props: ShikshaSaathi,
-
+    permissions: ["Admin"],
     icon: "SchoolIcon",
 
   },
@@ -47,7 +47,7 @@ const MenuOptions: any[] = [
     name: "School",
     resource: "school",
     props: school,
-
+    permissions: ["Admin"],
     icon: "SchoolIcon",
 
   },
@@ -55,7 +55,7 @@ const MenuOptions: any[] = [
     name: "Location",
     resource: "location",
     props: location,
-
+    permissions: ["Admin"],
     icon: "SchoolIcon",
 
   },
@@ -63,7 +63,7 @@ const MenuOptions: any[] = [
     name: "Grade Assessment",
     resource: "grade_assessment",
     props: gradeAssessment,
-
+    permissions: ["Admin"],
     icon: "SchoolIcon",
 
   },
@@ -79,7 +79,7 @@ const MenuOptions: any[] = [
     name: "School Mapping For Monitoring",
     resource: "ss_school_allocation_data",
     props: mapping,
-
+    permissions: ["Admin"],
     icon: "SchoolIcon",
 
   },

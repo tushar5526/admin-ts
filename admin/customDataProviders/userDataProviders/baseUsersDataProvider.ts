@@ -20,46 +20,39 @@ const dataProvider = {
   ): Promise<any> => {
     let queryString = [`registrations.applicationId:${Applications[resource]}`];
     console.log({ filter });
-    if (filter?.udise) {
-      queryString.push(`${filter?.udise}`);
-    }
+    if (filter && Object.keys(filter).length>0) {
+      queryString = [];
+      if (filter?.udise) {
+        queryString.push(`${filter?.udise}`);
+      }
 
-    if (filter?.data?.roleData?.role) {
-      queryString = [];
-      queryString.push(`data.roleData.role:${filter?.data?.roleData?.role}`);
-      queryString.push(`registrations.roles:${filter?.data?.roleData?.role}`);
-    }
-    if (filter?.esamwadRoles) {
-      queryString = [];
-      queryString.push(`registrations.roles:${filter?.esamwadRoles}`);
-    }
-    if (filter?.data?.roleData?.district) {
-      queryString = [];
-      queryString.push(
-        `data.roleData.district:${filter?.data?.roleData?.district}`
-      );
-    }
-    if (filter?.block) {
-      queryString = [];
-      queryString.push(
-        `data.roleData.block:${filter?.block}`
-      );
-    }
-    if (filter?.cluster) {
-      queryString = [];
-      queryString.push(
-        `data.roleData.cluster:${filter?.cluster}`
-      );
-    }
-    if (filter?.username) {
-      queryString = [];
-      queryString.push(`username:${filter?.username}`);
-      queryString.push(`username:*${filter?.username}*`);
+      if (filter?.data?.roleData?.role) {
+        queryString.push(`data.roleData.role:${filter?.data?.roleData?.role}`);
+      }
+      if (filter?.data?.roleData?.district) {
+        queryString.push(
+          `data.roleData.district:${filter?.data?.roleData?.district}`
+        );
+      }
+      if (filter?.block) {
+        queryString.push(
+          `data.roleData.block:${filter?.block}`
+        );
+      }
+      if (filter?.cluster) {
+        queryString.push(
+          `data.roleData.cluster:${filter?.cluster}`
+        );
+      }
+      if (filter?.username) {
+        queryString.push(`username:${filter?.username} OR username:*${filter?.username}*`);
+        // queryString.push(``);
+      }
     }
     const params = {
       startRow: (page - 1) * perPage,
       numberOfResults: perPage,
-      queryString: `(${queryString.join(") OR (")})`,
+      queryString: `(${queryString.join(") AND (")})`,
       applicationId: Applications[resource],
     };
     const response = await client.get("/admin/searchUser", { params });
@@ -74,6 +67,7 @@ const dataProvider = {
         data: [],
       };
     }
+
   },
   getOne: async (resource: any, { id }: any): Promise<any> => {
     const params = {
