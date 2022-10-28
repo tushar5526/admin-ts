@@ -85,7 +85,7 @@ const UserCreate = (props: any) => {
   return userCreated ? (
     <>
       <p>User Successfully Created</p>
-      <Button label="Back" />
+      <Button label="Back" onClick={() => history.back()} />
     </>
   ) : (
     <Create {...props}>

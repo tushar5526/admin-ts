@@ -110,9 +110,9 @@ const UserCreate = (props: any) => {
 
   // Input Constraints
   const inputConstraints = {
-    userName: [required("Please provide username"), number("The username must be numeric")],
+    userName: [required("Please provide username"), regex(/^[a-zA-Z0-9 ]*$/, "Name can only contain alphabets, numbers and spaces")],
     udise: [required("Please provide UDISE"), number("The UDISE must be numeric"), udiseValidation],
-    fullName: [required("Please provide fullname"), number("Mobile number must be numeric"), regex(/^[a-zA-Z0-9 ]*$/, "Name can only contain alphabets, numbers and spaces")],
+    fullName: [required("Please provide fullname"), regex(/^[a-zA-Z0-9 ]*$/, "Name can only contain alphabets, numbers and spaces")],
     mobile: [required("Please provide mobile number"), regex(/^\d+$/, "The phone number must be numeric"), minLength(10, "Mobile cannot be less than 10 digits"), maxLength(10, "Mobile cannot be more than 10 digits")],
     role: required("Please select a role"),
     designation: required("Please select a designation"),

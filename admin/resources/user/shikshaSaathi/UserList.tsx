@@ -226,7 +226,7 @@ const UserList = () => {
 
   return (
     <ListDataGridWithPermissions
-      listProps={{ filters: Filters }}
+      listProps={{ filters: Filters , exporter: false }}
     >
       <TextField source="username" />
       <TextField source="fullName" />

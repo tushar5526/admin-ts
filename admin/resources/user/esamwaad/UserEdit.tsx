@@ -269,7 +269,7 @@ const UserForm = () => {
   const inputConstraints = {
     userName: [
       required("Please provide username"),
-      number("The username must be numeric"),
+      regex(/^[a-zA-Z0-9 ]*$/,"Name can only contain alphabets, numbers and spaces")
     ],
     udise: [
       required("Please provide UDISE"),
