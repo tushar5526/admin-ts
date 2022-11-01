@@ -26,8 +26,8 @@ const dataProvider = {
         queryString.push(`${filter?.udise}`);
       }
 
-      if (filter?.data?.roleData?.role) {
-        queryString.push(`data.roleData.role:${filter?.data?.roleData?.role}`);
+      if (filter?.shikshaRoles) {
+        queryString.push(`registrations.roles:${filter?.shikshaRoles}`);
       }
       if (filter?.esamwadRoles) {
         queryString.push(`registrations.roles:${filter?.esamwadRoles}`);

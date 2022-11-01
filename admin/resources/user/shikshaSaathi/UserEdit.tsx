@@ -15,6 +15,8 @@ import {
   minLength,
   Toolbar,
   SaveButton,
+  required,
+  number,
 } from "react-admin";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
@@ -69,7 +71,7 @@ const UserForm = () => {
   const blockChoices = getBlocks(state.district, "", _loggedInUser);
   const clusterChoices = getClusters(state.block, "", _loggedInUser);
 
-  const validatePhoneNumber = [minLength(10, "Phone Number must be 10 digit long"), maxLength(10, "Phone Number must be 10 digit long")];
+  const validatePhoneNumber = [required(),number(),minLength(10, "Phone Number must be 10 digit long"), maxLength(10, "Phone Number must be 10 digit long")];
   const record = useRecordContext();
   const firstRender = useRef(true);
   const [designationName, setDesignationName] = useState("");

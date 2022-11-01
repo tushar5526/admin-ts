@@ -141,7 +141,7 @@ const LocationList = () => {
   ];
   return (
     <ListDataGridWithPermissions
-      listProps={{ filters: Filters }}
+      listProps={{ filters: Filters, exporter: false }}
     >
       <TextField source="id" />
       <TextField source="district" />

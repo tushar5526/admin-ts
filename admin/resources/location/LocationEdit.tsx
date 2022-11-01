@@ -5,7 +5,9 @@ import {
   ReferenceInput,
   useDataProvider,
   SelectInput,
-  Edit
+  Edit,
+  required,
+  regex
 } from "react-admin";
 import EditWrapper from "../../components/styleWrappers/EditWrapper";
 import { useLocation } from "react-router-dom";
@@ -128,8 +130,8 @@ const LocationForm = () => {
           source="district"
           choices={districts}
         />
-        <TextInput source="block" />
-        <TextInput source="cluster" />
+        <TextInput source="block" validate={[required(),regex(/^[A-Za-z][A-Za-z ]*$/,"Please Fill the Block with appropriate name with aplhabets only.")]}/>
+        <TextInput source="cluster" validate={[required(),regex(/^[A-Za-z][A-Za-z ]*$/,"Please Fill the Cluster with appropriate name with aplhabets only.")]}/>
     </>
   );
 };

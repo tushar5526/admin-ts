@@ -187,7 +187,7 @@ const UserList = () => {
     <TextInput source="username" alwaysOn key={"search"}/>,
     <SelectInput
       label="Role"
-      source="data.roleData.role"
+      source="shikshaRoles"
       choices={rolesChoices}
       key={"role"}
     />,
