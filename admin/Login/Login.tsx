@@ -34,9 +34,6 @@ const Login = () => {
     const isCorrect = await loginPreCheck(auth?.username, auth?.password);
     if (isCorrect) {
       setLoading(true);
-      setTimeout(() => {
-        window.location.reload();
-      }, 200)
       login(
         auth,
         location.state ? (location.state as any).nextPathname : "/"
