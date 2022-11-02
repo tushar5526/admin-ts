@@ -75,9 +75,9 @@ const StudentForm = (record: any) => {
       }
     })
   }, [udise])
-  const validateName = regex(/^[a-zA-Z\s]*$/, 'Name should contain only spaces and words');
-  const validateFatherName = regex(/^[a-zA-Z\s]*$/, 'Father Name should contain only spaces and words');
-  const validateMotherName = regex(/^[a-zA-Z\s]*$/, 'Mother Name should contain only spaces and words');
+  const validateName = regex(/^([A-Za-z\s/]*)$/, 'Name should contain only letters, spaces and slashes.');
+  const validateFatherName = regex(/^([A-Za-z\s/]*)$/, 'Father Name should contain only letters, spaces and slashes.');
+  const validateMotherName = regex(/^([A-Za-z\s/]*)$/, 'Mother Name should contain only letters, spaces and slashes.');
   const grade = () => {
     let grades = [];
     for (let i = 1; i <= 12; i++) {
@@ -100,21 +100,21 @@ const StudentForm = (record: any) => {
       <FunctionField
         render={(record: any) => {
           useEffect(() => {
-            if(firstRender.current){
+            if (firstRender.current) {
               setUdise(record?.school?.udise);
               firstRender.current = false;
               return;
             }
           })
           return (
-            <TextInput source="school.udise" label="UDISE" onChange={e => {
+            <TextInput source="school.udise" label="UDISE" disabled onChange={e => {
               setUdise(Number(e.target.value));
             }} />
           )
         }} />
       <TextInput source="father_name" validate={validateFatherName} />
       <TextInput source="mother_name" validate={validateMotherName} />
-      <SelectInput source="gender" choices={[{ id: "M", name: "M" }, { id: "F", name: "F" }, {id: "N", name: "N"}]} />
+      <SelectInput source="gender" choices={[{ id: "M", name: "M" }, { id: "F", name: "F" }, { id: "N", name: "N" }]} />
       <SelectInput source="grade_number" choices={grade()} />
       <SelectInput source="stream_tag" choices={streams_choices} />
       <SelectInput source="category" choices={category} />
