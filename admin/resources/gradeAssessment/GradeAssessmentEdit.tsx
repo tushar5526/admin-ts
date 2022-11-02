@@ -18,10 +18,10 @@ const GradeAssessmentEdit = () => {
         <TextInput source="grade_number" />
         <TextInput source="section" />
         <TextInput source="school_id" />
-        <TextInput source="school.udise" />
-        <SelectInput source="school.location.district" label="District" choices={districts} />
-        <SelectInput source="school.location.block" label="Block" choices={clusters} />
-        <SelectInput source="school.location.cluster" label="Cluster" choices={blocks} />
+        <TextInput source="school.udise" disabled />
+        <SelectInput source="school.location.district" disabled label="District" choices={districts} />
+        <SelectInput source="school.location.block" disabled label="Block" choices={clusters} />
+        <SelectInput source="school.location.cluster" disabled label="Cluster" choices={blocks} />
         <TextInput source="streams_id" />
         <DateInput source="created" />
         <DateInput source="updated" />

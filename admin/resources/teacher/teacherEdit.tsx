@@ -111,8 +111,8 @@ const TeacherEdit = ({ record }: any) => {
   return (
     <EditWrapper>
       <TextInput disabled source="id" />
-      <TextInput source="school.name" label="School"/>
-      <TextInput source="school.udise" label="UDISE"/>
+      <TextInput source="school.name" label="School" disabled/>
+      <TextInput source="school.udise" label="UDISE" disabled/>
       <TextInput label="Mode of employment" source="employment" />
       <TextInput label="Designation" source="designation" />
       <SelectInput label="Account Status" source="account_status" choices={statusChoices}/>

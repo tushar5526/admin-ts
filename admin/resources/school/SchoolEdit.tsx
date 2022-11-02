@@ -135,6 +135,7 @@ export const SchoolEdit = () => {
           source="location.district"
           choices={districts}
           validate={inputConstraints.district}
+          disabled
         />
         <SelectInput
           label="Block"
@@ -146,6 +147,7 @@ export const SchoolEdit = () => {
           source="location.block"
           choices={blocks}
           validate={inputConstraints.block}
+          disabled
         />
         <SelectInput
           label="Cluster"
@@ -154,6 +156,7 @@ export const SchoolEdit = () => {
           source="location.cluster"
           validate={inputConstraints.cluster}
           choices={clusters}
+          disabled
         />
       </SimpleForm>
     </Edit>
