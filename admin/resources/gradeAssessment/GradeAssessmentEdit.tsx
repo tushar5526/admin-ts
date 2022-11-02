@@ -3,6 +3,7 @@ import {
   ReferenceField,
   DateInput,
   SelectInput,
+  Edit,
 } from "react-admin";
 import EditWrapper from "../../components/styleWrappers/EditWrapper";
 import { getLocationDetails } from "../../utils/LocationDetailsHelper";
@@ -10,7 +11,7 @@ import { getLocationDetails } from "../../utils/LocationDetailsHelper";
 const GradeAssessmentEdit = () => {
   const { districts, clusters, blocks } = getLocationDetails();
   return (
-    <EditWrapper>
+    <Edit>
       <TextInput source="id" />
       <TextInput label={"Assessment"} source="assessment_id" />
       <TextInput source="grade_number" />
@@ -23,7 +24,7 @@ const GradeAssessmentEdit = () => {
       <TextInput source="streams_id" />
       <DateInput source="created" />
       <DateInput source="updated" />
-    </EditWrapper>
+    </Edit>
   );
 };
 export default GradeAssessmentEdit;

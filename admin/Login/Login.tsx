@@ -34,6 +34,9 @@ const Login = () => {
     const isCorrect = await loginPreCheck(auth?.username, auth?.password);
     if (isCorrect) {
       setLoading(true);
+      setTimeout(() => {
+        window.location.reload();
+      }, 200)
       login(
         auth,
         location.state ? (location.state as any).nextPathname : "/"
@@ -43,8 +46,8 @@ const Login = () => {
           typeof error === "string"
             ? error
             : typeof error === "undefined" || !error.message
-            ? "ra.auth.sign_in_error"
-            : error.message,
+              ? "ra.auth.sign_in_error"
+              : error.message,
           {
             type: "warning",
             messageArgs: {
@@ -52,8 +55,8 @@ const Login = () => {
                 typeof error === "string"
                   ? error
                   : error && error.message
-                  ? error.message
-                  : undefined,
+                    ? error.message
+                    : undefined,
             },
           }
         );
