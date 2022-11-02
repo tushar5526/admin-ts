@@ -2,6 +2,7 @@ import React from "react";
 import {
   BooleanInput,
   Create,
+  maxLength,
   NumberField,
   NumberInput,
   regex,
@@ -42,7 +43,7 @@ const SchoolCreate = () => {
         <BooleanInput source="is_active" />
         <TextInput source="latitude" validate={inputConstraints.coord} />
         <TextInput source="longitude" validate={inputConstraints.coord} />
-        <NumberInput source="enroll_count" validate={required("Please enter a valid enroll count")} />
+        <TextInput source="enroll_count" validate={[required("Please enter a valid enroll count"),regex(/^[0-9]\d*$/,"Only Integer Value is allowed."),maxLength(10,"Unable to Enroll this many students.")]}/>
       </SimpleForm>
     </Create>
   );

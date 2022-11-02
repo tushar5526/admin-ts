@@ -4,6 +4,7 @@ import {
   Pagination,
   ReferenceInput,
   SearchInput,
+  SelectArrayInput,
   ShowButton,
   useDataProvider,
 } from "react-admin";
@@ -147,7 +148,7 @@ const StudentList = () => {
     <NumberInput label="ID" source="id" alwaysOn />,
     <TextInput label="UDISE" source="school#udise" key="search" />,
     <TextInput label="School Name" source="school#name" key={"search"} />,
-    <SelectInput
+    <SelectArrayInput
       label="Grade"
       onChange={(e) => {
         setSelectedStatus(null);
@@ -157,7 +158,6 @@ const StudentList = () => {
         setSelectedCwsn(null);
         setSelectedGender(null);
       }}
-      value={selectedGrade}
       source="grade_number"
       choices={grade}
     />,
@@ -177,7 +177,7 @@ const StudentList = () => {
       choices={enabled}
       isRequired={true}
     />,
-    <SelectInput
+    <SelectArrayInput
       label="Stream"
       onChange={(e) => {
         setSelectedStatus(null);
@@ -187,7 +187,6 @@ const StudentList = () => {
         setSelectedCwsn(null);
         setSelectedGender(null);
       }}
-      value={selectedStream}
       source="stream_tag"
       choices={streams_choices}
       isRequired={true}
@@ -222,7 +221,7 @@ const StudentList = () => {
       choices={cwsn}
       isRequired={true}
     />,
-    <SelectInput
+    <SelectArrayInput
       label="gender"
       onChange={(e) => {
         setSelectedStatus(null);
@@ -232,13 +231,12 @@ const StudentList = () => {
         setSelectedCwsn(null);
         setSelectedGender(e.target.value);
       }}
-      value={selectedGender}
       source="gender"
       choices={gender}
       isRequired={true}
     />,
-    <SelectInput label="District" source="school#location#district" choices={districts} />,
-    <SelectInput label="Block" source="school#location#block" choices={blocks} />,
+    <SelectArrayInput label="District" source="school#location#district" choices={districts} />,
+    <SelectArrayInput label="Block" source="school#location#block" choices={blocks} />,
     <SelectInput label="Cluster" source="school#location#cluster" choices={clusters} />,
   ];
   const StudentPagination = () => (

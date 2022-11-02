@@ -299,7 +299,15 @@ const UserList = () => {
       <TextField source="data.roleData.district" label="District" />
       <TextField source="data.roleData.block" label="Block" />
       <TextField source="data.roleData.cluster" label="Cluster" />
-
+      <TextField source="data.roleData.designation"label="Designation" 
+      sx={{
+          padding: "7px 10px",
+          margin: "5px",
+          color: "white",
+          borderRadius: "25px",
+          backgroundColor: "#5a968b",
+          display: "inline-block",
+        }} />
       {/* <FunctionField
         label="District"
         render={(record: any) => {
