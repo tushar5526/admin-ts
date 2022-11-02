@@ -28,26 +28,26 @@ import {
 import { useLogin } from "../hooks";
 import { getClusters } from "../designation";
 import { ChangePasswordButton } from "../ChangePasswordButton";
-import { designationLevels } from "../esamwaad/designation";  
+import { designationLevels } from "../esamwaad/designation";
 
 const displayRoles = (a: any) => {
-    return (
-      <span
-        style={{
-          padding: "7px 10px",
-          margin: "5px",
-          color: "white",
-          borderRadius: "25px",
-          backgroundColor: "#5a968b",
-          display: "inline-block",
-        }}
-      >
-        {a}
-      </span>
-    );
+  return (
+    <span
+      style={{
+        padding: "7px 10px",
+        margin: "5px",
+        color: "white",
+        borderRadius: "25px",
+        backgroundColor: "#5a968b",
+        display: "inline-block",
+      }}
+    >
+      {a}
+    </span>
+  );
 };
 const UserEditToolbar = (props: any) => (
-  <Toolbar {...props} >
+  <Toolbar {...props}>
     <SaveButton />
   </Toolbar>
 );
@@ -71,34 +71,42 @@ const UserForm = () => {
   const blockChoices = getBlocks(state.district, "", _loggedInUser);
   const clusterChoices = getClusters(state.block, "", _loggedInUser);
 
-  const validatePhoneNumber = [required(),number(),minLength(10, "Phone Number must be 10 digit long"), maxLength(10, "Phone Number must be 10 digit long")];
+  const validatePhoneNumber = [
+    required(),
+    number(),
+    minLength(10, "Phone Number must be 10 digit long"),
+    maxLength(10, "Phone Number must be 10 digit long"),
+  ];
   const record = useRecordContext();
   const firstRender = useRef(true);
   const [designationName, setDesignationName] = useState("");
   useEffect(() => {
-    if(firstRender.current){
+    if (firstRender.current) {
       setDesignationName(record?.registrations?.[0].roles);
       firstRender.current = false;
       return;
-    }   
-  },[designationName]);
+    }
+  }, [designationName]);
   return (
     <>
       <span>User Details</span>
 
       <TextInput
-        onChange={e => setState({ ...state, userName: e.target.value })}
+        onChange={(e) => setState({ ...state, userName: e.target.value })}
         source="username"
-        disabled={true} />
+        disabled={true}
+      />
       <TextInput
-        onChange={e => setState({ ...state, fullName: e.target.value })}
+        onChange={(e) => setState({ ...state, fullName: e.target.value })}
         source="fullName"
-        label="Full Name" />
+        label="Full Name"
+      />
       <TextInput
-        onChange={e => setState({ ...state, mobile: e.target.value })}
+        onChange={(e) => setState({ ...state, mobile: e.target.value })}
         source="mobilePhone"
         label="Mobile Phone"
-        validate={validatePhoneNumber} />
+        validate={validatePhoneNumber}
+      />
       <SelectInput
         defaultValue={record?.registrations?.[0].roles}
         onChange={(e) => {
@@ -113,7 +121,7 @@ const UserForm = () => {
           setScope(scopeData[0].scope);
         }}
         source="designation"
-        label="Designation"
+        label="Role"
         choices={designationChoices}
       />
 
@@ -199,11 +207,13 @@ const UserEdit = () => {
             data: {
               phone: values["mobilePhone"],
               accountName: values["userName"],
-              district: values?.data.district,
-              block: values?.data.block,
-              cluster: values?.data.cluster
+              roleData: {
+                district: values?.district,
+                block: values?.block,
+                cluster: values?.cluster,
+                designation: values.designation,
+              },
             },
-            designation: values.designation,
             id: values.id,
           };
           _v["gql"] = {
@@ -217,6 +227,6 @@ const UserEdit = () => {
         <UserForm />
       </SimpleForm>
     </Edit>
-  )
+  );
 };
 export default UserEdit;
