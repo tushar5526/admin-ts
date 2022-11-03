@@ -28,8 +28,7 @@ export const getToken = async (userName: string, password: string) => {
       event.key = key;
 
       document.dispatchEvent(event);
-
-      originalSetItem.apply(this, arguments);
+      originalSetItem.apply(this, [key, value]);
     };
 
     // Setting token to be used in prepareDataProviders
