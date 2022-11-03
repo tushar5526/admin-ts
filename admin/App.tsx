@@ -45,9 +45,9 @@ const App = () => {
   };
   const JSONDataProvider = {
     ...JSONDp,
-    updateSamarthUser: (...r: any) => {},
+    updateSamarthUser: (...r: any) => { },
   };
-  const prepareDataProviders = async () => {
+  const prepareDataProviders = async (session: any) => {
     try {
       const hasuraDP = await getDataProvider(session);
       const _dataProvider = combineDataProviders((resource) => {
@@ -75,14 +75,34 @@ const App = () => {
         }
       });
       setDataProvider(_dataProvider);
-    } catch (e) {}
+    } catch (e) { }
   };
   useEffect(() => {
-    prepareDataProviders();
+    prepareDataProviders(session);
     fixBlankPage();
   }, []);
 
   if (!dataProvider) return <p>Loading...</p>;
+
+  const prepareDataProvidersAgain = function (e: any) {
+    const newSession: any = {
+      user: {
+        name: null,
+        email: null,
+        image: null,
+      },
+      expires: "2022-09-23T04:48:50.273Z",
+      jwt: e.value,
+      role: "Admin",
+      fullName: "Samarth-Admin",
+      username: "samarth-admin",
+      applicationId: "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da",
+    };
+    prepareDataProviders(newSession);
+  };
+
+  // Preparing data providers again as soon as token is retrieved.
+  document.addEventListener("userFetched", prepareDataProvidersAgain, false);
 
   return (
     <Admin
