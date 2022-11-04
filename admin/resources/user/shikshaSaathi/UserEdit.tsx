@@ -203,11 +203,11 @@ const UserEdit = () => {
           const _v: any = {
             mobilePhone: values["mobilePhone"],
             userName: values["userName"],
-            fullName: values["fullName"],
+            fullName: values["fullName"],            
             data: {
               phone: values["mobilePhone"],
-              accountName: values["userName"],
-              roledata: {
+              accountName: values["fullName"],
+              roleData: {
                 district: values?.district,
                 block: values?.block,
                 cluster: values?.cluster,
