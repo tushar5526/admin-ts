@@ -196,37 +196,37 @@ const UserList = () => {
       choices={["Teacher", "Principal", "school"].map(el => { return { id: el, name: el } })}
       key={"role"}
     />,
-    <SelectInput
-      label="District"
-      key={"district"}
-      onChange={(e: any) => {
-        setSelectedDistrict(e.target.value);
-        setSelectedBlock(null);
-        setSelectedCluster(null);
-      }}
-      value={selectedDistrict}
-      source="data.roleData.district"
-      choices={districts}
-    />,
-    <SelectInput
-      label="Block"
-      onChange={(e) => {
-        setSelectedBlock(e.target.value);
-        setSelectedCluster(null);
-      }}
-      key="block"
-      value={selectedBlock}
-      source="block"
-      choices={blocks}
-    />,
-    <SelectInput
-      label="Cluster"
-      onChange={(e) => setSelectedCluster(e.target.value)}
-      value={selectedCluster}
-      source="cluster"
-      choices={clusters}
-      key="cluster"
-    />,
+    // <SelectInput
+    //   label="District"
+    //   key={"district"}
+    //   onChange={(e: any) => {
+    //     setSelectedDistrict(e.target.value);
+    //     setSelectedBlock(null);
+    //     setSelectedCluster(null);
+    //   }}
+    //   value={selectedDistrict}
+    //   source="data.roleData.district"
+    //   choices={districts}
+    // />,
+    // <SelectInput
+    //   label="Block"
+    //   onChange={(e) => {
+    //     setSelectedBlock(e.target.value);
+    //     setSelectedCluster(null);
+    //   }}
+    //   key="block"
+    //   value={selectedBlock}
+    //   source="block"
+    //   choices={blocks}
+    // />,
+    // <SelectInput
+    //   label="Cluster"
+    //   onChange={(e) => setSelectedCluster(e.target.value)}
+    //   value={selectedCluster}
+    //   source="cluster"
+    //   choices={clusters}
+    //   key="cluster"
+    // />,
   ];
 
   const statusChoices = [
@@ -294,7 +294,7 @@ const UserList = () => {
           return DisplayRoles(record);
         }}
       />
-      <TextField source="data.roleData.district" label="District" sortable={false}/>
+      {/* <TextField source="data.roleData.district" label="District" sortable={false}/>
       <TextField source="data.roleData.block" label="Block" sortable={false}/>
       <TextField source="data.roleData.cluster" label="Cluster" sortable={false}/>
       <TextField source="data.roleData.designation"label="Designation" 
@@ -306,7 +306,7 @@ const UserList = () => {
           backgroundColor: "#5a968b",
           display: "inline-block",
         }} 
-        sortable={false}/>
+        sortable={false}/> */}
       {/* <FunctionField
         label="District"
         render={(record: any) => {

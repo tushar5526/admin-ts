@@ -207,7 +207,7 @@ const UserEdit = () => {
             data: {
               phone: values["mobilePhone"],
               accountName: values["userName"],
-              roleData: {
+              roledata: {
                 district: values?.district,
                 block: values?.block,
                 cluster: values?.cluster,
