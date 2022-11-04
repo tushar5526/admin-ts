@@ -276,29 +276,27 @@ const UserList = () => {
 
   return (
     <ListDataGridWithPermissions
-      dataGridProps={{ rowClick: "show" }}
       listProps={{ filters: Filters }}
     >
-      <TextField source="username" />
-      <NumberField source="data.udise" label="UDISE" />
-      <ColoredChipField label="Account Status" source="usernameStatus" />
+      <TextField source="username" sortable={false}/>
+      <NumberField source="data.udise" label="UDISE" sortable={false}/>
+      <ColoredChipField label="Account Status" source="usernameStatus" sortable={false}/>
       <FunctionField
         label="Full Name"
         render={(record: any) => `${record.firstName} ${record.lastName}`}
       />
       ;
-      <NumberField source="mobilePhone" label="Mobile Phone" />
+      <NumberField source="mobilePhone" label="Mobile Phone" sortable={false} />
       ;
       <FunctionField
         label="Role"
         render={(record: any) => {
-          console.log(record);
           return DisplayRoles(record);
         }}
       />
-      <TextField source="data.roleData.district" label="District" />
-      <TextField source="data.roleData.block" label="Block" />
-      <TextField source="data.roleData.cluster" label="Cluster" />
+      <TextField source="data.roleData.district" label="District" sortable={false}/>
+      <TextField source="data.roleData.block" label="Block" sortable={false}/>
+      <TextField source="data.roleData.cluster" label="Cluster" sortable={false}/>
       <TextField source="data.roleData.designation"label="Designation" 
       sx={{
           padding: "7px 10px",
@@ -307,7 +305,8 @@ const UserList = () => {
           borderRadius: "25px",
           backgroundColor: "#5a968b",
           display: "inline-block",
-        }} />
+        }} 
+        sortable={false}/>
       {/* <FunctionField
         label="District"
         render={(record: any) => {

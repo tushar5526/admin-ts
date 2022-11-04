@@ -228,18 +228,18 @@ const UserList = () => {
     <ListDataGridWithPermissions
       listProps={{ filters: Filters , exporter: false }}
     >
-      <TextField source="username" />
-      <TextField source="fullName" />
-      <NumberField source="mobilePhone" label="Mobile Phone" />
+      <TextField source="username" sortable={false} />
+      <TextField source="fullName" sortable={false} />
+      <NumberField source="mobilePhone" label="Mobile Phone" sortable={false}/>
       <FunctionField
         label="Role"
         render={(record: any) => {
           return DisplayRoles(record);
         }}
       />
-      <TextField source="data.roleData.district" label="District" />
-      <TextField source="data.roleData.block" label="Block" />
-      <TextField source="data.roleData.cluster" label="Cluster" />
+      <TextField source="data.roleData.district" label="District" sortable={false}/>
+      <TextField source="data.roleData.block" label="Block" sortable={false}/>
+      <TextField source="data.roleData.cluster" label="Cluster" sortable={false}/>
     </ListDataGridWithPermissions>
   );
 };

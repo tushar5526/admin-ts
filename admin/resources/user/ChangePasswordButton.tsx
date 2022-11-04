@@ -28,7 +28,7 @@ export const ChangePasswordButton = ({ record }: any) => {
   return (
     <Button
       variant={"outlined"}
-      sx={{ marginTop: "10px" }}
+      sx={{ marginTop: "10px", color: "green", borderColor: "green" }}
       onClick={() => {
         mutate();
       }}

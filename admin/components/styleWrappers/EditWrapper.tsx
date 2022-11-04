@@ -3,7 +3,7 @@ import { Edit, SaveButton, SimpleForm, Toolbar } from "react-admin";
 
 const EditToolbar = (props: any) => (
   <Toolbar  {...props}>
-      <SaveButton />
+      <SaveButton sx={{backgroundColor: "green"}} />
   </Toolbar>
 );
 const EditWrapper = (props: any) => {

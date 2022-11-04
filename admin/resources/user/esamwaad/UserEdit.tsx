@@ -249,7 +249,8 @@ const inputChoices = {
 const UserForm = () => {
   const record = useRecordContext();
   const [state, setState] = useState<any>({
-    roles: record?.registrations?.[0]?.roles,
+    // Here we are putting only the index where user is registered in Shiksha. 
+    roles: record?.registrations?.[record?.registrations?.findIndex((user: { applicationId: string; }) => user.applicationId == ApplicationId)]?.roles,
   });
   const dataProvider = useDataProvider();
 
@@ -363,15 +364,13 @@ const UserForm = () => {
             />
           </>
         )}
-      <ReferenceInput source="school_id" reference="school">
         <TextInput
           onChange={(e) => setState({ ...state, udise: e.target.value })}
-          source="udise"
+          source="data.udise"
           label="School UDISE"
           validate={inputConstraints.udise}
           defaultValue={record?.data?.udise}
         />
-      </ReferenceInput>
 
       <ChangePasswordButton record={record}></ChangePasswordButton>
       <br></br>
@@ -401,7 +400,7 @@ const UserForm = () => {
 
 const UserEditToolbar = (props: any) => (
   <Toolbar {...props}>
-    <SaveButton />
+    <SaveButton sx={{backgroundColor : "green"}}/>
   </Toolbar>
 );
 

@@ -27,7 +27,7 @@ const dataProvider = {
       }
 
       if (filter?.shikshaRoles) {
-        queryString.push(`registrations.roles:${filter?.shikshaRoles}`);
+        queryString.push(`registrations.roles:%22${filter?.shikshaRoles}%22`);
       }
       if (filter?.esamwadRoles) {
         queryString.push(`registrations.roles:${filter?.esamwadRoles}`);

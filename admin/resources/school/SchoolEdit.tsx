@@ -16,6 +16,7 @@ import { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import * as _ from "lodash";
 import { getLocationDetails } from "../../utils/LocationDetailsHelper";
+import EditWrapper from "../../components/styleWrappers/EditWrapper";
 
 export const SchoolEdit = () => {
   const location = useLocation();
@@ -110,8 +111,7 @@ export const SchoolEdit = () => {
   const { districts, blocks, clusters } = getLocationDetails();
 
   return (
-    <Edit mutationMode={"pessimistic"}>
-      <SimpleForm>
+    <EditWrapper>
         {/* <ReferenceInput source="id" reference="location">
           <SelectInput disabled optionText={"id"} />
         </ReferenceInput> */}
@@ -158,8 +158,7 @@ export const SchoolEdit = () => {
           choices={clusters}
           disabled
         />
-      </SimpleForm>
-    </Edit>
+      </EditWrapper>
   );
 };
 export default SchoolEdit;
