@@ -51,7 +51,7 @@ const displayRoles = (a: any) => {
 };
 const UserEditToolbar = (props: any) => (
   <Toolbar {...props}>
-    <SaveButton sx={{backgroundColor : "green"}}/>
+    <SaveButton sx={{ backgroundColor: "green" }} />
   </Toolbar>
 );
 const UserForm = () => {
@@ -118,10 +118,7 @@ const UserForm = () => {
       return [];
     }
     if (!selectedDistrict) {
-      return _.uniqBy(
-        districtData,
-        "block"
-      ).map((a) => {
+      return _.uniqBy(districtData, "block").map((a) => {
         return {
           id: a.block,
           name: a.block,
@@ -144,10 +141,7 @@ const UserForm = () => {
       return [];
     }
     if (!selectedBlock) {
-      return _.uniqBy(
-        districtData,
-        "cluster"
-      ).map((a) => {
+      return _.uniqBy(districtData, "cluster").map((a) => {
         return {
           id: a.cluster,
           name: a.cluster,
@@ -213,7 +207,7 @@ const UserForm = () => {
           });
           setDesignationName(e.target.value);
           setScope(scopeData[0].scope);
-          geographic_level = scopeData[0].scope
+          geographic_level = scopeData[0].scope;
         }}
         source="designation"
         label="Role"
@@ -227,7 +221,7 @@ const UserForm = () => {
             setSelectedDistrict(e.target.value);
             setSelectedBlock(null);
             setSelectedCluster(null);
-            setState({ ...state, cluster: e.target.value })
+            setState({ ...state, cluster: e.target.value });
           }}
           source="district"
           label="District"
@@ -242,7 +236,7 @@ const UserForm = () => {
           onChange={(e: any) => {
             setSelectedBlock(e.target.value);
             setSelectedCluster(null);
-            setState({ ...state, cluster: e.target.value })
+            setState({ ...state, cluster: e.target.value });
           }}
           source="block"
           label="Block"
@@ -254,8 +248,8 @@ const UserForm = () => {
         <SelectInput
           value={state.cluster}
           onChange={(e: any) => {
-            setSelectedCluster(e.target.value)
-            setState({ ...state, cluster: e.target.value })
+            setSelectedCluster(e.target.value);
+            setState({ ...state, cluster: e.target.value });
           }}
           source="cluster"
           label="Cluster"
@@ -319,9 +313,15 @@ const UserEdit = () => {
                 block: values?.block,
                 cluster: values?.cluster,
                 designation: values?.designation,
-                geographic_level: geographic_level
+                geographic_level: geographic_level,
               },
             },
+            registrations: [
+              {
+                applicationId: "1ae074db-32f3-4714-a150-cc8a370eafd1",
+                roles: [values?.designation],
+              },
+            ],
             id: values.id,
           };
           _v["gql"] = {

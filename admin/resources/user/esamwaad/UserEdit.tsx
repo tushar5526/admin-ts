@@ -82,8 +82,8 @@ export const SchoolUDISEInput = () => {
         {data?.data?.name
           ? `School: ${data?.data?.name}`
           : isLoading
-            ? "Loading..."
-            : "No School"}
+          ? "Loading..."
+          : "No School"}
       </Typography>
       <TextInput
         source={"data.udise"}
@@ -249,33 +249,40 @@ const inputChoices = {
 const UserForm = () => {
   const record = useRecordContext();
   const [state, setState] = useState<any>({
-    // Here we are putting only the index where user is registered in Shiksha. 
-    roles: record?.registrations?.[record?.registrations?.findIndex((user: { applicationId: string; }) => user.applicationId == ApplicationId)]?.roles,
+    // Here we are putting only the index where user is registered in Shiksha.
+    roles:
+      record?.registrations?.[
+        record?.registrations?.findIndex(
+          (user: { applicationId: string }) =>
+            user.applicationId == ApplicationId
+        )
+      ]?.roles,
   });
   const dataProvider = useDataProvider();
 
   const udiseValidation = async (value: any) => {
-    const res = await dataProvider.getList('school', {
+    const res = await dataProvider.getList("school", {
       pagination: { perPage: 1, page: 1 },
-      sort: { field: 'id', order: 'asc' },
-      filter: { udise: value }
+      sort: { field: "id", order: "asc" },
+      filter: { udise: value },
     });
-    if (res?.data?.length == 0)
-      return "Please enter a valid UDISE"
+    if (res?.data?.length == 0) return "Please enter a valid UDISE";
     return undefined;
   };
-
 
   // Input Constraints
   const inputConstraints = {
     userName: [
       required("Please provide username"),
-      regex(/^[a-zA-Z0-9 ]*$/,"Name can only contain alphabets, numbers and spaces")
+      regex(
+        /^[a-zA-Z0-9 ]*$/,
+        "Name can only contain alphabets, numbers and spaces"
+      ),
     ],
     udise: [
       required("Please provide UDISE"),
       number("The UDISE must be numeric"),
-      udiseValidation
+      udiseValidation,
     ],
     fullName: [
       required("Please provide fullname"),
@@ -288,7 +295,7 @@ const UserForm = () => {
       required("Please provide mobile number"),
       regex(/^\d+$/, "The phone number must be numeric"),
       minLength(10, "Mobile cannot be less than 10 digits"),
-      maxLength(10, "Mobile cannot be more than 10 digits")
+      maxLength(10, "Mobile cannot be more than 10 digits"),
     ],
     role: required("Please select a role"),
     designation: required("Please select a designation"),
@@ -364,13 +371,13 @@ const UserForm = () => {
             />
           </>
         )}
-        <TextInput
-          onChange={(e) => setState({ ...state, udise: e.target.value })}
-          source="data.udise"
-          label="School UDISE"
-          validate={inputConstraints.udise}
-          defaultValue={record?.data?.udise}
-        />
+      <TextInput
+        onChange={(e) => setState({ ...state, udise: e.target.value })}
+        source="data.udise"
+        label="School UDISE"
+        validate={inputConstraints.udise}
+        defaultValue={record?.data?.udise}
+      />
 
       <ChangePasswordButton record={record}></ChangePasswordButton>
       <br></br>
@@ -400,7 +407,7 @@ const UserForm = () => {
 
 const UserEditToolbar = (props: any) => (
   <Toolbar {...props}>
-    <SaveButton sx={{backgroundColor : "green"}}/>
+    <SaveButton sx={{ backgroundColor: "green" }} />
   </Toolbar>
 );
 
@@ -430,6 +437,7 @@ const UserEdit = () => {
       <SimpleForm
         toolbar={<UserEditToolbar />}
         onSubmit={(values) => {
+          console.log({values});
           const _v: any = {
             mobilePhone: values["mobilePhone"],
             firstName: values["firstName"],
@@ -440,6 +448,12 @@ const UserEdit = () => {
               school: values?.data.school,
               udise: values?.data.udise,
             },
+            registrations: [
+              {
+                applicationId: "f0ddb3f6-091b-45e4-8c0f-889f89d4f5da",
+                roles: values?.roles,
+              },
+            ],
             designation: values.designation,
             id: values.id,
             account_status: values.account_status,
