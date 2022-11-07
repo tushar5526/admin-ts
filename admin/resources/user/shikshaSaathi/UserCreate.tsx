@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Create,
   SimpleForm,
@@ -10,6 +10,7 @@ import {
   maxLength,
   required,
   number,
+  useDataProvider,
 } from "react-admin";
 import { useLogin } from "../hooks";
 import { getClusters } from "../designation";
@@ -22,7 +23,10 @@ import {
   getVisibility,
 } from "../designation";
 import { client } from "../../../api-clients/users-client";
-// const ApplicationId = "1ae074db-32f3-4714-a150-cc8a370eafd1";
+import { useQuery } from "react-query";
+import _ from "lodash";
+import { useLocation } from "react-router-dom";
+// const ApplicationId = "1ae074db-32f3-4714-a150-cc8a370eafd1"
 const UserCreate = (props: any) => {
   const { user: _loggedInUser } = useLogin();
   const [userCreated, setUserCreated] = useState(false);
@@ -77,10 +81,100 @@ const UserCreate = (props: any) => {
 
   //   const designation = getLowerDesignations(_loggedInUser);
   const designationChoices = getLowerDesignationsChoices(_loggedInUser);
-  const districtChoices = getAllDistricts("", _loggedInUser);
-  const blockChoices = getBlocks(state.district, "", _loggedInUser);
-  const clusterChoices = getClusters(state.block, "", _loggedInUser);
-  
+  const dataProvider = useDataProvider();
+  const {
+    data: _districtData,
+    isLoading,
+    error,
+  } = useQuery(["location", "getList", {}], () =>
+    dataProvider.getList("location", {
+      pagination: { perPage: 10000, page: 1 },
+      sort: { field: "id", order: "asc" },
+      filter: {},
+    })
+  );
+
+  const location = useLocation();
+  const params: any = new Proxy(new URLSearchParams(location.search), {
+    get: (searchParams, prop) => searchParams.get(prop as string),
+  });
+  const initialFilters = params.filter ? JSON.parse(params.filter) : null;
+  const [selectedDistrict, setSelectedDistrict] = useState(
+    initialFilters?.district || ""
+  );
+  const [selectedBlock, setSelectedBlock] = useState(
+    initialFilters?.block || ""
+  );
+  const [selectedCluster, setSelectedCluster] = useState(
+    initialFilters?.cluster || ""
+  );
+
+  const districtData = useMemo(() => {
+    return _districtData?.data;
+  }, [_districtData]);
+
+  const districts = useMemo(() => {
+    if (!districtData) {
+      return [];
+    }
+    return _.uniqBy(districtData, "district").map((a) => {
+      return {
+        id: a.district,
+        name: a.district,
+      };
+    });
+  }, [districtData]);
+  const blocks = useMemo(() => {
+    if (!districtData) {
+      return [];
+    }
+    if(!selectedDistrict){
+      return _.uniqBy(
+        districtData,
+        "block"
+      ).map((a) => {
+        return {
+          id: a.block,
+          name: a.block,
+        };
+      });
+    }
+    return _.uniqBy(
+      districtData.filter((d) => d.district === selectedDistrict),
+      "block"
+    ).map((a) => {
+      return {
+        id: a.block,
+        name: a.block,
+      };
+    });
+  }, [selectedDistrict, districtData]);
+
+  const clusters = useMemo(() => {
+    if (!districtData) {
+      return [];
+    }
+    if(!selectedBlock){
+      return _.uniqBy(
+        districtData,
+        "cluster"
+      ).map((a) => {
+        return {
+          id: a.cluster,
+          name: a.cluster,
+        };
+      });
+    }
+    return _.uniqBy(
+      districtData.filter((d) => d.block === selectedBlock),
+      "cluster"
+    ).map((a) => {
+      return {
+        id: a.cluster,
+        name: a.cluster,
+      };
+    });
+  }, [selectedBlock, districtData]);
   const validatePhoneNumber = [required(),number(),minLength(10,"Phone Number must be of 10 digit"),maxLength(10,"Phone Number must be of 10 digit")];
   return userCreated ? (
     <>
@@ -129,32 +223,41 @@ const UserCreate = (props: any) => {
         {scope === "District" || scope === "Block" || scope === "Cluster" ? (
           <SelectInput
             value={state.district}
-            onChange={(e) => setState({ ...state, district: e.target.value })}
+            onChange={(e: any) => {
+              setSelectedDistrict(e.target.value);
+              setSelectedBlock(null);
+              setSelectedCluster(null);
+              setState({ ...state, cluster: e.target.value })
+            }}
             source="district"
             label="District"
-            // @ts-ignore
-            choices={districtChoices}
+            choices={districts}
           />
         ) : null}
 
         {scope === "Block" || scope === "Cluster" ? (
           <SelectInput
             value={state.block}
-            onChange={(e) => setState({ ...state, block: e.target.value })}
+            onChange={(e: any) => {
+              setSelectedBlock(e.target.value);
+              setSelectedCluster(null);
+              setState({ ...state, cluster: e.target.value })
+            }}
             source="block"
             label="Block"
-            // @ts-ignore
-            choices={blockChoices}
+            choices={blocks}
           />
         ) : null}
         {scope === "Cluster" ? (
           <SelectInput
             value={state.cluster}
-            onChange={(e) => setState({ ...state, cluster: e.target.value })}
+            onChange={(e: any) => {
+              setSelectedCluster(e.target.value)
+              setState({ ...state, cluster: e.target.value })
+            }}
             source="cluster"
             label="Cluster"
-            // @ts-ignore
-            choices={clusterChoices}
+            choices={clusters}
           />
         ) : null}
       </SimpleForm>

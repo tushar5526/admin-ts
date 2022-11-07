@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   useResourceContext,
   useNotify,
@@ -29,7 +29,10 @@ import { useLogin } from "../hooks";
 import { getClusters } from "../designation";
 import { ChangePasswordButton } from "../ChangePasswordButton";
 import { designationLevels } from "../esamwaad/designation";
+import _ from "lodash";
+import { useLocation } from "react-router-dom";
 
+let geographic_level: string = "";
 const displayRoles = (a: any) => {
   return (
     <span
@@ -53,13 +56,13 @@ const UserEditToolbar = (props: any) => (
 );
 const UserForm = () => {
   const { user: _loggedInUser } = useLogin();
-  const [scope, setScope] = useState("No");
+  const [scope, setScope] = useState("");
   const [state, setState] = useState({
     userName: "",
     fullName: "",
     mobile: "",
     designation: "",
-    geographicLevel: "Block",
+    geographicLevel: geographic_level,
     district: "",
     block: "",
     cluster: "",
@@ -67,9 +70,100 @@ const UserForm = () => {
     password: "1234abcd",
   });
   const designationChoices = getLowerDesignationsChoices(_loggedInUser);
-  const districtChoices = getAllDistricts("", _loggedInUser);
-  const blockChoices = getBlocks(state.district, "", _loggedInUser);
-  const clusterChoices = getClusters(state.block, "", _loggedInUser);
+  const dataProvider = useDataProvider();
+  const {
+    data: _districtData,
+    isLoading,
+    error,
+  } = useQuery(["location", "getList", {}], () =>
+    dataProvider.getList("location", {
+      pagination: { perPage: 10000, page: 1 },
+      sort: { field: "id", order: "asc" },
+      filter: {},
+    })
+  );
+
+  const location = useLocation();
+  const params: any = new Proxy(new URLSearchParams(location.search), {
+    get: (searchParams, prop) => searchParams.get(prop as string),
+  });
+  const initialFilters = params.filter ? JSON.parse(params.filter) : null;
+  const [selectedDistrict, setSelectedDistrict] = useState(
+    initialFilters?.district || ""
+  );
+  const [selectedBlock, setSelectedBlock] = useState(
+    initialFilters?.block || ""
+  );
+  const [selectedCluster, setSelectedCluster] = useState(
+    initialFilters?.cluster || ""
+  );
+
+  const districtData = useMemo(() => {
+    return _districtData?.data;
+  }, [_districtData]);
+
+  const districts = useMemo(() => {
+    if (!districtData) {
+      return [];
+    }
+    return _.uniqBy(districtData, "district").map((a) => {
+      return {
+        id: a.district,
+        name: a.district,
+      };
+    });
+  }, [districtData]);
+  const blocks = useMemo(() => {
+    if (!districtData) {
+      return [];
+    }
+    if (!selectedDistrict) {
+      return _.uniqBy(
+        districtData,
+        "block"
+      ).map((a) => {
+        return {
+          id: a.block,
+          name: a.block,
+        };
+      });
+    }
+    return _.uniqBy(
+      districtData.filter((d) => d.district === selectedDistrict),
+      "block"
+    ).map((a) => {
+      return {
+        id: a.block,
+        name: a.block,
+      };
+    });
+  }, [selectedDistrict, districtData]);
+
+  const clusters = useMemo(() => {
+    if (!districtData) {
+      return [];
+    }
+    if (!selectedBlock) {
+      return _.uniqBy(
+        districtData,
+        "cluster"
+      ).map((a) => {
+        return {
+          id: a.cluster,
+          name: a.cluster,
+        };
+      });
+    }
+    return _.uniqBy(
+      districtData.filter((d) => d.block === selectedBlock),
+      "cluster"
+    ).map((a) => {
+      return {
+        id: a.cluster,
+        name: a.cluster,
+      };
+    });
+  }, [selectedBlock, districtData]);
 
   const validatePhoneNumber = [
     required(),
@@ -119,6 +213,7 @@ const UserForm = () => {
           });
           setDesignationName(e.target.value);
           setScope(scopeData[0].scope);
+          geographic_level = scopeData[0].scope
         }}
         source="designation"
         label="Role"
@@ -128,32 +223,44 @@ const UserForm = () => {
       {scope === "District" || scope === "Block" || scope === "Cluster" ? (
         <SelectInput
           value={state.district}
-          onChange={(e) => setState({ ...state, district: e.target.value })}
+          onChange={(e: any) => {
+            setSelectedDistrict(e.target.value);
+            setSelectedBlock(null);
+            setSelectedCluster(null);
+            setState({ ...state, cluster: e.target.value })
+          }}
           source="district"
           label="District"
           // @ts-ignore
-          choices={districtChoices}
+          choices={districts}
         />
       ) : null}
 
       {scope === "Block" || scope === "Cluster" ? (
         <SelectInput
           value={state.block}
-          onChange={(e) => setState({ ...state, block: e.target.value })}
+          onChange={(e: any) => {
+            setSelectedBlock(e.target.value);
+            setSelectedCluster(null);
+            setState({ ...state, cluster: e.target.value })
+          }}
           source="block"
           label="Block"
           // @ts-ignore
-          choices={blockChoices}
+          choices={blocks}
         />
       ) : null}
       {scope === "Cluster" ? (
         <SelectInput
           value={state.cluster}
-          onChange={(e) => setState({ ...state, cluster: e.target.value })}
+          onChange={(e: any) => {
+            setSelectedCluster(e.target.value)
+            setState({ ...state, cluster: e.target.value })
+          }}
           source="cluster"
           label="Cluster"
           // @ts-ignore
-          choices={clusterChoices}
+          choices={clusters}
         />
       ) : null}
 
@@ -203,7 +310,7 @@ const UserEdit = () => {
           const _v: any = {
             mobilePhone: values["mobilePhone"],
             userName: values["userName"],
-            fullName: values["fullName"],            
+            fullName: values["fullName"],
             data: {
               phone: values["mobilePhone"],
               accountName: values["fullName"],
@@ -211,7 +318,8 @@ const UserEdit = () => {
                 district: values?.district,
                 block: values?.block,
                 cluster: values?.cluster,
-                designation: values.designation,
+                designation: values?.designation,
+                geographic_level: geographic_level
               },
             },
             id: values.id,
