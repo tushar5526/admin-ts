@@ -13,7 +13,7 @@ export const ChangePasswordButton = ({ record }: any) => {
     () =>
       dataProvider.changePassword(resource, {
         loginId: record?.username,
-        password: resource === "e_samwaad_user" || "shiksha_saathi_user" ? "himachal12345" : "1234abcd",
+        password: resource == "shiksha_saathi_user" ? "1234abcd" : resource == "e_samwaad_user" ? "himachal12345" : null
       }),
 
     {

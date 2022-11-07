@@ -31,12 +31,13 @@ const DisplayRoles = (a: any) => {
     return (
       <span
         style={{
-          padding: "7px 10px",
+          padding: "3px 10px",
           margin: "5px",
-          color: "white",
-          borderRadius: "25px",
-          backgroundColor: "#5a968b",
+          color: "#fff",
+          borderRadius: "0.5rem",
+          background: `${role == "Teacher" ? '#2A8E82' : role == "Principal" ? "#3E766D" : "#668E86"}`,
           display: "inline-block",
+          fontWeight: 'bold'
         }}
         key={index}
       >
@@ -278,12 +279,11 @@ const UserList = () => {
     <ListDataGridWithPermissions
       listProps={{ filters: Filters }}
     >
-      <TextField source="username" sortable={false}/>
-      <NumberField source="data.udise" label="UDISE" sortable={false}/>
-      <ColoredChipField label="Account Status" source="usernameStatus" sortable={false}/>
+      <TextField source="username" sortable={false} />
+      <NumberField source="data.udise" label="UDISE" sortable={false} />
       <FunctionField
         label="Full Name"
-        render={(record: any) => `${record.firstName} ${record.lastName}`}
+        render={(record: any) => `${record.firstName || '----------------------'} ${record.lastName || ""}`}
       />
       ;
       <NumberField source="mobilePhone" label="Mobile Phone" sortable={false} />

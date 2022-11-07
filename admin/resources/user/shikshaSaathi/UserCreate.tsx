@@ -10,6 +10,7 @@ import {
   maxLength,
   required,
   number,
+  useNotify,
   useDataProvider,
 } from "react-admin";
 import { useLogin } from "../hooks";
@@ -31,6 +32,8 @@ const UserCreate = (props: any) => {
   const { user: _loggedInUser } = useLogin();
   const [userCreated, setUserCreated] = useState(false);
   const [scope, setScope] = useState("No");
+  const notify = useNotify();
+
   const [state, setState] = useState({
     userName: "",
     fullName: "",
@@ -74,7 +77,8 @@ const UserCreate = (props: any) => {
 
     res.then((data) => {
       if (data?.data?.responseCode === "OK") {
-        setUserCreated(true);
+        notify(`User created successfully`, { type: 'success' });
+        window.location.replace('/#/shiksha_saathi_user')
       }
     });
   };

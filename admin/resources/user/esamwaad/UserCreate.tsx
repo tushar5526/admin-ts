@@ -71,7 +71,8 @@ const UserCreate = (props: any) => {
     const res = client.post(endPoint, body);
     res.then((data) => {
       if (data?.data?.responseCode === "OK") {
-        setUserCreated(true);
+        notify(`User created successfully`, { type: 'success' });
+        window.location.replace('/#/e_samwaad_user')
       } else if (data?.data?.status != 200) {
         const errorStrings: String[] = [];
         const errors = data?.data?.exception?.fieldErrors;
@@ -198,7 +199,7 @@ const UserCreate = (props: any) => {
               onChange={(e) => setState({ ...state, udise: e.target.value })}
               source="udise"
               label="School UDISE"
-              validate={inputConstraints.udise}
+            // validate={inputConstraints.udise}
             />
           </>
         </ReferenceInput>

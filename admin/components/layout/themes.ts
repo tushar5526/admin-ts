@@ -17,7 +17,7 @@ export const lightTheme = {
     mode: "light" as "light",
   },
   shape: {
-    borderRadius: 10,
+    borderRadius: 5,
   },
   sidebar: {
     width: 260,

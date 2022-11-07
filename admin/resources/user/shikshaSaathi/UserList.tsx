@@ -34,12 +34,13 @@ const DisplayRoles = (a: any) => {
     return (
       <span
         style={{
-          padding: "7px 10px",
+          padding: "3px 10px",
           margin: "5px",
-          color: "white",
-          borderRadius: "25px",
-          backgroundColor: "#5a968b",
+          color: "#fff",
+          borderRadius: "0.5rem",
+          background: "#668E86",
           display: "inline-block",
+          fontWeight: 'bold'
         }}
         key={index}
       >
@@ -135,7 +136,7 @@ const UserList = () => {
     if (!districtData) {
       return [];
     }
-    if(!selectedDistrict){
+    if (!selectedDistrict) {
       return _.uniqBy(
         districtData,
         "block"
@@ -161,7 +162,7 @@ const UserList = () => {
     if (!districtData) {
       return [];
     }
-    if(!selectedBlock){
+    if (!selectedBlock) {
       return _.uniqBy(
         districtData,
         "cluster"
@@ -184,7 +185,7 @@ const UserList = () => {
   }, [selectedBlock, districtData]);
   const rolesChoices: any = designationLevels;
   const Filters = [
-    <TextInput source="username" alwaysOn key={"search"}/>,
+    <TextInput source="username" alwaysOn key={"search"} />,
     <SelectInput
       label="Role"
       source="shikshaRoles"
@@ -226,20 +227,20 @@ const UserList = () => {
 
   return (
     <ListDataGridWithPermissions
-      listProps={{ filters: Filters , exporter: false }}
+      listProps={{ filters: Filters, exporter: false }}
     >
-      <TextField source="username" sortable={false} />
+      <TextField source="username" sortable={false} sx={{ fontSize: '0.8rem' }} />
       <TextField source="fullName" sortable={false} />
-      <NumberField source="mobilePhone" label="Mobile Phone" sortable={false}/>
+      <NumberField source="mobilePhone" label="Mobile Phone" sortable={false} />
       <FunctionField
         label="Role"
         render={(record: any) => {
           return DisplayRoles(record);
         }}
       />
-      <TextField source="data.roleData.district" label="District" sortable={false}/>
-      <TextField source="data.roleData.block" label="Block" sortable={false}/>
-      <TextField source="data.roleData.cluster" label="Cluster" sortable={false}/>
+      <TextField source="data.roleData.district" label="District" sortable={false} />
+      <TextField source="data.roleData.block" label="Block" sortable={false} />
+      <TextField source="data.roleData.cluster" label="Cluster" sortable={false} />
     </ListDataGridWithPermissions>
   );
 };
